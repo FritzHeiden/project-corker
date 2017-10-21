@@ -8,7 +8,8 @@
     "build-server": "webpack --config webpack.config.server.js",
     "start-server": "node ./dist/server.js",
     "build-start-server": "npm run build-server && npm run start-server",
-    "build-webapp": "webpack --config webpack.config.web.js"
+    "build-webapp": "webpack --config webpack.config.web.js",
+    "dev-webapp": "webpack-dev-server --config webpack.config.web.js"
   },
   "repository": {
     "type": "git",
