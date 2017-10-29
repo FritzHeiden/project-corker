@@ -1,0 +1,66 @@
+/*************************************/
+/*  Vorraussichtlich bald entfernt   */
+/*************************************/
+
+html, body{
+  background-color: #323232;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h3{
+  font-size: 2.0rem;
+  font-family: 'Helvetica';
+  color: #00868B;
+  position: relative;
+  top: -1.25rem;
+  left: -26%;
+  margin-bottom: -0.5rem;
+}
+
+button{
+  border: 3px solid #00868B;
+  color: white;
+  margin-top: 0.5rem;
+  background: #323232;
+}
+
+footer{
+  position:absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+table {
+  margin: 0 auto; /* or margin: 0 auto 0 auto */
+  width: 85%;
+  overflow: scroll;
+  font-family: 'Helvetica';
+}
+
+table tr td{
+  border-bottom:1pt solid #323232;
+}
+
+table tr th{
+  border-bottom:1pt solid #323232;
+}
+
+.sliderDot::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #00868B;
+    cursor: pointer;
+}
+
+.sliderDot::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #00868B;
+    cursor: pointer;
+}
