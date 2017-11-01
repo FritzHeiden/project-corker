@@ -10,18 +10,7 @@ function init() {
     } catch(e) {
         alert('Web Audio API is not supported');
     }
-    // To be replaced with AudioTrack class whatever
-    let bufferLoader = new BufferLoader(
-        context,
-        [
-            './basic_loop.wav',
-        ],
-        finishedLoading);
 
-    bufferLoader.load();
-}
-
-function finishedLoading() {
     initLowpass();
 
     source = context.createBufferSource();
