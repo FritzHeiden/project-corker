@@ -11,6 +11,18 @@ function init() {
         alert('Web Audio API is not supported');
     }
 
+    let request = new XMLHttpRequest();
+    request.open('GET', './sound.wav', true);
+    request.responseType = 'arraybuffer';
+
+
+    request.onload = function() {
+        context.decodeAudioData(request.response, function(buffer) {
+                soundBuffer = buffer;
+        }, onError);
+    }
+    request.send();
+
     initLowpass();
 
     source = context.createBufferSource();
