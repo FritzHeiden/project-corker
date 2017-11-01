@@ -55,16 +55,12 @@ function changeVolume(element) {
     this.gainNode.gain.value = fraction * fraction;
 }
 
-function connectLowpass(element) {
+function connectLowpass() {
     source.disconnect(context.destination);
     lowpassFilter.disconnect();
 
-    if (element.checked) {
-        source.connect(lowpassFilter);
-        lowpassFilter.connect(context.destination);
-    } else {
-        connect(context.destination);
-    }
+    source.connect(lowpassFilter);
+    lowpassFilter.connect(context.destination);
 }
 
 function changeLowpassFilterFrequency(element) {
