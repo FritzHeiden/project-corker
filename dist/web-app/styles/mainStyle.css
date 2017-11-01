@@ -19,6 +19,11 @@ h3{
   margin-bottom: -0.5rem;
 }
 
+h2, p{
+  color: #95989A;
+  font-family: 'Helvetica';
+}
+
 button{
   border: 3px solid #00868B;
   color: white;

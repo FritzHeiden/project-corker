@@ -1,46 +1,25 @@
 import React from 'react';
 
-class App extends React.Component {
+class Tasks extends React.Component {
    render() {
-
-     var headLine =
-     {
-       fontSize: "4rem",
-       fontFamily: "'Merriweather', serif",
-       color: "#00868B",
-       MsTransform: "translate(-50%, -50%)",
-       transform: "translate(-50%, -50%)",
-       marginLeft: "50%",
-     }
-
-     var actionBox =
-     {
-       width: "100%",
-       height: "75%",
-       position: "relative",
-       boxSizing: "border-box",
-     }
-
-     var audio =
-     {
-         width: "50%",
-     }
 
      return (
         <div>
-          <SVGPart/>
-          <MenuButton/>
-          <h1 style={headLine}>Project: JRectD</h1>
-          <div style={actionBox}>
-            <div style={audio}>
-              <AudioBox/>
+          <div id="perspective" className="perspective effect-airbnb">
+            <div className="container">
+              <div className="wrapper">
+                <MenuButton/>
+              </div>
             </div>
           </div>
-          <Footer/>
+          <nav className="outer-nav left vertical">
+          <a>Home</a>
+          <a>News</a>
+          </nav>
         </div>
      );
    }
-}
+ }
 
 class MenuButton extends React.Component{
   render(){
@@ -68,98 +47,6 @@ class MenuButton extends React.Component{
       </div>
     );
   }
-}
-
-class AudioPlayer extends React.Component {
-  render(){
-
-    let audio =
-    {
-      height: "5rem",
-      width: "85%",
-      position: "relative",
-      backgroundColor: "white",
-      border: "3px solid #00868B",
-      left: "7.5%",
-    }
-    return(
-      <div style={audio}></div>
-    );
-  }
-}
-
-class Player extends React.Component {
-  render(){
-
-    let PlayerBox =
-    {
-      borderTop: "3px solid #323232",
-      marginTop: "0.5rem",
-    }
-    let player =
-    {
-      height: "50px",
-      width: "50px",
-    }
-
-    return(
-      <div style={PlayerBox}>
-        <button style={player}>10 sec +</button><br/>
-        <button style={player}>Play</button><br/>
-        <button style={player}>10 sec -</button><br/>
-      </div>
-    );
-  }
-}
-
-class Filter extends React.Component {
-  render(){
-    let filter =
-    {
-      margin: "0.5rem",
-      height: "50px",
-      width: "50px",
-    }
-
-    let filterBox =
-    {
-      margin: "1rem auto",
-      width: "auto",
-      borderTop: "3px solid #323232",
-    }
-
-    return(
-      <div style={filterBox}>
-        <button style={filter}></button>
-        <button style={filter}></button>
-        <button style={filter}></button>
-        <button style={filter}></button>
-        <button style={filter}></button>
-      </div>
-    );
-  }
-}
-
-class AudioBox extends React.Component {
-   render() {
-
-      let audioBox =
-      {
-        backgroundColor: "#494949",
-        width: "50%",
-        height: "auto",
-        position: "relative",
-        left: "15%",
-        display: "block",
-      }
-      return (
-         <div style={audioBox}>
-           <AudioPlayer/>
-           <Player/>
-           <Filter/>
-         </div>
-      );
-   }
 }
 
 class SVGPart extends React.Component {
@@ -254,149 +141,7 @@ class SVGPart extends React.Component {
 
       </div>
     );
- }
-}
-
-class Footer extends React.Component {
-   render() {
-
-     let slideContainer =
-     {
-       margin: "4rem 0 4rem 0",
-     }
-
-     let slider =
-     {
-       WebkitAppearance: "none",
-           width: "25%",
-           height: "7.5px",
-           borderRadius: "10px",
-           background: "#494949",
-           WebkitTransition: ".2s",
-     }
-
-     let musicFolder =
-     {
-       margin: "0 auto", /* or margin: 0 auto 0 auto */
-       background: "#494949",
-       width: "50%",
-       height: "auto",
-       color: "white",
-     }
-
-     let colOne =
-     {
-       width: "65%",
-     }
-
-     let colTwo =
-     {
-       width: "20%",
-     }
-
-     let colThree =
-     {
-       width: "15%",
-     }
-
-      return (
-         <div>
-           <footer>
-             <div style={slideContainer}>
-              <input style={slider} type="range" min={1} max={100} defaultValue={50} className="sliderDot"/>
-             </div>
-             <div style={musicFolder}>
-               <h3>Ordnerverzeichnis</h3>
-               <table>
-                 <tbody>
-                 <tr>
-                   <th style={colOne}>Titel</th>
-                   <th style={colTwo}>Künstler</th>
-                   <th style={colThree}>Dauer</th>
-                 </tr>
-                 <tr>
-                   <td>daw</td>
-                   <td>daw</td>
-                   <td>daw</td>
-                 </tr>
-                 <tr>
-                   <td>daw</td>
-                   <td>daw</td>
-                   <td>daw</td>
-                 </tr>
-                 <tr>
-                   <td>daw</td>
-                   <td>daw</td>
-                   <td>daw</td>
-                 </tr>
-                 <tr>
-                   <td>daw</td>
-                   <td>daw</td>
-                   <td>daw</td>
-                 </tr>
-               </tbody>
-               </table>
-             </div>
-           </footer>
-         </div>
-      );
-   }
-}
-
-export default App;
-
-{/*
-
-  class App extends React.Component {
-     render() {
-
-       var headLine =
-       {
-         fontSize: "4rem",
-         fontFamily: "'Merriweather', serif",
-         color: "#00868B",
-         MsTransform: "translate(-50%, -50%)",
-         transform: "translate(-50%, -50%)",
-         marginLeft: "50%",
-       }
-
-       var actionBox =
-       {
-         width: "100%",
-         height: "75%",
-         position: "relative",
-         boxSizing: "border-box",
-       }
-
-       var audio =
-       {
-           width: "50%",
-       }
-
-       return (
-          <div>
-            <div id="perspective" className="perspective effect-airbnb">
-              <div className="container">
-                <div className="wrapper">
-                  <SVGPart/>
-                  <MenuButton/>
-                  <h1 style={headLine}>Project: JRectD</h1>
-                  <div style={actionBox}>
-                    <div style={audio}>
-                      <AudioBox/>
-                    </div>
-                  </div>
-                  <Footer/>
-                </div>
-              </div>
-            </div>
-            <nav className="outer-nav left vertical">
-              <a>Home</a>
-              <a>News</a>
-            </nav>
-          </div>
-       );
-     }
   }
+}
 
-*/}
+export default Tasks;
