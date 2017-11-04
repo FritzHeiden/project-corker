@@ -1,16 +1,4 @@
-import React from 'react'
-
-class SignUp extends React.Component {
-   render() {
-      return (
-        <div>
-          <SVGPart/>
-          <h1>Project: JRectD</h1>
-          <FormPage/>
-        </div>
-      );
-   }
-}
+import React from 'react';
 
 class SVGPart extends React.Component {
  render() {
@@ -22,25 +10,9 @@ class SVGPart extends React.Component {
       strokeMiterlimit: "10",
     }
 
-    let svgOne =
-    {
-      width: "19%",
-      position: "absolute",
-      top: "0",
-      left: "0",
-    }
-
-    let svgTwo =
-    {
-        width: "13%",
-        position: "absolute",
-        top: "0",
-        right: "0",
-    }
-
     return (
        <div>
-         <svg style={svgOne} viewBox="0 0 350.39232 230.71234">
+         <svg className="svg1" viewBox="0 0 350.39232 230.71234">
            <line style={svg} x1="312" y1="0.35879" x2="176" y2="132.35879"/>
            <line style={svg} y1="84.35879" x2="163" y2="84.35879"/>
            <line style={svg} x1="143" y1="5.35879" x2="75" y2="84.35879"/>
@@ -71,7 +43,7 @@ class SVGPart extends React.Component {
            <line style={svg} x1="349" y1="61.35879" x2="300" y2="86.35879"/>
          </svg>
 
-         <svg style={svgTwo} viewBox="0 0 225.58951 351.71698">
+         <svg className="svg2" viewBox="0 0 225.58951 351.71698">
            <line style={svg} x1="224.98389" y1="313.42285" x2="95.36989" y2="175.14699"/>
            <line style={svg} x1="146.42454" y1="0.0087" x2="143.58879" y2="162.98403"/>
            <line style={svg} x1="222.92478" y1="144.36144" x2="145.11975" y2="74.99735"/>
@@ -101,91 +73,9 @@ class SVGPart extends React.Component {
            <line style={svg} x1="163.34942" y1="349.35602" x2="188.74578" y2="326.79443"/>
            <line style={svg} x1="163.34942" y1="349.35602" x2="139.20567" y2="299.9285"/>
          </svg>
-
       </div>
     );
  }
 }
 
-class FormPage extends React.Component {
- render() {
-
-    let inputField =
-    {
-      backgroundColor: "#323232",
-      width: "75%",
-      height: "2rem",
-      margin: "2rem 0 1rem 12.5%",
-      fontSize: "20px",
-      border: "2px solid #323232",
-      color: "#95989A",
-    }
-
-     let formpage =
-     {
-       width: "40%",
-       height: "30rem",
-       backgroundColor: "#494949",
-       position: "relative",
-       top: "-38%",
-       left: "50%",
-       transform: "translate(-50%, 0)",
-     }
-
-    let options =
-    {
-      fontSize: "30px",
-      textAlign: "left",
-      position: "relative",
-      left: "5.5rem",
-      top: "1rem",
-      marginBottom: "2rem",
-    }
-
-    let line =
-    {
-      borderBottom: "3px solid #323232",
-    }
-
-    let userReact=
-    {
-      backgroundColor: "red",
-      height: "8%",
-      width: "3%",
-      marginTop: "2rem",
-    }
-
-    let left =
-    {
-      float: "left",
-    }
-
-    let pushButton =
-    {
-      backgroundColor: "#00868B",
-      color: "white",
-      width: "75%",
-      height: "3rem",
-      marginBottom: "1rem",
-      fontSize: "25px",
-      position: "absolute",
-      bottom: "0",
-      left: "12.5%",
-    }
-
-    return (
-      <div style={formpage}>
-        <h2 style={options}>Anmelden</h2>
-        <div style={line}></div>
-
-        <input type="text" value={'Name'} style={[inputField, left]}/>
-        <div style={[userReact, left]}></div>
-        <input type="text" value={'Musikverzeichnis'} style={[inputField, left]}/>
-        <div style={[userReact, left]}></div>
-        <button type="button" name="button" style={pushButton}>Fertig</button>
-      </div>
-    );
- }
-}
-
-export default SignUp;
+export default SVGPart;
