@@ -2,41 +2,59 @@ import React from 'react';
 import SVGPart from './SVG.js';
 import Footer from './Footer.js';
 import AudioBox from './AudioBox.js';
+//import WebsiteJs from './js/website.js';
 
 class App extends React.Component {
 
    constructor(props){
      super(props);
+    }
+
+    handleClick() {
+    /*  obj = document.getElementById('#wrapper');
+      obj.style.position='relative';
+
+      function shake(interval) {
+          obj.style.right = '10px';
+          setTimeout(function(){
+              obj.style.right = '0px';
+          }, interval);
+      }
+
+      setInterval(function(){
+          shake(500);
+      }, 1000)
+      */
    }
 
    render() {
      const {title} = this.props;
 
+     let wrapper ={
+       display: "block",
+     }
+
+     let menu ={
+       display: "none",
+     }
+
+
+
      return (
-        <div>
-          <div id="perspective" className="perspective effect-airbnb">
-            <div className="container">
-              <div className="wrapper">
-                <SVGPart/>
-                <MenuButton/>
-                <h1>{title}</h1>
-                <div className="actionBox">
-                  <div className="audio">
-                    <AudioBox/>
-                  </div>
-                </div>
-                <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-              </div>
+        <div stlye={wrapper} id="wrapper">
+          <SVGPart/>
+          <MenuButton onClick={this.handleClick()}/>
+          <h1>{title}</h1>
+          <div className="actionBox">
+            <div className="audio">
+              <AudioBox/>
             </div>
           </div>
-          <nav className="outer-nav left vertical">
-            <MenuOptions imageOne="./img/home.svg" imageTwo="./img/options.svg" disOne="Home" disTwo="Einstellungen" />
-          </nav>
+          <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
         </div>
      );
    }
 }
-
 class MenuOptions extends React.Component{
   constructor(props){
     super(props);
@@ -59,8 +77,8 @@ class MenuOptions extends React.Component{
 }
 
 class MenuButton extends React.Component{
-  render(){
-    return(
+  render() {
+    return (
       <div className="menuButtons" id="showMenu">
         <div className="rect"></div>
         <div className="rect"></div>
