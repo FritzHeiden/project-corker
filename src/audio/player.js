@@ -1,67 +1,81 @@
-window.onload = init;
-let context;
-let source;
+let context = new (window.AudioContext || window.webkitAudioContext)();
+let source, buffer;
 let gainNode;
+
+let startedAt;
+let pausedAt;
+let paused = true;
+
 let lowpassFilter;
 
-function init() {
-    try {
-        context = new (window.AudioContext || window.webkitAudioContext)();
-    } catch(e) {
-        alert('Web Audio API is not supported');
-    }
+let request = new XMLHttpRequest();
 
-    let request = new XMLHttpRequest();
-    request.open('GET', './sound.wav', true);
-    request.responseType = 'arraybuffer';
+request.open('GET', './basic_beat.wav', true);
+request.responseType = 'arraybuffer';
+
+request.onload = function() {
+    context.decodeAudioData(request.response, onBufferLoad, onBufferError);
+};
+request.send();
 
 
-    request.onload = function() {
-        context.decodeAudioData(request.response, function(buffer) {
-                soundBuffer = buffer;
-        }, onError);
-    }
-    request.send();
+function onBufferLoad(buff) {
+    buffer = buff;
+}
 
+function onBufferError(e) {
+    console.log('onBufferError', e);
+}
+
+function connectNodes() {
+    gainNode = context.createGain();
+    source = context.createBufferSource();
+    source.buffer = buffer;
     initLowpass();
 
-    source = context.createBufferSource();
-    gainNode = context.createGain();
     source.connect(gainNode);
-    source.connect(context.destination);
+    gainNode.connect(lowpassFilter);
+    lowpassFilter.connect(context.destination);
+}
+
+function pausePlay() {
+    if (paused) {
+        play();
+    } else {
+        stop();
+    }
+}
+
+function play() {
+    connectNodes();
+
+    paused = false;
+
+    if (pausedAt) {
+        startedAt = Date.now() - pausedAt;
+        source.start(0, pausedAt / 1000);
+    }
+    else {
+        startedAt = Date.now();
+        source.start(0);
+    }
+}
+
+function stop() {
+    source.stop(0);
+    pausedAt = Date.now() - startedAt;
+    paused = true;
+}
+
+function changeVolume(element) {
+    let fraction = parseInt(element.value) / parseInt(element.max);
+    gainNode.gain.value = fraction * fraction;
 }
 
 function initLowpass() {
     lowpassFilter = context.createBiquadFilter();
     lowpassFilter.type = 'lowpass';
     lowpassFilter.frequency.value = 5000;
-}
-
-function start(time) {
-    source.start(time);
-}
-
-function stop() {
-    source.stop();
-}
-
-function play(time) {
-    this.isPlaying ? this.stop() : this.start(time);
-    this.isPlaying = !this.isPlaying;
-}
-
-function changeVolume(element) {
-    let volume = element.value;
-    let fraction = parseInt(element.value) / parseInt(element.max);
-    this.gainNode.gain.value = fraction * fraction;
-}
-
-function connectLowpass() {
-    source.disconnect(context.destination);
-    lowpassFilter.disconnect();
-
-    source.connect(lowpassFilter);
-    lowpassFilter.connect(context.destination);
 }
 
 function changeLowpassFilterFrequency(element) {
@@ -71,5 +85,4 @@ function changeLowpassFilterFrequency(element) {
     let multiplier = Math.pow(2, numberOfOctaves * (element.value - 1.0));
     lowpassFilter.frequency.value = maxValue * multiplier;
 }
-
 
