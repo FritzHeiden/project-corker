@@ -1,4 +1,7 @@
 import React from 'react';
+//import ModernizrJs from './js/modernizr.custom.25376.js'
+//import MenuJs from 'js/menu.js'
+//import ClassieJs from 'js/classie.js'
 
 class App extends React.Component {
    render() {
@@ -26,20 +29,79 @@ class App extends React.Component {
          width: "50%",
      }
 
+     var menu = {
+       color: "#95989A",
+     }
+
      return (
         <div>
-          <SVGPart/>
-          <MenuButton/>
-          <h1 style={headLine}>Project: JRectD</h1>
-          <div style={actionBox}>
-            <div style={audio}>
-              <AudioBox/>
+          <div id="perspective" className="perspective effect-airbnb">
+            <div className="container">
+              <div className="wrapper">
+                <SVGPart/>
+                <MenuButton/>
+                <h1 style={headLine}>Project: JRectD</h1>
+                <div style={actionBox}>
+                  <div style={audio}>
+                    <AudioBox/>
+                  </div>
+                </div>
+                <Footer/>
+              </div>
             </div>
           </div>
-          <Footer/>
+          <nav className="outer-nav left vertical">
+            <MenuOptions/>
+          </nav>
         </div>
      );
    }
+}
+
+class MenuOptions extends React.Component{
+  render(){
+
+    let menu =
+    {
+      position: "relative",
+      top: "50%",
+      left: "18rem",
+      display: "none",
+    }
+
+    let menuNames =
+    {
+      color: "#95989A",
+      fontSize: "60px",
+      fontFamily: 'Helvetica',
+    }
+
+    let svgMenu =
+    {
+      width: "35%",
+      position: "relative",
+      top: "-2rem",
+      float: "left",
+    }
+
+    let margin =
+    {
+        marginTop: "10rem",
+    }
+
+    return(
+      <div style={menu} id="menuOps">
+        <div>
+          <img style={svgMenu} src="./img/home.svg" alt=""/>
+          <a style={menuNames}>Home</a>
+        </div>
+        <div style={margin}>
+          <img style={svgMenu} src="./img/options.svg" alt=""/>
+          <a style={menuNames}>Einstellungen</a>
+        </div>
+      </div>
+    );
+  }
 }
 
 class MenuButton extends React.Component{
@@ -55,7 +117,7 @@ class MenuButton extends React.Component{
     let rect =
     {
       padding: "0.25rem 0.4rem",
-      background: "grey",
+      background: "#95989A",
       width:"3rem",
       border: "3px solid #323232",
     }
@@ -344,59 +406,3 @@ class Footer extends React.Component {
 }
 
 export default App;
-
-{/*
-
-  class App extends React.Component {
-     render() {
-
-       var headLine =
-       {
-         fontSize: "4rem",
-         fontFamily: "'Merriweather', serif",
-         color: "#00868B",
-         MsTransform: "translate(-50%, -50%)",
-         transform: "translate(-50%, -50%)",
-         marginLeft: "50%",
-       }
-
-       var actionBox =
-       {
-         width: "100%",
-         height: "75%",
-         position: "relative",
-         boxSizing: "border-box",
-       }
-
-       var audio =
-       {
-           width: "50%",
-       }
-
-       return (
-          <div>
-            <div id="perspective" className="perspective effect-airbnb">
-              <div className="container">
-                <div className="wrapper">
-                  <SVGPart/>
-                  <MenuButton/>
-                  <h1 style={headLine}>Project: JRectD</h1>
-                  <div style={actionBox}>
-                    <div style={audio}>
-                      <AudioBox/>
-                    </div>
-                  </div>
-                  <Footer/>
-                </div>
-              </div>
-            </div>
-            <nav className="outer-nav left vertical">
-              <a>Home</a>
-              <a>News</a>
-            </nav>
-          </div>
-       );
-     }
-  }
-
-*/}

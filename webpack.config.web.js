@@ -8,16 +8,13 @@ module.exports = {
         path: path.resolve(__dirname, 'dist/web-app')
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+      extensions: ['.js', '.jsx']
     },
 
     module: {
         rules: [
-            {
-                test: /\.js$|\.jsx$/,
-                exclude: /node_modules/,
-                loader: "babel-loader"
-            }
+          { test: /\.css$/, loader: "style-loader!css-loader" },
+          { test: /\.js$|\.jsx$/, exclude: /node_modules/, loader: "babel-loader"}
         ]
     },
     plugins: [
