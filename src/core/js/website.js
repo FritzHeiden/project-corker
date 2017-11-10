@@ -1,4 +1,53 @@
 
+export function helloWorld(){
+  alert("hello World");
+}
+
+export function hover(){
+  var element = document.getElementById("menuButtons");
+  element.classList.toggle("hover");
+}
+
+export function showMenu(){
+  var element = document.getElementById("openMenu");
+  element.classList.toggle("openMenu");
+
+  let input = document.getElementById("inputFolderPath");
+  input.classList.toggle("showInput");
+  setTimeout(showInputField(input), 1000);
+
+  //so the two menu divs become a cross
+  let crossOne = document.getElementById('crossOne');
+  crossOne.classList.toggle("cross_One_show");
+
+  let crossTwo = document.getElementById('crossTwo');
+  crossTwo.classList.toggle("cross_Two_show");
+}
+
+export function closeMenu() {
+  var element = document.getElementById("openMenu");
+  element.classList.toggle("closeMenu");
+
+  let input = document.getElementById("inputFolderPath");
+  input.classList.toggle("closeInput");
+  setTimeout(closeInputField(input), 1000);
+
+  //so the two menu divs become a cross
+  let crossOne = document.getElementById('crossOne');
+  crossOne.classList.toggle("cross_One_close");
+
+  let crossTwo = document.getElementById('crossTwo');
+  crossTwo.classList.toggle("cross_Two_close");
+}
+
+function closeInputField(input){
+  input.style.display = "none";
+}
+
+function showInputField(input){
+  input.style.display = "block";
+}
+
 
 
 /*

@@ -33,6 +33,7 @@ class FormPage extends React.Component {
           let formValues = this.state.formValues;
           let name = event.target.name;
           let value = event.target.value;
+          website.helloWorld();
 
           formValues[name] = value;
 

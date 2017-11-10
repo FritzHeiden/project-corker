@@ -1,8 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import SVGPart from './SVG.js';
 import Footer from './Footer.js';
 import AudioBox from './AudioBox.js';
-//import WebsiteJs from './js/website.js';
+import * as website from './js/website.js';
 
 class App extends React.Component {
 
@@ -10,51 +11,32 @@ class App extends React.Component {
      super(props);
     }
 
-    handleClick() {
-    /*  obj = document.getElementById('#wrapper');
-      obj.style.position='relative';
-
-      function shake(interval) {
-          obj.style.right = '10px';
-          setTimeout(function(){
-              obj.style.right = '0px';
-          }, interval);
-      }
-
-      setInterval(function(){
-          shake(500);
-      }, 1000)
-      */
-   }
-
    render() {
      const {title} = this.props;
 
-     let wrapper ={
-       display: "block",
-     }
-
-     let menu ={
-       display: "none",
-     }
-
-
-
      return (
-        <div stlye={wrapper} id="wrapper">
+       <div>
+         <div id="wrapper">
           <SVGPart/>
-          <MenuButton onClick={this.handleClick()}/>
+          <MenuButton/>
           <h1>{title}</h1>
           <div className="actionBox">
             <div className="audio">
-              <AudioBox/>
+              <AudioBox last="false"/>
+            </div>
+            {/*not solved well, if I still have time I should work on that later on -->*/}
+            <div className="audio secondAudioBox">
+              <AudioBox last="true"/>
             </div>
           </div>
           <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-        </div>
+         </div>
+       </div>
      );
    }
 }
+
+/*
 class MenuOptions extends React.Component{
   constructor(props){
     super(props);
@@ -75,14 +57,49 @@ class MenuOptions extends React.Component{
     );
   }
 }
+*/
 
 class MenuButton extends React.Component{
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      clicked: false
+    }
+    this.handleClick = this.handleClick.bind(this);
+    this.onHover = this.onHover.bind(this);
+   }
+
+   onHover(){
+     if(this.state.clicked === false){
+       website.hover();
+     }
+   }
+
+   handleClick() {
+     if(this.state.clicked === false)
+     {
+       this.setState({clicked: true});
+       website.showMenu();
+     }
+     else
+     {
+       if(this.state.clicked === true){
+         this.setState({clicked: false});
+         website.closeMenu();
+       }
+     }
+   }
+
   render() {
     return (
-      <div className="menuButtons" id="showMenu">
-        <div className="rect"></div>
-        <div className="rect"></div>
-        <div className="rect"></div>
+      <div id="menuButtons" className="menuButtons" onClick={this.handleClick} onMouseOver={this.onHover}>
+        <div className="rect" id="crossOne"/>
+        <div className="rect" id="crossTwo"/>
+        <div className="rect" id="openMenu">
+          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"}/>
+        </div>
       </div>
     );
   }

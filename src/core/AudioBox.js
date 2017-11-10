@@ -2,14 +2,23 @@ import React from 'react';
 import Line from './Line.js';
 
 class AudioBox extends React.Component {
+
+  constructor(props){
+    super(props);
+  }
+
    render() {
+     const {last} = this.props;
+
       return (
-         <div className="audioBox">
-           <AudioPlayer/>
-           <Line/>
-           <Player/>
-           <Line/>
-           <Filter/>
+        <div>
+          <div className="audioBox">
+            <AudioPlayer/>
+            <Line/>
+            <Player/>
+            <Line/>
+            <Filter/>
+           </div>
          </div>
       );
    }
