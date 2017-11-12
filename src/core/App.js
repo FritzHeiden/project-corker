@@ -16,7 +16,6 @@ class App extends React.Component {
 
      return (
        <div>
-         <div id="wrapper">
           <SVGPart/>
           <MenuButton/>
           <h1>{title}</h1>
@@ -30,7 +29,6 @@ class App extends React.Component {
             </div>
           </div>
           <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-         </div>
        </div>
      );
    }
@@ -65,38 +63,38 @@ class MenuButton extends React.Component{
     super(props);
 
     this.state = {
-      clicked: false
+      clickedMenu: false
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleCrossClick = this.handleCrossClick.bind(this);
     this.onHover = this.onHover.bind(this);
    }
 
    onHover(){
-     if(this.state.clicked === false){
+     if(this.state.clickedMenu === false){
        website.hover();
      }
    }
 
-   handleClick() {
-     if(this.state.clicked === false)
-     {
-       this.setState({clicked: true});
+   handleMenuClick() {
+     if(this.state.clickedMenu === false){
+       this.setState({clickedMenu: true});
        website.showMenu();
      }
-     else
-     {
-       if(this.state.clicked === true){
-         this.setState({clicked: false});
-         website.closeMenu();
-       }
+   }
+
+   handleCrossClick(){
+     if(this.state.clickedMenu === true){
+       this.setState({clickedMenu: false});
+       website.closeMenu();
      }
    }
 
   render() {
     return (
-      <div id="menuButtons" className="menuButtons" onClick={this.handleClick} onMouseOver={this.onHover}>
-        <div className="rect" id="crossOne"/>
-        <div className="rect" id="crossTwo"/>
+      <div id="menuButtons" className="menuButtons" onClick={this.handleMenuClick} onMouseOver={this.onHover}>
+        <div className="rect" id="crossOne" onClick={this.handleCrossClick}/>
+        <div className="rect" id="crossTwo" onClick={this.handleCrossClick}/>
         <div className="rect" id="openMenu">
           <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"}/>
         </div>

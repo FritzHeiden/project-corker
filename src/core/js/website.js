@@ -9,45 +9,61 @@ export function hover(){
 }
 
 export function showMenu(){
+
+  /* Open the menu to write down the next directory */
   var element = document.getElementById("openMenu");
-  element.classList.toggle("openMenu");
+  element.style.animation = "showMenu 1s ease-in-out 0s";
+  element.style.animationFillMode = "forwards";
+  element.style.animationDirection = "normal";
+
 
   let input = document.getElementById("inputFolderPath");
-  input.classList.toggle("showInput");
-  setTimeout(showInputField(input), 1000);
+  var delayInMilliseconds = 275; //1 second
+  setTimeout(function() {
+    input.style.display = "block";
+    input.style.animation = "showInput 0.5s ease-in-out 0s";
+    input.style.animationFillMode = "forwards";
+    input.style.animationDirection = "normal";
+  }, delayInMilliseconds);
+
 
   //so the two menu divs become a cross
   let crossOne = document.getElementById('crossOne');
-  crossOne.classList.toggle("cross_One_show");
+  crossOne.style.animationName = "showCrossOne";
+  crossOne.style.animation = "showCrossOne 1s ease-in-out 0s";
+  crossOne.style.animationFillMode = "forwards";
+  crossOne.style.animationDirection = "normal";
 
   let crossTwo = document.getElementById('crossTwo');
-  crossTwo.classList.toggle("cross_Two_show");
+  crossTwo.style.animation = "showCrossTwo 1s ease-in-out 0s";
+  crossTwo.style.animationFillMode = "forwards";
+  crossTwo.style.animationDirection = "normal";
 }
 
 export function closeMenu() {
-  var element = document.getElementById("openMenu");
-  element.classList.toggle("closeMenu");
-
+  /* Close the menu*/
   let input = document.getElementById("inputFolderPath");
-  input.classList.toggle("closeInput");
-  setTimeout(closeInputField(input), 1000);
+  input.style.display = "none"; // nicht so schön
 
-  //so the two menu divs become a cross
+  var delayInMilliseconds = 200;
+  setTimeout(function() {
+    var element = document.getElementById("openMenu");
+    element.style.animation = "closeMenu 1s ease-in-out 0s";
+    element.style.animationFillMode = "backwards";
+    element.style.animationDirection = "reverse";
+  }, delayInMilliseconds);
+
+  //so the crosses become a menu symbole
   let crossOne = document.getElementById('crossOne');
-  crossOne.classList.toggle("cross_One_close");
+  crossOne.style.animation = "closeCrossOne 1s ease-in-out 0s";
+  crossOne.style.animationFillMode = "backwards";
+  crossOne.style.animationDirection = "reverse";
 
   let crossTwo = document.getElementById('crossTwo');
-  crossTwo.classList.toggle("cross_Two_close");
+  crossTwo.style.animation = "closeCrossTwo 1s ease-in-out 0s";
+  crossTwo.style.animationFillMode = "backwards";
+  crossTwo.style.animationDirection = "reverse";
 }
-
-function closeInputField(input){
-  input.style.display = "none";
-}
-
-function showInputField(input){
-  input.style.display = "block";
-}
-
 
 
 /*

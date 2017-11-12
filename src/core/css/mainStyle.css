@@ -408,11 +408,13 @@ input[type="text"].showInput{
 .openMenu{
   animation: showMenu 1s ease-in-out 0s;
   animation-fill-mode: forwards;
+  animation-direction: normal;
 }
 
 .closeMenu{
   animation: showMenu 1s ease-in-out 0s;
   animation-direction: reverse;
+  animation-fill-mode: backwards;
 }
 
 input[type="text"].closeInput{
@@ -422,38 +424,7 @@ input[type="text"].closeInput{
   animation-direction: reverse;
 }
 
-/*
-  .clicked{
-    pointer-events: none;
-    transition: transform 300ms cubic-bezier(0.06, 0.8, 0.6, 1.26);
-    transform: translate(200px, 0);
-    animation: menu 2s cubic-bezier(0.06, 0.8, 0.6, 1.26);
-  }
-*/
-
-.cross_One_show{
-  animation: crossOne 1s ease-in-out 0s;
-  animation-fill-mode: forwards;
-}
-
-.cross_Two_show{
-  animation: crossTwo 1s ease-in-out 0s;
-  animation-fill-mode: forwards;
-}
-
-.cross_One_close{
-  animation: crossOne 1s ease-in-out 0s;
-  animation-direction: reverse;
-}
-
-.cross_Two_close{
-  animation: crossTwo 1s ease-in-out 0s;
-  animation-direction: reverse;
-}
-
-
-
-@keyframes crossOne {
+@keyframes showCrossOne {
   0%{
     transform: rotate(0deg);
   }
@@ -463,13 +434,33 @@ input[type="text"].closeInput{
   }
 }
 
-@keyframes crossTwo {
+@keyframes showCrossTwo {
   0%{
     transform: rotate(0deg);
   }
 
   100%{
     transform: rotate(-45deg) scale(0.5, 0.5);
+  }
+}
+
+@keyframes closeCrossOne {
+  100%{
+      transform: rotate(45deg) scale(0.5, 0.5) translate(20px,15px);
+    }
+
+  0%{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes closeCrossTwo {
+  100%{
+    transform: rotate(-45deg) scale(0.5, 0.5);
+  }
+
+  0%{
+    transform: rotate(0deg);
   }
 }
 
@@ -508,26 +499,28 @@ input[type="text"].closeInput{
         border-radius: 0.2rem;
         height: 0.25rem;
       }
-      15%{
-        border-radius: 0.4rem;
-        width:5rem;
-        height: 2.5rem;
-      }
-      30%{
-        border-radius: 0.6rem;
-        width:10rem;
-        height: 3rem;
-      }
-      75%{
-        border-radius: 0.8rem;
-        width:15rem;
-        height: 4.5rem;
-      }
+
       100%{
         border-radius: 1rem;
         width:20rem;
         height: 5.5rem;
       }
+}
+
+@keyframes closeMenu {
+  100%
+  {
+    border-radius: 1rem;
+    width:20rem;
+    height: 5.5rem;
+  }
+
+  0%
+  {
+    width: 3rem;
+    border-radius: 0.2rem;
+    height: 0.25rem;
+  }
 }
 
 @keyframes swing{
