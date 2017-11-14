@@ -1,8 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
+import * as drag from './js/dragAndDrop.js';
 
 class Footer extends React.Component {
     constructor(props){
-      super(props)
+      super(props);
+      this.mouseDragged = this.mouseDragged.bind(this);
+    }
+
+    mouseDragged(event){
+      event.dataTransfer.setData("text", event.target.id);
     }
 
     render() {
@@ -38,10 +46,10 @@ class Footer extends React.Component {
                    <th style={colTwo}>{colTwoName}</th>
                    <th style={colThree}>{colThreeName}</th>
                  </tr>
-                 <tr>
-                   <td>daw</td>
-                   <td>daw</td>
-                   <td>daw</td>
+                 <tr draggable="true" onDragStart={this.mouseDragged.bind(this)}>
+                   <td>Hallo</td>
+                   <td>Ich </td>
+                   <td>Bins</td>
                  </tr>
                  <tr>
                    <td>daw</td>

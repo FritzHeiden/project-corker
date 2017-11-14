@@ -44,6 +44,7 @@ export function closeMenu() {
   /* Close the menu*/
   let input = document.getElementById("inputFolderPath");
   input.style.display = "none"; // nicht so schön
+  input.value = "";
 
   var delayInMilliseconds = 200;
   setTimeout(function() {
