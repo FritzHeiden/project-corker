@@ -5,8 +5,14 @@ import Line from './Line.js';
 import * as audio from './js/audioplayer.js';
 import * as drop from './js/dragAndDrop.js';
 
-class AudioBox extends React.Component {
+/* Images */
+import NextButton from './svg/Next.js';
+import PauseButton from './svg/Pause.js';
+import PreviousButton from './svg/Pre.js';
+import StartButton from './svg/Start.js';
 
+
+class AudioBox extends React.Component {
   constructor(props){
     super(props);
   }
@@ -71,14 +77,55 @@ class AudioPlayer extends React.Component {
 }
 
 class Player extends React.Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      click: false
+    }
+    this.buttonClicked = this.buttonClicked.bind(this);
+   }
+
+   /* doesn't work */
+   buttonClicked(){
+     if(this.state.click === false){
+       this.setState({click: true});
+     }
+     else if(this.state.click === true){
+       this.setState({click: false});
+     }
+   }
+
+
   render(){
-    return(
-      <div className="minimalButtons">
-        <button className="player">10 sec +</button><br/>
-        <button className="player">Play</button><br/>
-        <button className="player">10 sec -</button><br/>
-      </div>
-    );
+
+    var all = {
+      fill: "none",
+      stroke:"#95989a",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+    }
+
+    var one = {
+      strokeWidth: "13px",
+    }
+
+    var two = {
+      strokeWidth: "9px",
+    }
+
+    const clicked = this.state.click;
+     return (
+       <div className="minimalButtons">
+        <PreviousButton/>
+        {clicked ?
+          (<PauseButton onClick={this.buttonClicked}/>) :
+          (<StartButton onClick={this.buttonClicked}/>)
+        }
+        <NextButton/>
+       </div>
+     );
   }
 }
 
@@ -86,36 +133,58 @@ class Filter extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = { x: 0, y: 0, clicked: 0};
-    this.mouseDragged = this.mouseDragged.bind(this);
-    this.clicked = this.clicked.bind(this);
+    this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0};
+    this.changeVolume = this.changeVolume.bind(this);
+    this.setStart = this.setStart.bind(this);
   }
 
-  clicked(e){
+  setStart(e){
     if(this.state.clicked == 0){
+      this.setState({ startY: e.screenY});
+      this.setState({ startX: e.screenX});
       this.setState({ clicked: 1});
-      this.setState({ x: e.screenX, y: e.screenY });
+      console.log("Hallo");
     }
     else if(this.state.clicked == 1){
-      let y = e.screenY;
-
-      let difference = y - this.state.y;
-      console.log(difference);
-
-      this.setState({ clicked: 0 });
+      this.setState({ clicked: 0});
     }
   }
 
-  mouseDragged(e){
-    this.setState({ x: e.screenX, y: e.screenY });
-    console.log(this.state.x +", " + this.state.y);
-    audio.clicked(this.state.x, this.state.y);
+  /* Doesn't work well */
+  changeVolume(e){
+
+    if(this.state.clicked == 1){
+
+      let elementSize = 50;
+      var position = document.getElementById('filterButton_1').getBoundingClientRect();
+      let middleX = position.left + elementSize/2;
+      let middleY = position.top + elementSize/2;
+
+      let y = e.screenY;
+      let x = e.screenX;
+
+      this.setState({ endY: e.screenY});
+      this.setState({ endX: e.screenX});
+      console.log("Ende der Line: " + this.state.endX + ", " + this.state.endY);
+      console.log("Mittelpunkt Kreis: " + middleX +", " + middleY);
+
+
+      let dy = this.state.endY - middleY;
+      let dx = this.state.endX - middleX;
+      let theta = Math.atan(dy/dx);
+      theta *= 180/Math.PI;
+
+      let object = e.target.id
+      let filter = document.getElementById(object);
+      filter.style.transform = 'rotate('+theta+'deg)';
+    }
   }
+
 
   render(){
     return(
       <div className="filterBox">
-        <div className="filter" id="filterButton_1" onClick={this.clicked.bind(this)}>
+        <div className="filter" id="filterButton_1" onClick={this.setStart.bind(this)} onMouseMove={this.changeVolume.bind(this)} >
           <div className="dot">
 
           </div>

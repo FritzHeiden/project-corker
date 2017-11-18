@@ -1,16 +1,11 @@
-
-export function helloWorld(){
-  alert("hello World");
-}
-
 export function hover(){
   var element = document.getElementById("menuButtons");
   element.classList.toggle("hover");
 }
-
+/*
 export function showMenu(){
 
-  /* Open the menu to write down the next directory */
+  // Open the menu to write down the next directory 
   var element = document.getElementById("openMenu");
   element.style.animation = "showMenu 1s ease-in-out 0s";
   element.style.animationFillMode = "forwards";
@@ -41,7 +36,7 @@ export function showMenu(){
 }
 
 export function closeMenu() {
-  /* Close the menu*/
+  // Close the menu
   let input = document.getElementById("inputFolderPath");
   input.style.display = "none"; // nicht so schön
   input.value = "";
@@ -65,7 +60,7 @@ export function closeMenu() {
   crossTwo.style.animationFillMode = "backwards";
   crossTwo.style.animationDirection = "reverse";
 }
-
+*/
 
 /*
 let audioVideo;
