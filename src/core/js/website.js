@@ -1,3 +1,72 @@
+
+export function helloWorld(){
+  alert("hello World");
+}
+
+export function hover(){
+  var element = document.getElementById("menuButtons");
+  element.classList.toggle("hover");
+}
+
+export function showMenu(){
+
+  /* Open the menu to write down the next directory */
+  var element = document.getElementById("openMenu");
+  element.style.animation = "showMenu 1s ease-in-out 0s";
+  element.style.animationFillMode = "forwards";
+  element.style.animationDirection = "normal";
+
+
+  let input = document.getElementById("inputFolderPath");
+  var delayInMilliseconds = 275; //1 second
+  setTimeout(function() {
+    input.style.display = "block";
+    input.style.animation = "showInput 0.5s ease-in-out 0s";
+    input.style.animationFillMode = "forwards";
+    input.style.animationDirection = "normal";
+  }, delayInMilliseconds);
+
+
+  //so the two menu divs become a cross
+  let crossOne = document.getElementById('crossOne');
+  crossOne.style.animationName = "showCrossOne";
+  crossOne.style.animation = "showCrossOne 1s ease-in-out 0s";
+  crossOne.style.animationFillMode = "forwards";
+  crossOne.style.animationDirection = "normal";
+
+  let crossTwo = document.getElementById('crossTwo');
+  crossTwo.style.animation = "showCrossTwo 1s ease-in-out 0s";
+  crossTwo.style.animationFillMode = "forwards";
+  crossTwo.style.animationDirection = "normal";
+}
+
+export function closeMenu() {
+  /* Close the menu*/
+  let input = document.getElementById("inputFolderPath");
+  input.style.display = "none"; // nicht so schön
+  input.value = "";
+
+  var delayInMilliseconds = 200;
+  setTimeout(function() {
+    var element = document.getElementById("openMenu");
+    element.style.animation = "closeMenu 1s ease-in-out 0s";
+    element.style.animationFillMode = "backwards";
+    element.style.animationDirection = "reverse";
+  }, delayInMilliseconds);
+
+  //so the crosses become a menu symbole
+  let crossOne = document.getElementById('crossOne');
+  crossOne.style.animation = "closeCrossOne 1s ease-in-out 0s";
+  crossOne.style.animationFillMode = "backwards";
+  crossOne.style.animationDirection = "reverse";
+
+  let crossTwo = document.getElementById('crossTwo');
+  crossTwo.style.animation = "closeCrossTwo 1s ease-in-out 0s";
+  crossTwo.style.animationFillMode = "backwards";
+  crossTwo.style.animationDirection = "reverse";
+}
+
+
 /*
 let audioVideo;
 

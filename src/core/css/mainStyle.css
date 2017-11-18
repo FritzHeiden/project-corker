@@ -25,6 +25,7 @@ button{
   color: white;
   margin-top: 0.5rem;
   background: #323232;
+  cursor: pointer;
 }
 
 footer{
@@ -68,7 +69,7 @@ table tr th{
 
 .rect{
   padding: 0.25rem 0.4rem;
-  background: grey;
+  background: #95989A;
   width:3rem;
   border: 3px solid #323232;
 }
@@ -96,6 +97,7 @@ span{
   position: absolute;
   top: 2rem;
   left: 2rem;
+  cursor:pointer;
 }
 
 .svg1{
@@ -133,7 +135,19 @@ span{
   height: 50px;
   width: 50px;
   margin: 1rem 0.25rem 1rem;
+  border-radius: 100%;
+  background-color: #323232;
+  border: 2px solid #00868B;
+}
 
+.dot{
+  height: 10%;
+  width: 10%;
+  background-color: #95989A;
+  border-radius: 100%;
+  position: relative;
+  left: 50%;
+  top: 5%;
 }
 
 .audioPlayer{
@@ -165,13 +179,19 @@ span{
   height: auto;
   position: relative;
   left: 15%;
+  float: left;
   display:block;
+}
+
+.secondAudioBox{
+  margin-left: 60%;
 }
 
 .audio{
   width: 50%;
-/*      background-color: red;*/
 }
+
+
 
 .musicFolder{
   margin: 0 auto; /* or margin: 0 auto 0 auto */
@@ -187,32 +207,32 @@ span{
 
 .slider {
   -webkit-appearance: none;
-      width: 25%;
-      height: 7.5px;
-      border-radius: 10px;
-      background: #494949;
-      /* outline: none; */
-      /* opacity: 0.7; */
-      -webkit-transition: .2s;
-      /* transition: opacity .2s; */
+  width: 25%;
+  height: 7.5px;
+  border-radius: 10px;
+  background: #494949;
+  /* outline: none; */
+  /* opacity: 0.7; */
+  -webkit-transition: .2s;
+  /* transition: opacity .2s; */
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #00868B;
-    cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #00868B;
+  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #00868B;
-    cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #00868B;
+  cursor: pointer;
 }
 
 .player{
@@ -229,21 +249,6 @@ span{
   top: -38%;
   left: 50%;
   transform: translate(-50%, 0%);
-}
-
-input[type="text"]{
-  color: #323232;
-  background-color: white;
-  width: 75%;
-  height: 2rem;
-  margin-bottom: 1rem;
-  margin-left: 12.5%;
-  font-size: 20px;
-}
-
-
-input[type="text"]:last-child{
-  margin-bottom: 3rem;
 }
 
 .pushButton{
@@ -321,12 +326,15 @@ input[type="text"]{
   background-color: #323232;
   width: 75%;
   height: 2rem;
-  margin: 2rem 0 1rem 12.5%;
+  margin: 2rem 0 0.5rem 12.5%;
   font-size: 20px;
   border: 2px solid #323232;
   color: #95989A;
 }
 
+input[type="text"]:focus{
+  border: 2px solid #00868B;
+}
 
 .pushButton{
   background-color: #00868B;
@@ -338,6 +346,7 @@ input[type="text"]{
   position: absolute;
   bottom: 0;
   left: 12.5%;
+  border: none;
 }
 
 .bubble
@@ -382,4 +391,165 @@ h2.options{
 
 .menuOps{
   display: none;
+}
+
+.menu{
+  opacity: 0;
+  width: 0;
+  margin-left: 0;
+}
+
+.inputFolderPath{
+  width: 0rem;
+  display: none;
+}
+
+input[type="text"].showInput{
+  animation: showInput 0.5s ease-in-out 0s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+  width: 0;
+  height: 0;
+}
+
+/** Animeationen**/
+.hover{
+  animation: swing 1s ease;
+}
+
+.openMenu{
+  animation: showMenu 1s ease-in-out 0s;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+}
+
+.closeMenu{
+  animation: showMenu 1s ease-in-out 0s;
+  animation-direction: reverse;
+  animation-fill-mode: backwards;
+}
+
+input[type="text"].closeInput{
+  animation: showInput 0.5s ease-in-out 0s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+  animation-direction: reverse;
+}
+
+@keyframes showCrossOne {
+  0%{
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(45deg) scale(0.5, 0.5) translate(20px,15px);
+  }
+}
+
+@keyframes showCrossTwo {
+  0%{
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(-45deg) scale(0.5, 0.5);
+  }
+}
+
+@keyframes closeCrossOne {
+  100%{
+      transform: rotate(45deg) scale(0.5, 0.5) translate(20px,15px);
+    }
+
+  0%{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes closeCrossTwo {
+  100%{
+    transform: rotate(-45deg) scale(0.5, 0.5);
+  }
+
+  0%{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes showInput {
+  0%{
+    opacity: 0;
+    width: 0rem;
+    height: 0rem;
+  }
+  25%{
+    opacity: 0.25;
+    width: 2.5rem;
+    height: 0.5rem;
+
+  }
+  50%{
+    opacity: 0.50;
+    width: 5rem;
+    height: 1rem;
+  }
+  75%{
+    opacity: 0.75;
+    width: 10rem;
+    height: 1.5rem;
+  }
+  100%{
+    opacity: 1;
+    width: 15rem;
+    height: 2rem;
+  }
+}
+
+@keyframes showMenu {
+      0%{
+        width: 3rem;
+        border-radius: 0.2rem;
+        height: 0.25rem;
+      }
+
+      100%{
+        border-radius: 1rem;
+        width:20rem;
+        height: 5.5rem;
+      }
+}
+
+@keyframes closeMenu {
+  100%
+  {
+    border-radius: 1rem;
+    width:20rem;
+    height: 5.5rem;
+  }
+
+  0%
+  {
+    width: 3rem;
+    border-radius: 0.2rem;
+    height: 0.25rem;
+  }
+}
+
+@keyframes swing{
+    15%
+    {
+        transform: translateX(2px);
+    }
+    30%
+    {
+        transform: translateX(-2px);
+    }
+    75%
+    {
+        transform: translateX(3px);
+    }
+    100%
+    {
+      transform: translateX(0);
+    }
 }

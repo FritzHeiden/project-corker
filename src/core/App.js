@@ -1,42 +1,40 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import SVGPart from './SVG.js';
 import Footer from './Footer.js';
 import AudioBox from './AudioBox.js';
+import * as website from './js/website.js';
 
 class App extends React.Component {
 
    constructor(props){
      super(props);
-   }
+    }
 
    render() {
      const {title} = this.props;
 
      return (
-        <div>
-          <div id="perspective" className="perspective effect-airbnb">
-            <div className="container">
-              <div className="wrapper">
-                <SVGPart/>
-                <MenuButton/>
-                <h1>{title}</h1>
-                <div className="actionBox">
-                  <div className="audio">
-                    <AudioBox/>
-                  </div>
-                </div>
-                <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-              </div>
+       <div>
+          <SVGPart/>
+          <MenuButton/>
+          <h1>{title}</h1>
+          <div className="actionBox">
+            <div className="audio">
+              <AudioBox last="false"/>
+            </div>
+            {/*not solved well, if I still have time I should work on that later on -->*/}
+            <div className="audio secondAudioBox">
+              <AudioBox last="true"/>
             </div>
           </div>
-          <nav className="outer-nav left vertical">
-            <MenuOptions imageOne="./img/home.svg" imageTwo="./img/options.svg" disOne="Home" disTwo="Einstellungen" />
-          </nav>
-        </div>
+          <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
+       </div>
      );
    }
 }
 
+/*
 class MenuOptions extends React.Component{
   constructor(props){
     super(props);
@@ -57,14 +55,49 @@ class MenuOptions extends React.Component{
     );
   }
 }
+*/
 
 class MenuButton extends React.Component{
-  render(){
-    return(
-      <div className="menuButtons" id="showMenu">
-        <div className="rect"></div>
-        <div className="rect"></div>
-        <div className="rect"></div>
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      clickedMenu: false
+    }
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleCrossClick = this.handleCrossClick.bind(this);
+    this.onHover = this.onHover.bind(this);
+   }
+
+   onHover(){
+     if(this.state.clickedMenu === false){
+       website.hover();
+     }
+   }
+
+   handleMenuClick() {
+     if(this.state.clickedMenu === false){
+       this.setState({clickedMenu: true});
+       website.showMenu();
+     }
+   }
+
+   handleCrossClick(){
+     if(this.state.clickedMenu === true){
+       this.setState({clickedMenu: false});
+       website.closeMenu();
+     }
+   }
+
+  render() {
+    return (
+      <div id="menuButtons" className="menuButtons" onClick={this.handleMenuClick} onMouseOver={this.onHover}>
+        <div className="rect" id="crossOne" onClick={this.handleCrossClick}/>
+        <div className="rect" id="crossTwo" onClick={this.handleCrossClick}/>
+        <div className="rect" id="openMenu">
+          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"}/>
+        </div>
       </div>
     );
   }
