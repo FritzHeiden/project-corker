@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SVGPart extends React.Component {
+class BackgroundImage extends React.Component {
  render() {
 
    let svg =
@@ -11,7 +11,7 @@ class SVGPart extends React.Component {
     }
 
     return (
-       <div>
+       <div className="background">
          <svg className="svg1" viewBox="0 0 350.39232 230.71234">
            <line style={svg} x1="312" y1="0.35879" x2="176" y2="132.35879"/>
            <line style={svg} y1="84.35879" x2="163" y2="84.35879"/>
@@ -78,4 +78,4 @@ class SVGPart extends React.Component {
  }
 }
 
-export default SVGPart;
+export default BackgroundImage;

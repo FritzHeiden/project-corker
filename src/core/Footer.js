@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import * as drag from './js/dragAndDrop.js';
+import Folder from './svg/folder.js';
 
 class Footer extends React.Component {
     constructor(props){
@@ -45,6 +46,11 @@ class Footer extends React.Component {
                    <th style={colOne}>{colOneName}</th>
                    <th style={colTwo}>{colTwoName}</th>
                    <th style={colThree}>{colThreeName}</th>
+                 </tr>
+                 <tr>
+                   <td><Folder/></td>
+                   <td></td>
+                   <td></td>
                  </tr>
                  <tr draggable="true" onDragStart={this.mouseDragged.bind(this)}>
                    <td>Hallo</td>

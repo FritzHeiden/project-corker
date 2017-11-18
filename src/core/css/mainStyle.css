@@ -2,7 +2,6 @@ html, body{
   background-color: #323232;
   margin: 0;
   padding: 0;
-  text-align: center;
 }
 
 h3{
@@ -29,9 +28,10 @@ button{
 }
 
 footer{
-  position:absolute;
+  /*position:absolute;*/
   bottom: 0;
   width: 100%;
+  flex-grow : 1;
 }
 
 table {
@@ -72,15 +72,13 @@ table tr th{
   background: #95989A;
   width:3rem;
   border: 3px solid #323232;
+  margin: -0.5rem 0 0 0rem;
 }
 
 h1{
   font-size: 4rem;
   font-family: 'Merriweather', serif;
   color: #00868B;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  margin-left: 50%;
 }
 img{
   width: 20%;
@@ -93,40 +91,75 @@ span{
   margin-left: 2rem;
 }
 
-.menuButtons{
+.MenuButton{
   position: absolute;
   top: 2rem;
   left: 2rem;
-  cursor:pointer;
+  cursor: pointer;
+  stroke: #95989a;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  width: 6rem;
+  fill:none;
+  z-index: 100;
+}
+
+.MenuButton line.One{
+  stroke-width: 13px;
+}
+
+.MenuButton circle.Two{
+  stroke-width: 9px;
+}
+
+.background{
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: -1;
 }
 
 .svg1{
   width: 19%;
   position: absolute;
-  top: 0;
   left: 0;
 }
 
 .svg2{
   width: 13%;
   position: absolute;
-  top: 0;
   right: 0;
+}
+
+.main{
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto;
+  height: 100vh;
 }
 
 /* next part*/
 
 .actionBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-flow: row wrap;
+
+/*
   width: 100%;
   height: 75%;
   position: relative;
-  box-sizing: border-box;
+  box-sizing: border-box;*/
   /*background-color: red;*/
 }
 
 .filterBox{
-  width: auto;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .filter{
@@ -164,7 +197,15 @@ span{
 }
 
 .minimalButtons{
-  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.minimalButtons>svg {
+  margin: 0.75rem;
+  height: 3rem;
+  width: auto;
 }
 
 .loadAndMusicChanger{
@@ -173,16 +214,19 @@ span{
   align-content: center;
 }
 
+.buttons{
+  margin: -3rem 0 0 0;
+}
+
 .audioBox{
   background-color: #494949;
-  width: 50%;
+  /*width: 50%;
   height: auto;
   position: relative;
   left: 15%;
-  float: left;
-  display:block;
+  /*float: left;*/
 }
-
+/*
 .secondAudioBox{
   margin-left: 60%;
 }
@@ -190,8 +234,7 @@ span{
 .audio{
   width: 50%;
 }
-
-
+*/
 
 .musicFolder{
   margin: 0 auto; /* or margin: 0 auto 0 auto */
@@ -201,20 +244,14 @@ span{
   color: white;
 }
 
-.slidecontainer{
-  margin: 4rem 0 4rem 0;
-}
-
 .slider {
   -webkit-appearance: none;
   width: 25%;
   height: 7.5px;
   border-radius: 10px;
   background: #494949;
-  /* outline: none; */
-  /* opacity: 0.7; */
   -webkit-transition: .2s;
-  /* transition: opacity .2s; */
+  margin-bottom: 8vh;
 }
 
 .slider::-webkit-slider-thumb {
@@ -258,34 +295,34 @@ span{
   height: 3rem;
   margin-bottom: 1rem;
   font-size: 25px;
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0;
   left: 12.5%;
 }
 
 .bubble
 {
-position: relative;
-width: 30rem;
-height: auto;
-padding: 0px;
-background: #494949;
-position: absolute;
-top: 100px;
-left: 100px;
+  position: relative;
+  width: 30rem;
+  height: auto;
+  padding: 0px;
+  background: #494949;
+  /*position: absolute;*/
+  top: 100px;
+  left: 100px;
 }
 
 .bubble:after
 {
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 15px 20px 15px 0;
-border-color: transparent #494949;
-display: block;
-z-index: 1;
-left: -20px;
-top: 5px;
+  content: '';
+  /*position: absolute;*/
+  border-style: solid;
+  border-width: 15px 20px 15px 0;
+  border-color: transparent #494949;
+  display: block;
+  z-index: 1;
+  left: -20px;
+  top: 5px;
 }
 
 p{
@@ -322,11 +359,23 @@ div.bubble p{
   text-align: left;
 }
 
+/*
 input[type="text"]{
   background-color: #323232;
   width: 75%;
   height: 2rem;
   margin: 2rem 0 0.5rem 12.5%;
+  font-size: 20px;
+  border: 2px solid #323232;
+  color: #95989A;
+}
+*/
+
+input[type="text"]{
+  background-color: #323232;
+  width: 75%;
+  height: 2rem;
+  margin: 4rem 0 0.5rem 12.5%;
   font-size: 20px;
   border: 2px solid #323232;
   color: #95989A;
@@ -343,7 +392,7 @@ input[type="text"]:focus{
   height: 3rem;
   margin-bottom: 1rem;
   font-size: 25px;
-  position: absolute;
+  /*position: absolute;*/
   bottom: 0;
   left: 12.5%;
   border: none;
@@ -351,28 +400,28 @@ input[type="text"]:focus{
 
 .bubble
 {
-position: relative;
-width: 250px;
-height: 120px;
-padding: 0px;
-background: #FFFFFF;
--webkit-border-radius: 0px;
--moz-border-radius: 0px;
-border-radius: 0px;
+  position: relative;
+  width: 250px;
+  height: 120px;
+  padding: 0px;
+  background: #FFFFFF;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
 
 .bubble:after
 {
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 15px 20px 15px 0;
-border-color: transparent #FFFFFF;
-display: block;
-width: 0;
-z-index: 1;
-left: -20px;
-top: 5px;
+  content: '';
+  /*position: absolute;*/
+  border-style: solid;
+  border-width: 15px 20px 15px 0;
+  border-color: transparent #FFFFFF;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -20px;
+  top: 5px;
 }
 
 h2, p{
@@ -399,10 +448,12 @@ h2.options{
   margin-left: 0;
 }
 
+/*
 .inputFolderPath{
   width: 0rem;
   display: none;
-}
+}*/
+
 
 input[type="text"].showInput{
   animation: showInput 0.5s ease-in-out 0s;
@@ -412,7 +463,19 @@ input[type="text"].showInput{
   height: 0;
 }
 
+.options{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  border: 2px solid green;
+  z-index: 1;
+  top: -1rem;
+  position: relative;
+}
+
+
 /** Animeationen**/
+/*
 .hover{
   animation: swing 1s ease;
 }
@@ -552,4 +615,74 @@ input[type="text"].closeInput{
     {
       transform: translateX(0);
     }
+}
+
+
+/* Navigation bar*/
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    text-align: center;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    /*position: absolute;*/
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.sidenav h3{
+  font-size: 1.0rem;
+  font-family: 'Helvetica';
+  color: #00868B;
+  position: relative;
+  top: 4rem;
+  left: 0;
+  margin-bottom: 0rem;
+}
+
+.sidenav input[type="text"]{
+  background-color: #323232;
+  width: 95%;
+  height: 2rem;
+  margin: 5rem 0 0 0;
+  font-size: 20px;
+  border: 2px solid #323232;
+  color: #95989A;
+  text-align: center;
+}
+
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }

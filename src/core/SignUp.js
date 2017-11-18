@@ -1,6 +1,9 @@
 import React from 'react'
-import SVGPart from './SVG.js';
 import Line from './Line.js';
+
+/* Images*/
+import BackgroundImage from './svg/background.js';
+
 
 class SignUp extends React.Component {
    constructor(props){
@@ -11,7 +14,7 @@ class SignUp extends React.Component {
      const{title} = this.props;
       return (
         <div>
-          <SVGPart/>
+          <BackgroundImage/>
           <h1>{title}</h1>
           <FormPage title="Anmelden"/>
         </div>
