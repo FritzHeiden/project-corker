@@ -73,9 +73,10 @@ function changeVolume(element) {
 }
 
 function initLowpass() {
+    // Frequencies below the cutoff pass through, frequencies above it are attenuated
     lowpassFilter = context.createBiquadFilter();
     lowpassFilter.type = 'lowpass';
-    lowpassFilter.frequency.value = 5000;
+    lowpassFilter.frequency.value = 5000; // The cutoff frequency
 }
 
 function changeLowpassFilterFrequency(element) {
@@ -85,4 +86,9 @@ function changeLowpassFilterFrequency(element) {
     let multiplier = Math.pow(2, numberOfOctaves * (element.value - 1.0));
     lowpassFilter.frequency.value = maxValue * multiplier;
 }
+
+function changeLowpassFilterQuality(element) {
+    lowpassFilter.Q.value = element.value * 30;
+}
+
 
