@@ -7,6 +7,10 @@ let pausedAt;
 let paused = true;
 
 let lowpassFilter;
+let highshelfFilter;
+
+let lowpassConnected = false;
+let highshelfConnected = false;
 
 let request = new XMLHttpRequest();
 
@@ -28,14 +32,31 @@ function onBufferError(e) {
 }
 
 function connectNodes() {
-    gainNode = context.createGain();
-    source = context.createBufferSource();
-    source.buffer = buffer;
     initLowpass();
+    initHighshelf();
+
+    let lowpassConnected = false;
+    let highshelfConnected = false;
 
     source.connect(gainNode);
-    gainNode.connect(lowpassFilter);
-    lowpassFilter.connect(context.destination);
+
+    if(document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+        gainNode.connect(lowpassFilter);
+        lowpassFilter.connect(highshelfFilter);
+        highshelfFilter.connect(context.destination);
+        lowpassConnected = true;
+        highshelfConnected = true;
+    } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
+        gainNode.connect(lowpassFilter);
+        lowpassFilter.connect(context.destination);
+        lowpassConnected = true;
+    } else if(!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked){
+        gainNode.connect(highshelfFilter);
+        highshelfFilter.connect(context.destination);
+        highshelfConnected = true;
+    } else {
+        gainNode.connect(context.destination);
+    }
 }
 
 function pausePlay() {
@@ -47,6 +68,10 @@ function pausePlay() {
 }
 
 function play() {
+    gainNode = context.createGain();
+    source = context.createBufferSource();
+    source.buffer = buffer;
+    source.loop = true;
     connectNodes();
 
     paused = false;
@@ -72,8 +97,8 @@ function changeVolume(element) {
     gainNode.gain.value = fraction * fraction;
 }
 
+// Frequencies below the cutoff pass through, frequencies above it are attenuated
 function initLowpass() {
-    // Frequencies below the cutoff pass through, frequencies above it are attenuated
     lowpassFilter = context.createBiquadFilter();
     lowpassFilter.type = 'lowpass';
     lowpassFilter.frequency.value = 5000; // The cutoff frequency
@@ -89,6 +114,32 @@ function changeLowpassFilterFrequency(element) {
 
 function changeLowpassFilterQuality(element) {
     lowpassFilter.Q.value = element.value * 30;
+}
+
+// Frequencies higher than the frequency get a boost or an attenuation, frequencies lower are unchanged.
+function initHighshelf() {
+    highshelfFilter = context.createBiquadFilter();
+    highshelfFilter.type = 'highshelf';
+    highshelfFilter.gain.value = 50;
+    highshelfFilter.frequency.value = 10000;
+}
+
+function changeHighshelfFilterFrequency(element) {
+    highshelfFilter.frequency.value = element.value;
+}
+
+function toggleFilter() {
+    source.disconnect(0);
+    gainNode.disconnect(0);
+
+    if(lowpassConnected) {
+        lowpassFilter.disconnect(0);
+    }
+    if (highshelfConnected) {
+        highshelfFilter.disconnect(0);
+    }
+
+    connectNodes();
 }
 
 
