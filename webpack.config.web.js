@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/core/core.js',
+    entry: './src/web-app/core/core.js',
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, 'dist/web-app')

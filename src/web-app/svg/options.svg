@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 269">
+  <defs>
+    <style>.cls-1,.cls-2,.cls-3{fill:none;stroke:#95989a;stroke-linecap:round;stroke-linejoin:round;}.cls-1{stroke-width:13px;}.cls-2{stroke-width:9px;}.cls-3{stroke-width:12px;}
+    </style>
+  </defs>
+  <title>Element 2</title>
+  <g id="Ebene_2" data-name="Ebene 2">
+    <g id="Ebene_1-2" data-name="Ebene 1">
+      <line class="cls-1" x1="445.5" y1="28.5" x2="6.5" y2="28.5"/>
+      <circle class="cls-2" cx="52" cy="29.5" r="25"/>
+      <line class="cls-3" x1="445.5" y1="134.5" x2="6.5" y2="134.5"/>
+      <circle class="cls-2" cx="366" cy="134.5" r="25"/>
+      <line class="cls-3" x1="445.5" y1="239.5" x2="6.5" y2="239.5"/>
+      <circle class="cls-2" cx="43" cy="239.5" r="25"/>
+    </g>
+  </g>
+</svg>
