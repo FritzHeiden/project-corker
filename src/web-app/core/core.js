@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FileService from "../services/file-service";
 import SignUp from '../components/SignUp.js';
+import App from '../components/App.js';
 import AudioFile from "../data/audio-file";
 import AudioFileAnalyser from "../analysis/audio-file-analyser";
 
@@ -89,4 +90,4 @@ if (!String.prototype.format) {
 // }
 
 
-ReactDOM.render(<SignUp title="Project: JRectD"/>, document.getElementById('root'));
+ReactDOM.render(<App title="Project: JRectD"/>, document.getElementById('root'));

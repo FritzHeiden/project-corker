@@ -2,7 +2,7 @@ import React from 'react'
 import Line from './Line.js';
 
 /* Images*/
-import BackgroundImage from './svg/background.js';
+import BackgroundImage from '../svg/background.js';
 
 
 class SignUp extends React.Component {

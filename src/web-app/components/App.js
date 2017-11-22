@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom';
 import Footer from './Footer.js';
 import AudioBox from './AudioBox.js';
 
-import * as website from './js/website.js';
-import * as sidebar from './js/sidebar.js';
-import Options from './svg/options.js';
+import * as website from '../test/website.js';
+import * as sidebar from '../test/sidebar.js';
+import Options from '../svg/options.js';
 
 /* Images */
-import BackgroundImage from './svg/background.js';
+import BackgroundImage from '../svg/background.js';
 
 
 class App extends React.Component {

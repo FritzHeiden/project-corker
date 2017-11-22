@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import * as drag from './js/dragAndDrop.js';
-import Folder from './svg/folder.js';
+import * as drag from '../test/dragAndDrop.js';
+import Folder from '../svg/folder.js';
 
 class Footer extends React.Component {
     constructor(props){

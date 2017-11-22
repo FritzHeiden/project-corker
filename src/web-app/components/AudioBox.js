@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Line from './Line.js';
-import * as audio from './js/audioplayer.js';
-import * as drop from './js/dragAndDrop.js';
+import * as audio from '../test/audioplayer.js';
+import * as drop from '../test/dragAndDrop.js';
 
 /* Images */
-import NextButton from './svg/Next.js';
-import PauseButton from './svg/Pause.js';
-import PreviousButton from './svg/Pre.js';
-import StartButton from './svg/Start.js';
+import NextButton from '../svg/Next.js';
+import PauseButton from '../svg/Pause.js';
+import PreviousButton from '../svg/Pre.js';
+import StartButton from '../svg/Start.js';
 
 
 
