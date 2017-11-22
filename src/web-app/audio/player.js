@@ -1,26 +1,19 @@
 export default class AudioPlayer {
 
     constructor() {
-        let context;
-        let source, buffer;
-        let gainNode;
+        this.source = {};
+        this.buffer = {};
+        this.gainNode = {};
+        this.startedAt = {};
+        this.pausedAt = {};
+        this.lowpassFilter = {};
+        this.highshelfFilter = {};
 
-        let startedAt;
-        let pausedAt;
-        let paused;
-
-        let lowpassFilter;
-        let highshelfFilter;
-
-        let lowpassConnected;
-        let highshelfConnected;
-
-        let request;
-        context = new (window.AudioContext || window.webkitAudioContext)();
-        paused = true;
-        lowpassConnected = false;
-        highshelfConnected = false;
-        request = new XMLHttpRequest();
+        this.context = new (window.AudioContext || window.webkitAudioContext)();
+        this.paused = true;
+        this.lowpassConnected = false;
+        this.highshelfConnected = false;
+        this.request = new XMLHttpRequest();
 
         request.open('GET', './basic_beat.wav', true);
         request.responseType = 'arraybuffer';

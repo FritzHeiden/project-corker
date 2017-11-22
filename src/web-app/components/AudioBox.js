@@ -11,6 +11,7 @@ import PauseButton from '../svg/Pause.js';
 import PreviousButton from '../svg/Pre.js';
 import StartButton from '../svg/Start.js';
 
+import PlayerJS from '../audio/player.js';
 
 
 
