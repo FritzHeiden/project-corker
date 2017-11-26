@@ -14,12 +14,12 @@ import BackgroundImage from '../svg/background.js';
 import Options from '../svg/Options.js';
 
 
+
 class App extends React.Component {
 
     constructor(props) {
         super(props);
     }
-
     render() {
         const {title} = this.props;
 
