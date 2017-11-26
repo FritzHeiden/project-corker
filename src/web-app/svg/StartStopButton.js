@@ -61,11 +61,6 @@ class StopButton extends React.Component {
   render() {
     const {title} = this.props;
 
-    let svgStyle={
-      width: "16%",
-      marginTop: "4%",
-    }
-
     let zero =
     {
       fill: "#323232",
@@ -82,7 +77,7 @@ class StopButton extends React.Component {
      }
 
     return (
-      <svg style={svgStyle} x="0px" y="0px" viewBox="0 0 500 500" onClick={this.stop}>
+      <svg x="0px" y="0px" viewBox="0 0 500 500" onClick={this.stop}>
         <g>
          <path style={zero} d="M493,7v486H7V7H493 M493-0.3H7C3-0.3-0.3,3-0.3,7v486c0,4,3.3,7.3,7.3,7.3h486c4,0,7.3-3.3,7.3-7.3V7C500.3,3,497-0.3,493-0.3L493-0.3z"/>
         </g>
@@ -111,11 +106,6 @@ class StartButton extends React.Component{
 
   render() {
 
-    let svgStyle={
-      width: "16%",
-      marginTop: "4%",
-    }
-
     let zero =
     {
       fill: "#323232",
@@ -132,7 +122,7 @@ class StartButton extends React.Component{
       }
 
      return (
-         <svg style={svgStyle} x="0px" y="0px" viewBox="0 0 500 500" onClick={this.start}>
+         <svg x="0px" y="0px" viewBox="0 0 500 500" onClick={this.start}>
            <g>
            	<path style={zero} d="M493,7v486H7V7H493 M493-0.3H7C3-0.3-0.3,3-0.3,7v486c0,4,3.3,7.3,7.3,7.3h486c4,0,7.3-3.3,7.3-7.3V7C500.3,3,497-0.3,493-0.3L493-0.3z"/>
            </g>
