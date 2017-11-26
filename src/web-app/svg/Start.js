@@ -1,6 +1,6 @@
 import React from 'react';
 
-class PreviousButton extends React.Component {
+class StartButton extends React.Component {
  render() {
 
    let zero =
@@ -29,4 +29,4 @@ class PreviousButton extends React.Component {
  }
 }
 
-export default PreviousButton;
+export default StartButton;

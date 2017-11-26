@@ -99,7 +99,7 @@ span{
   stroke: #95989a;
   stroke-linecap: round;
   stroke-linejoin: round;
-  width: 6rem;
+  width: 5rem;
   fill:none;
   z-index: 100;
 }
@@ -145,14 +145,12 @@ span{
 .actionBox{
   display: flex;
   flex-direction: row;
-  justify-content: center;
   flex-flow: row wrap;
-
-/*
+  justify-content: space-between;
   width: 100%;
-  height: 75%;
+  height: auto;
   position: relative;
-  box-sizing: border-box;*/
+  box-sizing: border-box;
   /*background-color: red;*/
 }
 
@@ -220,6 +218,8 @@ span{
 
 .audioBox{
   background-color: #494949;
+  width: 35%;
+  margin: 0 3rem 0 3rem;
   /*width: 50%;
   height: auto;
   position: relative;

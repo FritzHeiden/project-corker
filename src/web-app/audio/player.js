@@ -1,6 +1,7 @@
 export default class AudioPlayer {
 
     constructor() {
+      console.log("!");
         this.source = {};
         this.buffer = {};
         this.gainNode = {};
@@ -19,7 +20,6 @@ export default class AudioPlayer {
             .then(file => {
             this.context.decodeAudioData(file, buffer => this.buffer = buffer, error => console.error(error));
             }).catch(error => console.error(error))
-
     }
 
     _connectNodes() {

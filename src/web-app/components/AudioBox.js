@@ -10,6 +10,7 @@ import NextButton from '../svg/Next.js';
 import PauseButton from '../svg/Pause.js';
 import PreviousButton from '../svg/Pre.js';
 import StartButton from '../svg/Start.js';
+import StartStopButton from '../svg/StartStopButton.js';
 
 import PlayerJS from '../audio/player.js';
 
@@ -24,7 +25,6 @@ class AudioBox extends React.Component {
      const {last} = this.props;
 
       return (
-        <div>
           <div className="audioBox">
             <AudioPlayer/>
             <Line/>
@@ -32,7 +32,6 @@ class AudioBox extends React.Component {
             <Line/>
             <Filter/>
            </div>
-         </div>
       );
    }
 }
@@ -83,49 +82,13 @@ class Player extends React.Component {
 
   constructor(props){
     super(props);
-
-    this.state = {
-      click: false
-    }
-    this.buttonClicked = this.buttonClicked.bind(this);
-   }
-
-   /* doesn't work */
-   buttonClicked(){
-     if(this.state.click === false){
-       this.setState({click: true});
-     }
-     else if(this.state.click === true){
-       this.setState({click: false});
-     }
-   }
-
+  }
 
   render(){
-
-    var all = {
-      fill: "none",
-      stroke:"#95989a",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-    }
-
-    var one = {
-      strokeWidth: "13px",
-    }
-
-    var two = {
-      strokeWidth: "9px",
-    }
-
-    const clicked = this.state.click;
      return (
        <div className="minimalButtons">
         <PreviousButton/>
-        {clicked ?
-          (<PauseButton onClick={this.buttonClicked}/>) :
-          (<StartButton onClick={this.buttonClicked}/>)
-        }
+        <StartStopButton/>
         <NextButton/>
        </div>
      );
