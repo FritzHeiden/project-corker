@@ -1,82 +1,72 @@
 import React from 'react'
 import Line from './Line.js';
 
-/* Images*/
-import BackgroundImage from '../svg/background.js';
-
-
-class SignUp extends React.Component {
-   constructor(props){
-     super(props);
-   }
-
-   render() {
-     const{title} = this.props;
-      return (
-        <div>
-          <BackgroundImage/>
-          <h1>{title}</h1>
-          <FormPage title="Anmelden"/>
-        </div>
-      );
-   }
-}
 
 class FormPage extends React.Component {
 
-      constructor(props) {
+  constructor(props) {
         super(props);
         this.state = {
-          formValues: {}
+          correctPath: true,
         }
+
+        this.checkPath = this.checkPath.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
       }
 
-      handleChange(event) {
-          event.preventDefault();
-          let formValues = this.state.formValues;
-          let name = event.target.name;
-          let value = event.target.value;
-          website.helloWorld();
+  checkPath() {
+    let filePath = document.getElementById('path').value;
+    let test = 1;
+    if(test === 1){
+      this.state.correctPath = true;
+      document.getElementById('signUp').style.display = "none";
+      document.getElementById('online').style.display = "block";
+      console.log("Path found!");
+    }
+    else if(!this.state.correctPath){
+      this.state.correctPath = false;
+      let inputPath = document.getElementById('form').getBoundingClientRect();
+      let left = inputPath.left;
+      let top = inputPath.top;
 
-          formValues[name] = value;
+      console.log(left);
+      console.log(top);
+      document.getElementById('path').value = "";
+      //document.getElementById("bubble").style.left = "100px";
 
-          this.setState({formValues})
-      }
+      document.getElementById('bubble').style.position = "absolute";
+      document.getElementById('bubble').style.display = "block";
+      document.getElementById('bubble').style.left = left +  175 + "px";
+      document.getElementById('bubble').style.top = top  -  75 + "px";
+    }
+  }
 
-
-      handleSubmit(event) {
-          event.preventDefault();
-          console.log(this.state.formValues);
-      }
+  handleKeyPress(e){
+    if (e.key === 'Enter') {
+      this.checkPath();
+    }
+  }
 
   render() {
     const {title} = this.props;
-
-    let userReact=
-    {
-      height: "8%",
-      width: "3%",
-      marginTop: "2rem",
-      display: "block",
-      color: "red",
-    }
-
-    let left =
-    {
-      float: "left",
-    }
+    const correctPath = this.state.correctPath;
 
     return (
-      <div className="form">
+      <div id="form" className="form">
         <h2 className="options">{title}</h2>
         <Line/>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" name="name" placeholder={'Name'} style={left} value={this.state.formValues["name"]} onChange={this.handleChange.bind(this)} />
-          <div style={userReact}/>
-          <input type="text" name="folder" placeholder={'Musikverzeichnis'} style={left} value={this.state.formValues["folder"]} onChange={this.handleChange.bind(this)}/>
-          <div style={[userReact,left]}/>
-          <input className="pushButton" type="submit" value="Fertig" />
-        </form>
+        {correctPath ? (
+          <input id="path" className="path" type="text" name="folder" placeholder={'Musikverzeichnis'} onKeyPress={this.handleKeyPress.bind(this)}/>
+        ) : (
+           <div>
+            <input id="path" className="path" type="text" name="folder" placeholder={'Musikverzeichnis'} onKeyPress={this.handleKeyPress.bind(this)}/>
+            <div className="wrongPathSignUp"/>
+            <div className="bubble" id="bubble">
+              <p> Musikverzeichnis wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe. </p>
+            </div>
+           </div>
+        )}
+        <button className="pushButton" onClick={this.checkPath}>Fertig</button>
       </div>
     );
   }
@@ -117,4 +107,4 @@ render() {
   );
 }
 */
-export default SignUp;
+export default FormPage;
