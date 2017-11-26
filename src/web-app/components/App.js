@@ -6,10 +6,10 @@ import AudioBox from './AudioBox.js';
 
 import * as website from '../test/website.js';
 import * as sidebar from '../test/sidebar.js';
-import Options from '../svg/options.js';
 
 /* Images */
 import BackgroundImage from '../svg/background.js';
+import Options from '../svg/options.js';
 
 
 class App extends React.Component {
@@ -29,12 +29,11 @@ class App extends React.Component {
          <div id="main" className="main">
           <h1>{title}</h1>
           <div className="actionBox">
-            <div className="audio">
-              <AudioBox last="false"/>
-            </div>
+            <AudioBox/>
+            <AudioBox/>
           </div>
           <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-         </div>
+        </div>
 
 
         {/*

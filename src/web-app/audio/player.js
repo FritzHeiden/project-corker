@@ -1,6 +1,7 @@
 export default class AudioPlayer {
 
     constructor() {
+      console.log("!");
         this.source = {};
         this.buffer = {};
         this.gainNode = {};
@@ -15,7 +16,7 @@ export default class AudioPlayer {
         this.highshelfConnected = false;
         this.request = new XMLHttpRequest();
 
-        request.open('GET', './basic_beat.wav', true);
+        request.open('GET', './basic_loop.wav', true);
         request.responseType = 'arraybuffer';
 
         request.onload = function () {
@@ -63,9 +64,9 @@ export default class AudioPlayer {
 
     pausePlay() {
         if (paused) {
-            play();
+            _play();
         } else {
-            stop();
+            _stop();
         }
     }
 
