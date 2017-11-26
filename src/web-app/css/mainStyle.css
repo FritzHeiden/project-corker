@@ -206,6 +206,12 @@ span{
   width: auto;
 }
 
+.minimalButtons>div {
+  margin: 0.75rem;
+  height: auto;
+  width: 3rem;
+}
+
 .loadAndMusicChanger{
   height: 25%;
   width: 100%;
