@@ -102,6 +102,8 @@ span{
   width: 5rem;
   fill:none;
   z-index: 100;
+  background-color: #323232;
+  padding: 0.5rem;
 }
 
 .MenuButton line.One{
@@ -224,7 +226,8 @@ span{
 
 .audioBox{
   background-color: #494949;
-  width: 35%;
+  /*width: 35%;*/
+  width: 14rem;
   margin: 0 3rem 0 3rem;
   /*width: 50%;
   height: auto;
@@ -286,50 +289,33 @@ span{
 
 .form{
   width: 40%;
-  height: 30rem;
+  /* height: 29rem; */
   background-color: #494949;
   position: relative;
   top: -38%;
   left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, 0%);
+  /* display: flex; */
+  flex-direction: row;
+  /* min-height: 100%; */
+  margin-top: 6rem;
+  justify-content: center;
 }
-
+/*
 .pushButton{
+  align-self: flex-end;
   background-color: #00868B;
   color: white;
   width: 75%;
   height: 3rem;
   margin-bottom: 1rem;
   font-size: 25px;
-  /*position: absolute;*/
+  /*position: absolute;
   bottom: 0;
   left: 12.5%;
-}
-
-.bubble
-{
-  position: relative;
-  width: 30rem;
-  height: auto;
-  padding: 0px;
-  background: #494949;
-  /*position: absolute;*/
-  top: 100px;
-  left: 100px;
-}
-
-.bubble:after
-{
-  content: '';
-  /*position: absolute;*/
-  border-style: solid;
-  border-width: 15px 20px 15px 0;
-  border-color: transparent #494949;
-  display: block;
-  z-index: 1;
-  left: -20px;
-  top: 5px;
-}
+}*/
 
 p{
   color: #95989A;
@@ -338,14 +324,12 @@ p{
 
 h2.options{
   font-size: 30px;
-  text-align: left;
   position: relative;
-  left: 5.5rem;
   top: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
 }
 
-div.form h2, div.bubble h3, div.bubble p{
+div.bubble h3, div.bubble p{
   color: #95989A;
   font-family: 'Helvetica';
   position: relative;
@@ -363,6 +347,7 @@ div.bubble p{
   left: 10%;
   font-size: 20px;
   text-align: left;
+  top: 10%;    
 }
 
 /*
@@ -376,21 +361,47 @@ input[type="text"]{
   color: #95989A;
 }
 */
-
+/*
 input[type="text"]{
   background-color: #323232;
   width: 75%;
   height: 2rem;
-  margin: 4rem 0 0.5rem 12.5%;
+  margin: 4rem 0 0.5rem 0;
   font-size: 20px;
   border: 2px solid #323232;
   color: #95989A;
-}
+  text-align: center;
+}*/
 
 input[type="text"]:focus{
   border: 2px solid #00868B;
 }
 
+.pushButton{
+  width: 75%;
+  background-color: #00868B;
+  border: none;
+  height: 2.5rem;
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;
+  align-self: flex-end;
+  margin: 3rem 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+input[type="text"].path{
+  font-size: 2rem;
+  width: 75%;
+  background-color: #323232;
+  color: #95989A;
+  border: none;
+  height: 2.5rem;
+  font-size: 1rem;
+  text-align: center;
+  margin: 3rem 0 2rem 0;
+}
+/*
 .pushButton{
   background-color: #00868B;
   color: white;
@@ -398,11 +409,11 @@ input[type="text"]:focus{
   height: 3rem;
   margin-bottom: 1rem;
   font-size: 25px;
-  /*position: absolute;*/
+  /*position: absolute;
   bottom: 0;
   left: 12.5%;
   border: none;
-}
+}*/
 
 .bubble
 {
@@ -435,15 +446,6 @@ h2, p{
   font-family: 'Helvetica';
 }
 
-h2.options{
-  font-size: 30px;
-  text-align: left;
-  position: relative;
-  left: 5.5rem;
-  top: 1rem;
-  margin-bottom: 2rem;
-}
-
 .menuOps{
   display: none;
 }
@@ -467,16 +469,6 @@ input[type="text"].showInput{
   animation-delay: 0.5s;
   width: 0;
   height: 0;
-}
-
-.options{
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
-  border: 2px solid green;
-  z-index: 1;
-  top: -1rem;
-  position: relative;
 }
 
 
@@ -691,4 +683,56 @@ input[type="text"].closeInput{
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+.wrongPath{
+  background-color: red;
+  width: 4%;
+  height: 2rem;
+  position: relative;
+  top: -2rem;
+  left: 0.5rem;
+}
+
+.wrongPathSignUp{
+  background-color: red;
+  width: 4%;
+  height: 2.5rem;
+  position: relative;
+  top: -4.5rem;
+  left: 5.0rem;
+}
+
+.online{
+  display: none;
+}
+
+.signUp{
+  text-align: center;
+}
+
+.bubble
+{
+  display: none;
+  width: 250px;
+  height: 120px;
+  padding: 0px;
+  background: #494949;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.bubble:after
+{
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #494949;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -10px;
+  top: 10px;
 }

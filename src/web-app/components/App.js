@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Footer from './Footer.js';
 import AudioBox from './AudioBox.js';
+import FormPage from './SignUp.js';
 
 import * as website from '../test/website.js';
 import * as sidebar from '../test/sidebar.js';
@@ -23,18 +24,23 @@ class App extends React.Component {
 
      return (
        <div>
-         <SideBar/>
-         <Options/>
-         <BackgroundImage/>
-         <div id="main" className="main">
-          <h1>{title}</h1>
-          <div className="actionBox">
-            <AudioBox/>
-            <AudioBox/>
-          </div>
-          <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
+        <BackgroundImage/>
+        <div id="signUp" className="signUp">
+              <h1>{title}</h1>
+              <FormPage title="Anmelden"/>
         </div>
-
+        <div id="online" className="online">
+          <SideBar/>
+          <Options/>
+          <div id="main" className="main">
+            <h1>{title}</h1>
+            <div className="actionBox">
+              <AudioBox/>
+              <AudioBox/>
+            </div>
+            <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
+          </div>
+        </div>
 
         {/*
          <SideBar/>
@@ -77,20 +83,49 @@ class SideBar extends React.Component {
 
    constructor(props){
      super(props);
+     this.state={
+       correctPath: true,
+     }
+     this.handleKeyPress = this.handleKeyPress.bind(this);
+    }
+
+
+    handleKeyPress(e) {
+      if (e.key === 'Enter') {
+        let pathExist = false;
+        if(pathExist){
+          this.state.correctPath = true
+          sidebar.closeOptions();
+          document.getElementById('inputFolderPath').value = '';
+          console.log('Verzeichnis upgedated');
+        }
+        else if(!pathExist){
+          this.state.correctPath = false;
+          console.log('Verzeichnis nicht gefunden');
+        }
+      }
     }
 
    render() {
      const {title} = this.props;
+     const correctPath = this.state.correctPath;
 
      return (
        <div id="mySidenav" className="sidenav">
         <h3> Wollen Sie ein neuen Ordnerpfad eingeben?</h3>
-        <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"}/>
+        {correctPath ? (
+          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleKeyPress.bind(this)}/>
+         ) : (
+           <div>
+             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleKeyPress.bind(this)}/>
+             <div className="wrongPath"/>
+             <p>Pfad wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe</p>
+           </div>
+        )}
        </div>
      );
    }
 }
-
 
 /*
 class MenuOptions extends React.Component{

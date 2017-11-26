@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FileService from "../services/file-service";
-import SignUp from '../components/SignUp.js';
-import App from '../components/App.js';
 import AudioFile from "../data/audio-file";
 import AudioFileAnalyser from "../analysis/audio-file-analyser";
+
+import SignUp from '../components/SignUp.js';
+import App from '../components/App.js';
 
 const css = require("../css/mainStyle.css");
 
