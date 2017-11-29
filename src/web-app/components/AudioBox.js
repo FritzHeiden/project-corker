@@ -99,7 +99,7 @@ class Filter extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0};
+    this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0, rotate: 0};
     this.changeVolume = this.changeVolume.bind(this);
     this.setStart = this.setStart.bind(this);
   }
@@ -109,7 +109,6 @@ class Filter extends React.Component {
       this.setState({ startY: e.screenY});
       this.setState({ startX: e.screenX});
       this.setState({ clicked: 1});
-      console.log("Hallo");
     }
     else if(this.state.clicked == 1){
       this.setState({ clicked: 0});
@@ -117,20 +116,20 @@ class Filter extends React.Component {
   }
 
   /* Doesn't work well */
-  changeVolume(e){
+  changeVolume(event){
 
     if(this.state.clicked == 1){
-
       let elementSize = 50;
-      var position = document.getElementById('filterButton_1').getBoundingClientRect();
+
+      var position = this.refs.filterButton.getBoundingClientRect();
       let middleX = position.left + elementSize/2;
       let middleY = position.top + elementSize/2;
 
-      let y = e.screenY;
-      let x = e.screenX;
+      let y = event.screenY;
+      let x = event.screenX;
 
-      this.setState({ endY: e.screenY});
-      this.setState({ endX: e.screenX});
+      this.setState({ endY: event.screenY});
+      this.setState({ endX: event.screenX});
       console.log("Ende der Line: " + this.state.endX + ", " + this.state.endY);
       console.log("Mittelpunkt Kreis: " + middleX +", " + middleY);
 
@@ -140,17 +139,22 @@ class Filter extends React.Component {
       let theta = Math.atan(dy/dx);
       theta *= 180/Math.PI;
 
-      let object = e.target.id
-      let filter = document.getElementById(object);
-      filter.style.transform = 'rotate('+theta+'deg)';
+      //let object = this.refs.filterButton;
+      //let filter = document.getElementById(object);
+      //filter.style.transform = 'rotate('+theta+'deg)';
+
+      this.setState({rotate: 90});
+
     }
   }
 
 
   render(){
+
     return(
       <div className="filterBox">
-        <div className="filter" id="filterButton_1" onClick={this.setStart.bind(this)} onMouseMove={this.changeVolume.bind(this)} >
+        <div className="filter"
+        style={{transform: 'rotate('+this.state.rotate+'deg)', WebkitTransform: 'rotate('+this.state.rotate+'deg)'}} ref = "filterButton" onClick={this.setStart.bind(this)} onMouseMove={this.changeVolume.bind(this)} >
           <div className="dot">
 
           </div>

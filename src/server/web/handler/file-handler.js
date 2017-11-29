@@ -9,7 +9,7 @@ export default class FileHandler {
 
     _getFiles(request, response) {
         let requestPath = FileHandler._getPath(request);
-
+        response.set("Access-Control-Allow-Origin", "*");
         this._listDir(requestPath)
             .then(files => response.send(files))
             .catch(err => {
@@ -20,7 +20,7 @@ export default class FileHandler {
 
     _getFile(request, response) {
         let requestPath = FileHandler._getPath(request);
-
+        response.set("Access-Control-Allow-Origin", "*");
         this._isFile(requestPath)
             .then(isFile => {
                 if (isFile) {

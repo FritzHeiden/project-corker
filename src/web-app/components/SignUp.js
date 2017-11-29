@@ -1,6 +1,6 @@
 import React from 'react'
 import Line from './Line.js';
-
+import FileService from '../services/file-service.js';
 
 class FormPage extends React.Component {
 
@@ -16,14 +16,24 @@ class FormPage extends React.Component {
 
   checkPath() {
     let filePath = document.getElementById('path').value;
-    let test = 1;
-    if(test === 1){
+//TODO
+
+    let testFilePath = new FileService('127.0.0.1', '2345');
+    testFilePath.getFiles(filePath).then(files => {
+      this.state.correctPath = true;
+      this.setState(this.state);
+    }).catch(error => {
+      this.state.correctPath = false;
+      this.setState(this.state);
+    })
+
+    if(this.state.correctPath === true){
       this.state.correctPath = true;
       document.getElementById('signUp').style.display = "none";
       document.getElementById('online').style.display = "block";
       console.log("Path found!");
     }
-    else if(!this.state.correctPath){
+    else if(this.state.correctPath === false){
       this.state.correctPath = false;
       let inputPath = document.getElementById('form').getBoundingClientRect();
       let left = inputPath.left;

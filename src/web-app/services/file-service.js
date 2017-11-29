@@ -69,7 +69,7 @@ export default class FileService {
                 }
             };
             if (this.hostname !== "") {
-                url = "http://{0}:{1}{2}".format(this.hostname, port, url);
+                url = "http://{0}:{1}{2}".format(this.hostname, this.port, url);
             }
             request.open(method, url);
             try {
@@ -93,7 +93,7 @@ export default class FileService {
                 }
             };
             if (this.hostname !== "") {
-                url = "http://{0}:{1}{2}".format(this.hostname, port, url);
+                url = "http://{0}:{1}{2}".format(this.hostname, this.port, url);
             }
             request.open(method, url);
             request.responseType = "arraybuffer";
