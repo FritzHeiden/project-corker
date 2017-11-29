@@ -23,11 +23,8 @@ class FormPage extends React.Component {
     let left = inputPath.left;
     let top = inputPath.top;
     document.getElementById('path').value = "";
-
-    document.getElementById('errorMessage').style.display = "block";
-    document.getElementById('errorMessage').style.position = "absolute";
     document.getElementById('errorMessage').style.left = left +  175 + "px";
-    document.getElementById('errorMessage').style.top = top  -  75 + "px";
+    document.getElementById('errorMessage').style.top = top - 75 + "px";
   }
 
   showDj(){
