@@ -715,7 +715,8 @@ input[type="text"].closeInput{
 
 .errorMessage
 {
-  display: none;
+  display: block;
+  position: absolute;
   width: 250px;
   height: 120px;
   padding: 0px;
