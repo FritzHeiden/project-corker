@@ -331,13 +331,13 @@ h2.options{
   margin-bottom: 0.75rem;
 }
 
-div.bubble h3, div.bubble p{
+div.errorMessage h3, div.errorMessage p{
   color: #95989A;
   font-family: 'Helvetica';
   position: relative;
 }
 
-div.bubble h3{
+div.errorMessage h3{
   color: #FC3F3F;
   font-size: 2.0rem;
   margin-bottom: -0.5rem;
@@ -345,7 +345,7 @@ div.bubble h3{
   left: -5%;
 }
 
-div.bubble p{
+div.errorMessage p{
   left: 10%;
   font-size: 20px;
   text-align: left;
@@ -417,7 +417,7 @@ input[type="text"].path{
   border: none;
 }*/
 
-.bubble
+.errorMessage
 {
   position: relative;
   width: 250px;
@@ -429,7 +429,7 @@ input[type="text"].path{
   border-radius: 0px;
 }
 
-.bubble:after
+.errorMessage:after
 {
   content: '';
   /*position: absolute;*/
@@ -713,7 +713,7 @@ input[type="text"].closeInput{
   text-align: center;
 }
 
-.bubble
+.errorMessage
 {
   display: none;
   width: 250px;
@@ -725,7 +725,7 @@ input[type="text"].closeInput{
   border-radius: 0px;
 }
 
-.bubble:after
+.errorMessage:after
 {
   content: '';
   position: absolute;

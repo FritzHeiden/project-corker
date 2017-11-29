@@ -10,50 +10,71 @@ class FormPage extends React.Component {
           correctPath: true,
         }
 
+        this.changeView = this.changeView.bind(this);
         this.checkPath = this.checkPath.bind(this);
+        this.test = this.test.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
       }
 
-  checkPath() {
-    let filePath = document.getElementById('path').value;
-//TODO
 
-    let testFilePath = new FileService('127.0.0.1', '2345');
-    testFilePath.getFiles(filePath).then(files => {
-      this.state.correctPath = true;
-      this.setState(this.state);
-    }).catch(error => {
-      this.state.correctPath = false;
-      this.setState(this.state);
-    })
+  showErrorMessage(){
+    console.log("not found!");
+    let inputPath = document.getElementById('form').getBoundingClientRect();
+    let left = inputPath.left;
+    let top = inputPath.top;
+    document.getElementById('path').value = "";
 
+    document.getElementById('errorMessage').style.display = "block";
+    document.getElementById('errorMessage').style.position = "absolute";
+    document.getElementById('errorMessage').style.left = left +  175 + "px";
+    document.getElementById('errorMessage').style.top = top  -  75 + "px";
+  }
+
+  showDj(){
+    document.getElementById('signUp').style.display = "none";
+    document.getElementById('online').style.display = "block";
+    console.log("Path found!");
+  }
+
+  test(){
+    console.log(this.state.correctPath);
     if(this.state.correctPath === true){
-      this.state.correctPath = true;
-      document.getElementById('signUp').style.display = "none";
-      document.getElementById('online').style.display = "block";
-      console.log("Path found!");
+      this.showDj();
+    }
+    else{
+      this.showErrorMessage();
+    }
+  }
+
+  changeView(){
+    this.checkPath();
+
+    setTimeout(this.test, 8);
+
+
+/*
+    if(this.state.correctPath === true){
+      this.showDj();
     }
     else if(this.state.correctPath === false){
-      this.state.correctPath = false;
-      let inputPath = document.getElementById('form').getBoundingClientRect();
-      let left = inputPath.left;
-      let top = inputPath.top;
+      this.showErrorMessage();
+    }*/
+  }
 
-      console.log(left);
-      console.log(top);
-      document.getElementById('path').value = "";
-      //document.getElementById("bubble").style.left = "100px";
+  checkPath(){
+    let filePath = document.getElementById('path').value;
+    let testFilePath = new FileService('127.0.0.1', '2345');
 
-      document.getElementById('bubble').style.position = "absolute";
-      document.getElementById('bubble').style.display = "block";
-      document.getElementById('bubble').style.left = left +  175 + "px";
-      document.getElementById('bubble').style.top = top  -  75 + "px";
-    }
+    testFilePath.getFiles(filePath).then(files => {
+      this.setState({correctPath : true});
+    }).catch(error => {
+      this.setState({correctPath : false});
+    })
   }
 
   handleKeyPress(e){
     if (e.key === 'Enter') {
-      this.checkPath();
+      this.changeView();
     }
   }
 
@@ -71,12 +92,12 @@ class FormPage extends React.Component {
            <div>
             <input id="path" className="path" type="text" name="folder" placeholder={'Musikverzeichnis'} onKeyPress={this.handleKeyPress.bind(this)}/>
             <div className="wrongPathSignUp"/>
-            <div className="bubble" id="bubble">
+            <div className="errorMessage" id="errorMessage">
               <p> Musikverzeichnis wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe. </p>
             </div>
            </div>
         )}
-        <button className="pushButton" onClick={this.checkPath}>Fertig</button>
+        <button className="pushButton" onClick={this.changeView.bind(this)}>Fertig</button>
       </div>
     );
   }

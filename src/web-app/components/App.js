@@ -8,6 +8,7 @@ import FormPage from './SignUp.js';
 
 import * as website from '../test/website.js';
 import * as sidebar from '../test/sidebar.js';
+import FileService from '../services/file-service.js';
 
 /* Images */
 import BackgroundImage from '../svg/background.js';
@@ -90,23 +91,38 @@ class SideBar extends React.Component {
      this.state={
        correctPath: true,
      }
-     this.handleKeyPress = this.handleKeyPress.bind(this);
+     this.handleEnter = this.handleEnter.bind(this);
+     this.checkPath = this.checkPath.bind(this);
+     this.changeView = this.changeView.bind(this);
     }
 
-
-    handleKeyPress(e) {
+    handleEnter(e){
       if (e.key === 'Enter') {
-        let pathExist = false;
-        if(pathExist){
-          this.state.correctPath = true
-          sidebar.closeOptions();
-          document.getElementById('inputFolderPath').value = '';
-          console.log('Verzeichnis upgedated');
-        }
-        else if(!pathExist){
-          this.state.correctPath = false;
-          console.log('Verzeichnis nicht gefunden');
-        }
+        this.checkPath();
+        setTimeout(this.changeView, 8);
+      }
+    }
+
+    checkPath(){
+        let filePath = document.getElementById('inputFolderPath').value;
+        let testFilePath = new FileService('127.0.0.1', '2345');
+
+        testFilePath.getFiles(filePath).then(files => {
+          this.setState({correctPath : true});
+        }).catch(error => {
+          this.setState({correctPath : false});
+        })
+      }
+
+
+    changeView(){
+      if(this.state.correctPath === true){
+        sidebar.closeOptions();
+        document.getElementById('inputFolderPath').value = '';
+        console.log('Verzeichnis upgedated');
+      }
+      else{
+        console.log('Verzeichnis nicht gefunden');
       }
     }
 
@@ -118,10 +134,10 @@ class SideBar extends React.Component {
        <div id="mySidenav" className="sidenav">
         <h3> Wollen Sie ein neuen Ordnerpfad eingeben?</h3>
         {correctPath ? (
-          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleKeyPress.bind(this)}/>
+          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
          ) : (
            <div>
-             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleKeyPress.bind(this)}/>
+             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
              <div className="wrongPath"/>
              <p>Pfad wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe</p>
            </div>
