@@ -1,18 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
 import PropTypes from 'prop-types';
 
 import AudioPlayer from '../audio/player.js';
-=======
 
 import * as AudioPlayer from '../audio/player.js';
->>>>>>> correct space bettween both musicplayers
-
-class StartStopControl extends React.Component {
-  constructor(props) {
-    super(props);
-<<<<<<< HEAD
+import AudioPlayer from '../audio/player.js';
 
     this.state = {click: true};
     this.clicked = this.clicked.bind(this);
@@ -34,12 +27,10 @@ class StartStopControl extends React.Component {
     {
       this.setState({click: false});
       this.audioPlayer.pausePlay();
-=======
     this.state = {click: false};
 
     this.clicked = this.clicked.bind(this);
   }
-
   componentDidMount() {
     this.clicked();
   }
@@ -47,33 +38,33 @@ class StartStopControl extends React.Component {
   clicked(){
     console.log(this.state.click);
 
-    //AudioPlayer.pausePlay();
+    //var test = new AudioPlayer();
+    //test.pausePlay();
 
     if(this.state.click === false)
     {
-      this.state = {click: true};
+      this.setState({click: true});
+      console.log("hallo");
     }
     else if(this.state.click === true)
     {
       this.state = {click: false};
->>>>>>> correct space bettween both musicplayers
     }
   }
 
   render() {
     let clicked = this.state.click;
 
-<<<<<<< HEAD
     let zero =
     {
       fill: "#323232",
     };
 
      let one =
-     {
-       fill: "#323232",
-       stroke: "none",
-=======
+         {
+             fill: "#323232",
+             stroke: "none",
+         };
     return (
       <div onClick={this.clicked}>
         {clicked ? (
@@ -116,12 +107,6 @@ class StopButton extends React.Component {
      {
        fill: "none",
        stroke: "#95989A",
->>>>>>> correct space bettween both musicplayers
-       strokeWidth: "8",
-       strokeLinecap: "round",
-       strokeLinejoin: "round",
-       strokeMiterlimit: "10",
-<<<<<<< HEAD
       };
 
       let two =
@@ -160,30 +145,14 @@ class StopButton extends React.Component {
          </div>
        )}
       </div>
-=======
-     }
-
-    return (
-      <svg style={svgStyle} x="0px" y="0px" viewBox="0 0 500 500" onClick={this.stop}>
-        <g>
-         <path style={zero} d="M493,7v486H7V7H493 M493-0.3H7C3-0.3-0.3,3-0.3,7v486c0,4,3.3,7.3,7.3,7.3h486c4,0,7.3-3.3,7.3-7.3V7C500.3,3,497-0.3,493-0.3L493-0.3z"/>
-        </g>
-        <path style={one} d="M168,103"/>
-        <g>
-         <rect x="175" y="91" style={zero} width="30" height="318"/>
-         <rect x="295" y="91" style={zero} width="30" height="318"/>
-        </g>
-      </svg>
->>>>>>> correct space bettween both musicplayers
     );
   }
 }
 
-<<<<<<< HEAD
 StartStopControl.propTypes = {
   changeStartStop: PropTypes.func,
 };
-=======
+
 class StartButton extends React.Component{
 
   constructor(props) {
@@ -229,6 +198,5 @@ class StartButton extends React.Component{
      );
    }
 }
->>>>>>> correct space bettween both musicplayers
 
 export default StartStopControl;

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {VideoPlayer} from 'react-video-players';
 
+
 import Line from './Line.js';
 import * as drop from '../test/dragAndDrop.js';
 
@@ -25,6 +26,8 @@ class VideoBox extends React.Component {
       return (
           <div className="audioBox">
             <Video/>
+            <Line/>
+            <Player/>
             <Line/>
             <Filter/>
            </div>
@@ -67,9 +70,12 @@ class Video extends React.Component {
   }
 
   drop(e) {
+
+      //drop.drop(this);
       e.preventDefault();
       var data = e.dataTransfer.getData("text");
       console.log("dropped");
+      //e.target.appendChild(document.getElementById(data));
   }
 
   render(){
@@ -85,7 +91,6 @@ class Video extends React.Component {
     }
     return(
       <div>
-
         {/* canvas elemet*/}
         <VideoPlayer id="testVideo" style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"
           play={this.state.play}/>
@@ -98,11 +103,23 @@ class Video extends React.Component {
 
     );
   }
-  /*
-    <PreviousButton/>
-    <StartStopButton changeStartStop={this.videoStartStop}/>
-    <NextButton/>
-    */
+}
+
+class Player extends React.Component {
+
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+     return (
+       <div className="minimalButtons">
+        <PreviousButton/>
+        <StartStopButton/>
+        <NextButton/>
+       </div>
+     );
+  }
 }
 
 class Filter extends React.Component {

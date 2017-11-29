@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import FileService from '../services/file-service.js';
 
 export default class AudioPlayer {
@@ -58,6 +59,53 @@ export default class AudioPlayer {
         // } else {
         //     this.gainNode.connect(this.context.destination);
         // }
+=======
+        this.request = new XMLHttpRequest();
+
+        this.request.open('GET', './basic_loop.wav', true);
+        this.request.responseType = 'arraybuffer';
+
+        this.request.onload = function(){
+          this.context.decodeAudioData(this.request.response, this.onBufferLoad, this.onBufferError);
+        }
+        this.request.send();
+    }
+
+    onBufferLoad(buff) {
+        this.buffer = buff;
+    }
+
+    onBufferError(e) {
+        console.log('onBufferError', e);
+    }
+
+    connectNodes() {
+        this.initLowpass();
+        this.initHighshelf();
+
+        let lowpassConnected = false;
+        let highshelfConnected = false;
+
+        source.connect(gainNode);
+
+        if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+            this.gainNode.connect(lowpassFilter);
+            this.lowpassFilter.connect(highshelfFilter);
+            this.highshelfFilter.connect(this.context.destination);
+            this.lowpassConnected = true;
+            this.highshelfConnected = true;
+        } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
+            this.gainNode.connect(lowpassFilter);
+            this.lowpassFilter.connect(this.context.destination);
+            this.lowpassConnected = true;
+        } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+            this.gainNode.connect(highshelfFilter);
+            this.highshelfFilter.connect(this.context.destination);
+            this.highshelfConnected = true;
+        } else {
+            this.gainNode.connect(this.context.destination);
+        }
+>>>>>>> path will be checked
     }
 
     pausePlay() {
@@ -80,6 +128,7 @@ export default class AudioPlayer {
         if (this.pausedAt) {
             this.startedAt = Date.now() - this.pausedAt;
             this.source.start(0, this.pausedAt / 1000);
+
         }
         else {
             this.startedAt = Date.now();
