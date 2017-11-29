@@ -76,6 +76,8 @@ table tr th{
 }
 
 h1{
+  position: relative;
+  top: 1rem;
   font-size: 4rem;
   font-family: 'Merriweather', serif;
   color: #00868B;
@@ -347,7 +349,7 @@ div.bubble p{
   left: 10%;
   font-size: 20px;
   text-align: left;
-  top: 10%;    
+  top: 10%;
 }
 
 /*

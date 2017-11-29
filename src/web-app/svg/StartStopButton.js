@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import * as AudioPlayer from '../audio/player.js';
+import AudioPlayer from '../audio/player.js';
 
 class StartStopControl extends React.Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class StartStopControl extends React.Component {
 
     this.clicked = this.clicked.bind(this);
   }
-
   componentDidMount() {
     this.clicked();
   }
@@ -18,15 +17,18 @@ class StartStopControl extends React.Component {
   clicked(){
     console.log(this.state.click);
 
-    //AudioPlayer.pausePlay();
+    //var test = new AudioPlayer();
+    //test.pausePlay();
 
     if(this.state.click === false)
     {
-      this.state = {click: true};
+      this.setState({click: true});
+      console.log("hallo");
     }
     else if(this.state.click === true)
     {
-      this.state = {click: false};
+      this.setState({click: false});
+      console.log("hallo_2");
     }
   }
 

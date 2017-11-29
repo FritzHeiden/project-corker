@@ -1,7 +1,8 @@
+//import FileService from '../services/file-service.js';
+
 export default class AudioPlayer {
 
     constructor() {
-      console.log("!");
         this.source = {};
         this.buffer = {};
         this.gainNode = {};
@@ -16,18 +17,17 @@ export default class AudioPlayer {
         this.highshelfConnected = false;
         this.request = new XMLHttpRequest();
 
-        request.open('GET', './basic_loop.wav', true);
-        request.responseType = 'arraybuffer';
+        this.request.open('GET', './basic_loop.wav', true);
+        this.request.responseType = 'arraybuffer';
 
-        request.onload = function () {
-            context.decodeAudioData(request.response, onBufferLoad, onBufferError);
-        };
-        request.send();
+        this.request.onload = function(){
+          this.context.decodeAudioData(this.request.response, this.onBufferLoad, this.onBufferError);
+        }
+        this.request.send();
     }
 
-
     onBufferLoad(buff) {
-        buffer = buff;
+        this.buffer = buff;
     }
 
     onBufferError(e) {
@@ -35,8 +35,8 @@ export default class AudioPlayer {
     }
 
     connectNodes() {
-        initLowpass();
-        initHighshelf();
+        this.initLowpass();
+        this.initHighshelf();
 
         let lowpassConnected = false;
         let highshelfConnected = false;
@@ -44,102 +44,102 @@ export default class AudioPlayer {
         source.connect(gainNode);
 
         if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-            gainNode.connect(lowpassFilter);
-            lowpassFilter.connect(highshelfFilter);
-            highshelfFilter.connect(context.destination);
-            lowpassConnected = true;
-            highshelfConnected = true;
+            this.gainNode.connect(lowpassFilter);
+            this.lowpassFilter.connect(highshelfFilter);
+            this.highshelfFilter.connect(this.context.destination);
+            this.lowpassConnected = true;
+            this.highshelfConnected = true;
         } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
-            gainNode.connect(lowpassFilter);
-            lowpassFilter.connect(context.destination);
-            lowpassConnected = true;
+            this.gainNode.connect(lowpassFilter);
+            this.lowpassFilter.connect(this.context.destination);
+            this.lowpassConnected = true;
         } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-            gainNode.connect(highshelfFilter);
-            highshelfFilter.connect(context.destination);
-            highshelfConnected = true;
+            this.gainNode.connect(highshelfFilter);
+            this.highshelfFilter.connect(this.context.destination);
+            this.highshelfConnected = true;
         } else {
-            gainNode.connect(context.destination);
+            this.gainNode.connect(this.context.destination);
         }
     }
 
     pausePlay() {
-        if (paused) {
-            _play();
+        if (this.paused) {
+            this._play();
         } else {
-            _stop();
+            this._stop();
         }
     }
 
     _play() {
-        gainNode = context.createGain();
-        source = context.createBufferSource();
-        source.buffer = buffer;
-        source.loop = true;
+        this.gainNode = this.context.createGain();
+        this.source = this.context.createBufferSource();
+        this.source.buffer = this.buffer;
+        this.source.loop = true;
         connectNodes();
 
-        paused = false;
+        this.paused = false;
 
-        if (pausedAt) {
-            startedAt = Date.now() - pausedAt;
-            source.start(0, pausedAt / 1000);
+        if (this.pausedAt) {
+            this.startedAt = Date.now() - pausedAt;
+            this.source.start(0, pausedAt / 1000);
         }
         else {
-            startedAt = Date.now();
-            source.start(0);
+            this.startedAt = Date.now();
+            this.source.start(0);
         }
     }
 
     _stop() {
-        source.stop(0);
-        pausedAt = Date.now() - startedAt;
-        paused = true;
+        this.source.stop(0);
+        this.pausedAt = Date.now() - startedAt;
+        this.paused = true;
     }
 
     changeVolume(element) {
         let fraction = parseInt(element.value) / parseInt(element.max);
-        gainNode.gain.value = fraction * fraction;
+        this.gainNode.gain.value = fraction * fraction;
     }
 
     // Frequencies below the cutoff pass through, frequencies above it are attenuated
     initLowpass() {
-        lowpassFilter = context.createBiquadFilter();
-        lowpassFilter.type = 'lowpass';
-        lowpassFilter.frequency.value = 5000; // The cutoff frequency
+        this.lowpassFilter = this.context.createBiquadFilter();
+        this.lowpassFilter.type = 'lowpass';
+        this.lowpassFilter.frequency.value = 5000; // The cutoff frequency
     }
 
     changeLowpassFilterFrequency(element) {
         let minValue = 40;
-        let maxValue = context.sampleRate / 2;
+        let maxValue = this.context.sampleRate / 2;
         let numberOfOctaves = Math.log(maxValue / minValue) / Math.LN2;
         let multiplier = Math.pow(2, numberOfOctaves * (element.value - 1.0));
-        lowpassFilter.frequency.value = maxValue * multiplier;
+        this.lowpassFilter.frequency.value = maxValue * multiplier;
     }
 
     changeLowpassFilterQuality(element) {
-        lowpassFilter.Q.value = element.value * 30;
+        this.lowpassFilter.Q.value = element.value * 30;
     }
 
     // Frequencies higher than the frequency get a boost or an attenuation, frequencies lower are unchanged.
     initHighshelf() {
-        highshelfFilter = context.createBiquadFilter();
-        highshelfFilter.type = 'highshelf';
-        highshelfFilter.gain.value = 50;
-        highshelfFilter.frequency.value = 10000;
+        this.highshelfFilter = this.context.createBiquadFilter();
+        this.highshelfFilter.type = 'highshelf';
+        this.highshelfFilter.gain.value = 50;
+        this.highshelfFilter.frequency.value = 10000;
     }
 
     changeHighshelfFilterFrequency(element) {
-        highshelfFilter.frequency.value = element.value;
+        this.highshelfFilter.frequency.value = element.value;
     }
 
     toggleFilter() {
-        source.disconnect(0);
-        gainNode.disconnect(0);
+        this.source.disconnect(0);
+        this.gainNode.disconnect(0);
 
-        if (lowpassConnected) {
-            lowpassFilter.disconnect(0);
+        if (this.lowpassConnected) {
+            this.lowpassFilter.disconnect(0);
         }
-        if (highshelfConnected) {
-            highshelfFilter.disconnect(0);
+        if (this.highshelfConnected) {
+            this.highshelfFilter.disconnect(0);
         }
 
         connectNodes();

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Footer from './Footer.js';
 import AudioBox from './AudioBox.js';
+import VideoBox from './VideoBox.js';
 import FormPage from './SignUp.js';
 
 import * as website from '../test/website.js';
@@ -36,13 +37,16 @@ class App extends React.Component {
             <h1>{title}</h1>
             <div className="actionBox">
               <AudioBox/>
-              <AudioBox/>
             </div>
             <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
           </div>
         </div>
 
         {/*
+
+          <VideoBox/>
+          <VideoBox/>
+
          <SideBar/>
          <Options/>
          <BackgroundImage/>
