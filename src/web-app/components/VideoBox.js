@@ -40,9 +40,10 @@ class Video extends React.Component {
     this.state={
       play: false,
     }
+
     this.drop = this.drop.bind(this);
     this.allowDrop = this.allowDrop.bind(this);
-    this.test = this.videoStartStop.bind(this);
+    this.videoStartStop = this.videoStartStop.bind(this);
 
     /**
     onPause:Function - Callback to pause video
@@ -51,12 +52,8 @@ class Video extends React.Component {
     */
   }
 
-  test(){
-    console.log("Test!");
-  }
-
   videoStartStop(){
-    console.log("galls");
+    console.log("TestFunction");
     if(this.state.play === false){
       this.setState({play : true});
     }
@@ -88,11 +85,12 @@ class Video extends React.Component {
     }
     return(
       <div>
-        <VideoPlayer id="testVideo" style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4" play={this.state.play}/>
+        <VideoPlayer id="testVideo" style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"
+          play={this.state.play}/>
         <Line/>
         <div className="minimalButtons">
          <PreviousButton/>
-         <StartStopButton/>
+         <StartStopButton changeStartStop={this.videoStartStop}/>
          <NextButton/>
         </div>
       </div>
