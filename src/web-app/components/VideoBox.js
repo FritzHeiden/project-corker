@@ -89,13 +89,18 @@ class Video extends React.Component {
           play={this.state.play}/>
         <Line/>
         <div className="minimalButtons">
-         <PreviousButton/>
          <StartStopButton changeStartStop={this.videoStartStop}/>
-         <NextButton/>
         </div>
       </div>
+
+
     );
   }
+  /*
+    <PreviousButton/>
+    <StartStopButton changeStartStop={this.videoStartStop}/>
+    <NextButton/>
+    */
 }
 
 class Filter extends React.Component {

@@ -739,3 +739,12 @@ input[type="text"].closeInput{
   left: -10px;
   top: 10px;
 }
+
+.finalVideo{
+  height: auto;
+  width: 10rem;
+  
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
