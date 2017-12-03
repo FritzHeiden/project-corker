@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {VideoPlayer} from 'react-video-players';
 
 import Line from './Line.js';
 import * as drop from '../test/dragAndDrop.js';
@@ -25,8 +26,6 @@ class VideoBox extends React.Component {
           <div className="audioBox">
             <Video/>
             <Line/>
-            <Player/>
-            <Line/>
             <Filter/>
            </div>
       );
@@ -38,59 +37,66 @@ class Video extends React.Component {
   constructor(props){
     super(props);
 
+    this.state={
+      play: false,
+    }
     this.drop = this.drop.bind(this);
     this.allowDrop = this.allowDrop.bind(this);
+    this.test = this.videoStartStop.bind(this);
+
+    /**
+    onPause:Function - Callback to pause video
+    onPlay:Function - Callback to play video
+    onSeek:Function - Callback to seek video
+    */
+  }
+
+  test(){
+    console.log("Test!");
+  }
+
+  videoStartStop(){
+    console.log("galls");
+    if(this.state.play === false){
+      this.setState({play : true});
+    }
+    else if(this.state.play === true){
+      this.setState({play : false});
+    }
   }
 
   allowDrop(e) {
-    //this.allowDrop(this);
     e.preventDefault();
   }
 
   drop(e) {
-      //drop.drop(this);
       e.preventDefault();
       var data = e.dataTransfer.getData("text");
       console.log("dropped");
-      //e.target.appendChild(document.getElementById(data));
   }
 
   render(){
 
-    let audio =
+    let video =
     {
       height: "5rem",
       width: "85%",
       position: "relative",
       backgroundColor: "#323232",
-      /*border: "3px solid #00868B",*/
       left: "0%",
       margin: "2% 0 2% 0",
     }
     return(
       <div>
-        <video width="225">
-          <source src="test.mp4" type="video/mp4"></source>
-        </video>
+        <VideoPlayer id="testVideo" style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4" play={this.state.play}/>
+        <Line/>
+        <div className="minimalButtons">
+         <PreviousButton/>
+         <StartStopButton/>
+         <NextButton/>
+        </div>
       </div>
     );
-  }
-}
-
-class Player extends React.Component {
-
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-     return (
-       <div className="minimalButtons">
-        <PreviousButton/>
-        <StartStopButton/>
-        <NextButton/>
-       </div>
-     );
   }
 }
 

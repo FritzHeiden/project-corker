@@ -37,13 +37,16 @@ class App extends React.Component {
           <div id="main" className="main">
             <h1>{title}</h1>
             <div className="actionBox">
-              <AudioBox/>
+              <VideoBox/>
+
             </div>
             <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
           </div>
         </div>
 
         {/*
+          <AudioBox/>
+          <AudioBox/>
 
           <VideoBox/>
           <VideoBox/>
@@ -99,7 +102,7 @@ class SideBar extends React.Component {
     handleEnter(e){
       if (e.key === 'Enter') {
         this.checkPath();
-        setTimeout(this.changeView, 8);
+        setTimeout(this.changeView, 15);
       }
     }
 

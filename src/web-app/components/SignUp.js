@@ -46,16 +46,7 @@ class FormPage extends React.Component {
   changeView(){
     this.checkPath();
 
-    setTimeout(this.test, 8);
-
-
-/*
-    if(this.state.correctPath === true){
-      this.showDj();
-    }
-    else if(this.state.correctPath === false){
-      this.showErrorMessage();
-    }*/
+    setTimeout(this.test, 15);
   }
 
   checkPath(){
