@@ -30,7 +30,6 @@ class FormPage extends React.Component {
   showDj(){
     document.getElementById('signUp').style.display = "none";
     document.getElementById('online').style.display = "block";
-    console.log("Path found!");
   }
 
   test(){
