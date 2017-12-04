@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Line from './Line.js';
-import * as audio from '../test/audioplayer.js';
+//import CanvasElements from '../test/canvasStyle.js';
+import * as musicElements from '../test/canvasStyle.js';
+
 import * as drop from '../test/dragAndDrop.js';
 
 /* Images */
@@ -43,6 +45,11 @@ class AudioPlayer extends React.Component {
 
     this.drop = this.drop.bind(this);
     this.allowDrop = this.allowDrop.bind(this);
+
+    //this.canvas = new CanvasElements(document.getElementById('canvasPlayer'));
+    //this.canvas.createCavasElements();
+    //this.musicBeams = new AudioHeights();
+    //this.musicBeams.createBeam();
   }
 
   allowDrop(e) {
@@ -69,14 +76,18 @@ class AudioPlayer extends React.Component {
       /*border: "3px solid #00868B",*/
       left: "0%",
       margin: "2% 0 2% 0",
+      overflowY: "scroll",
+
     }
     return(
-      <div>
-        <canvas id="canvasPlayer" style={audio} width="300" height="300"  onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
+      <div id="testMusic">
+        <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
       </div>
     );
   }
 }
+
+
 
 class Player extends React.Component {
 
