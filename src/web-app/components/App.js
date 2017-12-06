@@ -99,38 +99,27 @@ class SideBar extends React.Component {
      }
      this.handleEnter = this.handleEnter.bind(this);
      this.checkPath = this.checkPath.bind(this);
-     this.changeView = this.changeView.bind(this);
     }
 
     handleEnter(e){
       if (e.key === 'Enter') {
         this.checkPath();
-        setTimeout(this.changeView, 15);
       }
     }
 
     checkPath(){
         let filePath = document.getElementById('inputFolderPath').value;
-        let testFilePath = new FileService('127.0.0.1', '2345');
+        let testFilePath = new FileService('127.0.0.1', 2345);
 
         testFilePath.getFiles(filePath).then(files => {
           this.setState({correctPath : true});
+          this.sidebar.closeOptions();
+          console.log('Verzeichnis upgedated');
         }).catch(error => {
+          console.log(error);
           this.setState({correctPath : false});
         })
       }
-
-
-    changeView(){
-      if(this.state.correctPath === true){
-        sidebar.closeOptions();
-        document.getElementById('inputFolderPath').value = '';
-        console.log('Verzeichnis upgedated');
-      }
-      else{
-        console.log('Verzeichnis nicht gefunden');
-      }
-    }
 
    render() {
      const {title} = this.props;

@@ -35,7 +35,7 @@ export default class FileService {
                     let file = filesJson.files[i];
                     let directory = false;
                     let filepath = pathTool.join(path, file);
-                    let filename = file;
+                    let filename = file.split("\\").pop();
                     let data = null;
                     let extension = file.split(".").pop();
                     files.push(new File(filepath, filename, data, extension, directory));
@@ -45,7 +45,7 @@ export default class FileService {
                     let file = filesJson.directories[i];
                     let directory = true;
                     let filepath = pathTool.join(path, file);
-                    let filename = file;
+                    let filename = file.split("\\").pop();
                     let data = null;
                     let extension = null;
                     files.push(new File(filepath, filename, data, extension, directory));
@@ -57,6 +57,7 @@ export default class FileService {
     }
 
     _sendTextRequest(url, method = "get") {
+
         return new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
             request.onreadystatechange = () => {
