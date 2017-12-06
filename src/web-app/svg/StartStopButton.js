@@ -8,23 +8,26 @@ class StartStopControl extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {click: false};
+    this.state = {click: true};
     this.clicked = this.clicked.bind(this);
+    this.audioPlayer = new AudioPlayer();
   }
   componentDidMount() {
-    this.clicked();
   }
 
   clicked(){
+    console.log("clicked!");
     console.log(this.state.click);
 
     if(this.state.click === false)
     {
       this.setState({click: true});
+      this.audioPlayer.pausePlay();
     }
     else if(this.state.click === true)
     {
       this.setState({click: false});
+      this.audioPlayer.pausePlay();
     }
   }
 
@@ -34,7 +37,7 @@ class StartStopControl extends React.Component {
     let zero =
     {
       fill: "#323232",
-    }
+    };
 
      let one =
      {
@@ -44,7 +47,7 @@ class StartStopControl extends React.Component {
        strokeLinecap: "round",
        strokeLinejoin: "round",
        strokeMiterlimit: "10",
-      }
+      };
 
       let two =
       {
@@ -54,7 +57,7 @@ class StartStopControl extends React.Component {
         strokeLinecap: "round",
         strokeLinejoin: "round",
         strokeMiterlimit: "10",
-      }
+      };
 
     return (
       <div onClick={this.clicked}>

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import Footer from './Footer.js';
 import FinalVideo from './FinalVideo.js';
@@ -8,138 +7,101 @@ import VideoBox from './VideoBox.js';
 import FormPage from './SignUp.js';
 
 import * as website from '../test/website.js';
-import * as sidebar from '../test/sidebar.js';
 import FileService from '../services/file-service.js';
 
 /* Images */
 import BackgroundImage from '../svg/background.js';
-import Options from '../svg/options.js';
+import Options from '../svg/Options.js';
 
 
 class App extends React.Component {
 
-   constructor(props){
-     super(props);
+    constructor(props) {
+        super(props);
     }
 
-   render() {
-     const {title} = this.props;
+    render() {
+        const {title} = this.props;
 
-     return (
-       <div>
-        <BackgroundImage/>
-        <div id="signUp" className="signUp">
-              <h1>{title}</h1>
-              <FormPage title="Anmelden"/>
-        </div>
-        <div id="online" className="online">
-          <SideBar/>
-          <Options/>
-          <div id="main" className="main">
-            <h1>{title}</h1>
-            <div className="actionBox">
-              <AudioBox/>
-              <VideoBox/>
-              <VideoBox/>
-              <AudioBox/>
+        return (
+            <div>
+                <BackgroundImage/>
+                <div id="signUp" className="signUp">
+                    <h1>{title}</h1>
+                    <FormPage title="Anmelden"/>
+                </div>
+                <div id="online" className="online">
+                    <SideBar/>
+                    <Options/>
+                    <div id="main" className="main">
+                        <h1>{title}</h1>
+                        <div className="actionBox">
+                            <AudioBox/>
+                            <AudioBox/>
+                        </div>
+                        <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler"
+                                colThreeName="Dauer"/>
+                        <FinalVideo/>
+                    </div>
+                </div>
             </div>
-            <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-            <FinalVideo/>
-          </div>
-        </div>
-
-        {/*
-          <AudioBox/>
-
-          <VideoBox/>
-          <VideoBox/>
-
-         <SideBar/>
-         <Options/>
-         <BackgroundImage/>
-         <div id="main" className="main">
-          <h1>{title}</h1>
-          <div className="actionBox">
-            <div className="audio">
-              <AudioBox last="false"/>
-            </div>
-          </div>
-          <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-         </div>
-
-
-
-         {/*
-         <div id="main" className="main">
-            <h1>{title}</h1>
-            <div className="actionBox">
-              <div className="audio">
-                <AudioBox last="false"/>
-              </div>
-              {/*not solved well, if I still have time I should work on that later on -->
-              <div className="audio secondAudioBox">
-                <AudioBox last="true"/>
-              </div>
-            </div>
-            <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-         </div>
-         */}
-       </div>
-     );
-   }
+        );
+    }
 }
 
 
 class SideBar extends React.Component {
 
-   constructor(props){
-     super(props);
-     this.state={
-       correctPath: true,
-     }
-     this.handleEnter = this.handleEnter.bind(this);
-     this.checkPath = this.checkPath.bind(this);
+    constructor(props) {
+        super(props);
+        this.state = {
+            correctPath: true,
+        };
+        this.handleEnter = this.handleEnter.bind(this);
+        this.checkPath = this.checkPath.bind(this);
     }
 
-    handleEnter(e){
-      if (e.key === 'Enter') {
-        this.checkPath();
-      }
+    handleEnter(e) {
+        if (e.key === 'Enter') {
+            this.checkPath();
+        }
     }
 
-    checkPath(){
+    checkPath() {
         let filePath = document.getElementById('inputFolderPath').value;
         let testFilePath = new FileService('127.0.0.1', 2345);
 
         testFilePath.getFiles(filePath).then(files => {
-          this.setState({correctPath : true});
-          this.sidebar.closeOptions();
-          console.log('Verzeichnis upgedated');
+            this.setState({correctPath: true});
+            this.sidebar.closeOptions();
+            console.log('Verzeichnis upgedated');
         }).catch(error => {
-          console.log(error);
-          this.setState({correctPath : false});
+            console.log(error);
+            this.setState({correctPath: false});
         })
-      }
+    }
 
-   render() {
-     const {title} = this.props;
-     const correctPath = this.state.correctPath;
+    render() {
+        const {title} = this.props;
+        const correctPath = this.state.correctPath;
 
-     return (
-       <div id="mySidenav" className="sidenav">
-        <h3> Wollen Sie ein neuen Ordnerpfad eingeben?</h3>
-        {correctPath ? (
-          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
-         ) : (
-           <div>
-             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
-             <div className="wrongPath"/>
-             <p>Pfad wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe</p>
-           </div>
-        )}
-       </div>
-     );
-   }
+        return (
+            <div id="mySidenav" className="sidenav">
+                <h3> Wollen Sie ein neuen Ordnerpfad eingeben?</h3>
+                {correctPath ? (
+                    <input className="inputFolderPath" id="inputFolderPath" type="text"
+                           placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
+                ) : (
+                    <div>
+                        <input className="inputFolderPath" id="inputFolderPath" type="text"
+                               placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
+                        <div className="wrongPath"/>
+                        <p>Pfad wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe</p>
+                    </div>
+                )}
+            </div>
+        );
+    }
 }
 
 /*
@@ -166,46 +128,46 @@ class MenuOptions extends React.Component{
 */
 
 
-class MenuButton extends React.Component{
+class MenuButton extends React.Component {
 
-  constructor(props){
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      clickedMenu: false
+        this.state = {
+            clickedMenu: false
+        };
+
+        this.handleMenuClick = this.handleMenuClick.bind(this);
+        this.handleCrossClick = this.handleCrossClick.bind(this);
+        this.onHover = this.onHover.bind(this);
     }
-    this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleCrossClick = this.handleCrossClick.bind(this);
-    this.onHover = this.onHover.bind(this);
-   }
 
-   onHover(){
-     if(this.state.clickedMenu === false){
-       website.hover();
-     }
-   }
+    onHover() {
+        if (this.state.clickedMenu === false) {
+            website.hover();
+        }
+    }
 
-   handleMenuClick() {
-     if(this.state.clickedMenu === false){
-       this.setState({clickedMenu: true});
-       website.showMenu();
-     }
-   }
+    handleMenuClick() {
+        if (this.state.clickedMenu === false) {
+            this.setState({clickedMenu: true});
+            website.showMenu();
+        }
+    }
 
-   handleCrossClick(){
-     if(this.state.clickedMenu === true){
-       this.setState({clickedMenu: false});
-       website.closeMenu();
-     }
-   }
+    handleCrossClick() {
+        if (this.state.clickedMenu === true) {
+            this.setState({clickedMenu: false});
+            website.closeMenu();
+        }
+    }
 
 
+    render() {
+        return (
+            <div>
 
-  render() {
-    return (
-      <div>
-
-      {/*
+                {/*
       <div id="menuButtons" className="menuButtons" onClick={this.handleMenuClick} onMouseOver={this.onHover}>
         <div className="rect"/>
         <div className="rect"/>
@@ -240,9 +202,47 @@ class MenuButton extends React.Component{
 
 
 */}
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 export default App;
+
+
+/*
+          <AudioBox/>
+
+          <VideoBox/>
+          <VideoBox/>
+
+         <SideBar/>
+         <Options/>
+         <BackgroundImage/>
+         <div id="main" className="main">
+          <h1>{title}</h1>
+          <div className="actionBox">
+            <div className="audio">
+              <AudioBox last="false"/>
+            </div>
+          </div>
+          <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
+         </div>
+
+
+
+         {/*
+         <div id="main" className="main">
+            <h1>{title}</h1>
+            <div className="actionBox">
+              <div className="audio">
+                <AudioBox last="false"/>
+              </div>
+              {/*not solved well, if I still have time I should work on that later on -->
+              <div className="audio secondAudioBox">
+                <AudioBox last="true"/>
+              </div>
+            </div>
+            <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
+         </div>
+         */

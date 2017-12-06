@@ -1,4 +1,4 @@
-//import FileService from '../services/file-service.js';
+import FileService from '../services/file-service.js';
 
 export default class AudioPlayer {
 
@@ -7,7 +7,7 @@ export default class AudioPlayer {
         this.buffer = {};
         this.gainNode = {};
         this.startedAt = {};
-        this.pausedAt = {};
+        this.pausedAt = 0;
         this.lowpassFilter = {};
         this.highshelfFilter = {};
 
@@ -17,9 +17,17 @@ export default class AudioPlayer {
         this.highshelfConnected = false;
 
         this.fileService = new FileService();
-        this.fileService.getFile('../src/web-app/basic_loop.wav')
+        console.log("Getting audio file ...");
+        this.fileService.getFile('../src/web-app/audio/basic_loop.wav')
             .then(file => {
-            this.context.decodeAudioData(file, buffer => this.buffer = buffer, error => console.error(error));
+                this.context.decodeAudioData(file.data, buffer => {
+                    this.buffer = buffer;
+                    console.log("Buffer:");
+                    console.log(this.buffer);
+                }, error => {
+                    console.log("Something went wrong");
+                    console.error(error);
+                });
             }).catch(error => console.error(error))
     }
 
@@ -31,24 +39,25 @@ export default class AudioPlayer {
         this.highshelfConnected = false;
 
         this.source.connect(this.gainNode);
+        this.gainNode.connect(this.context.destination);
 
-        if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-            this.gainNode.connect(this.lowpassFilter);
-            this.lowpassFilter.connect(this.highshelfFilter);
-            this.highshelfFilter.connect(this.context.destination);
-            this.lowpassConnected = true;
-            this.highshelfConnected = true;
-        } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
-            this.gainNode.connect(this.lowpassFilter);
-            this.lowpassFilter.connect(this.context.destination);
-            this.lowpassConnected = true;
-        } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-            this.gainNode.connect(this.highshelfFilter);
-            this.highshelfFilter.connect(this.context.destination);
-            this.highshelfConnected = true;
-        } else {
-            this.gainNode.connect(this.context.destination);
-        }
+        // if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+        //     this.gainNode.connect(this.lowpassFilter);
+        //     this.lowpassFilter.connect(this.highshelfFilter);
+        //     this.highshelfFilter.connect(this.context.destination);
+        //     this.lowpassConnected = true;
+        //     this.highshelfConnected = true;
+        // } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
+        //     this.gainNode.connect(this.lowpassFilter);
+        //     this.lowpassFilter.connect(this.context.destination);
+        //     this.lowpassConnected = true;
+        // } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+        //     this.gainNode.connect(this.highshelfFilter);
+        //     this.highshelfFilter.connect(this.context.destination);
+        //     this.highshelfConnected = true;
+        // } else {
+        //     this.gainNode.connect(this.context.destination);
+        // }
     }
 
     pausePlay() {

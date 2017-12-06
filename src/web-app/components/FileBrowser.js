@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import FileService from '../services/file-service.js';
-import {Config} from '../test/filePath.js';
+import {Config} from '../test/filepath.js';
 import Folder from '../svg/folder.js';
 
 class FileBrowser extends React.Component {
