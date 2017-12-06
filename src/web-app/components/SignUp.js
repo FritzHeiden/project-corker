@@ -1,20 +1,19 @@
 import React from 'react'
 import Line from './Line.js';
 import FileService from '../services/file-service.js';
+import {Config} from '../test/filePath.js';
 
 class FormPage extends React.Component {
 
   constructor(props) {
-        super(props);
-        this.state = {
-          correctPath: true,
-        }
+    super(props);
+    this.state = {
+      correctPath: true,
+    }
 
-        this.changeView = this.changeView.bind(this);
         this.checkPath = this.checkPath.bind(this);
-        this.test = this.test.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
-      }
+  }
 
 
   showErrorMessage(){
@@ -32,36 +31,27 @@ class FormPage extends React.Component {
     document.getElementById('online').style.display = "block";
   }
 
-  test(){
-    console.log(this.state.correctPath);
-    if(this.state.correctPath === true){
-      this.showDj();
-    }
-    else{
-      this.showErrorMessage();
-    }
-  }
-
-  changeView(){
-    this.checkPath();
-
-    setTimeout(this.test, 15);
-  }
 
   checkPath(){
     let filePath = document.getElementById('path').value;
-    let testFilePath = new FileService('127.0.0.1', '2345');
+    console.log(filePath);
+    let testFilePath = new FileService('127.0.0.1', 2345);
 
+    console.log("getting files ...");
     testFilePath.getFiles(filePath).then(files => {
       this.setState({correctPath : true});
+      Config.path = filePath;
+      this.showDj();
     }).catch(error => {
       this.setState({correctPath : false});
+      console.error(error);
+      this.showErrorMessage();
     })
   }
 
   handleKeyPress(e){
     if (e.key === 'Enter') {
-      this.changeView();
+      this.checkPath();
     }
   }
 
@@ -84,7 +74,7 @@ class FormPage extends React.Component {
             </div>
            </div>
         )}
-        <button className="pushButton" onClick={this.changeView.bind(this)}>Fertig</button>
+        <button className="pushButton" onClick={this.handleKeyPress.bind(this)}>Fertig</button>
       </div>
     );
   }

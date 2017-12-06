@@ -85,6 +85,8 @@ class Video extends React.Component {
     }
     return(
       <div>
+
+        {/* canvas elemet*/}
         <VideoPlayer id="testVideo" style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"
           play={this.state.play}/>
         <Line/>

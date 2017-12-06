@@ -743,8 +743,16 @@ input[type="text"].closeInput{
 .finalVideo{
   height: auto;
   width: 10rem;
-  
+
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.testBeam{
+  width: 10px;
+  height: 70px;
+  margin: 0 4px 0 0;
+  background-color: red;
+  float: left;
 }
