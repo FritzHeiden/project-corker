@@ -9,8 +9,8 @@ h3{
   font-family: 'Helvetica';
   color: #00868B;
   position: relative;
-  top: -1.25rem;
-  left: -26%;
+  top: 0.5rem;
+  left: -16%;
   margin-bottom: -0.5rem;
 }
 
@@ -253,6 +253,8 @@ span{
   width: 50%;
   height: auto;
   color: white;
+  max-height: 15vh;
+  overflow-y: scroll;
 }
 
 .slider {
@@ -747,6 +749,7 @@ input[type="text"].closeInput{
   position: absolute;
   bottom: 0;
   right: 0;
+  overflow: hidden;
 }
 
 .testBeam{

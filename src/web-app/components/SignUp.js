@@ -75,7 +75,7 @@ class FormPage extends React.Component {
             </div>
            </div>
         )}
-        <button className="pushButton" onClick={this.handleKeyPress.bind(this)}>Fertig</button>
+        <button className="pushButton" onClick={this.checkPath.bind(this)}>Fertig</button>
       </div>
     );
   }

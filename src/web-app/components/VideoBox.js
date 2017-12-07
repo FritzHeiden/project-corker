@@ -89,11 +89,19 @@ class Video extends React.Component {
       left: "0%",
       margin: "2% 0 2% 0",
     }
+
+    let DisplayNone =
+    {
+      display: "none",
+    }
     return(
       <div>
-        {/* canvas elemet*/}
-        <VideoPlayer id="testVideo" style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"
-          play={this.state.play}/>
+        <video id="film" width="100" height="100">
+            <source src="./src/web-app/components/test.ogv" type="video/ogg"/>{/* TODO Findet Video nicht */}
+        </video>
+        <canvas id="zwischenablage" width="100" height="100" style={DisplayNone}></canvas>
+        <canvas id="ziel" width="100" height="100"></canvas>
+
         <Line/>
         <div className="minimalButtons">
          <StartStopButton changeStartStop={this.videoStartStop}/>

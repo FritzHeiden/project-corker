@@ -10,7 +10,6 @@ class FileBrowser extends React.Component {
     super(props);
     this.state = {files: []}
 
-
     this.fileService = new FileService("127.0.0.1", 2345);
     Config.onPathChange = this.updateFileList.bind(this);
 //this.updateFileList();
@@ -54,7 +53,8 @@ class FileBrowser extends React.Component {
   updateTable(){
     let table = this.state.files.filter( file =>
     {
-      return file.extension === "wav";
+      //return file.extension === "wav";
+      return file;
     }).map( file => {
 
       return( <tr><td>{file.filename}</td></tr>)
@@ -83,22 +83,24 @@ class FileBrowser extends React.Component {
 
 
     return (
-      <div className="musicFolder">
+      <div>
         <h3>{title}</h3>
-        <table>
-          <tbody>
-          <tr>
-            <th style={colOne}>{colOneName}</th>
-          </tr>
-          <tr>
-            <td><Folder/></td>
-          </tr>
-          <tr draggable="true" onDragStart={this.mouseDragged.bind(this)}>
-            <td>Hallo</td>
-          </tr>
-          {this.updateTable()}
-        </tbody>
-        </table>
+        <div className="musicFolder">
+          <table>
+            <tbody>
+            <tr>
+              <th style={colOne}>{colOneName}</th>
+            </tr>
+            <tr>
+              <td><Folder/></td>
+            </tr>
+            <tr draggable="true" onDragStart={this.mouseDragged.bind(this)}>
+              <td>Hallo</td>
+            </tr>
+            {this.updateTable()}
+          </tbody>
+          </table>
+        </div>
       </div>
     );
  }
