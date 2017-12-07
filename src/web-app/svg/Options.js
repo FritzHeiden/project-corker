@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import * as website from '../test/website.js';
-import * as sidebar from '../test/sidebar.js';
+import {Sidebar} from '../test/sidebar.js';
 
 class OptionsButton extends React.Component {
   constructor(props){
@@ -13,34 +12,19 @@ class OptionsButton extends React.Component {
     }
     this.handleMenuClick = this.handleMenuClick.bind(this);
     //this.handleCrossClick = this.handleCrossClick.bind(this);
-    this.onHover = this.onHover.bind(this);
-   }
-
-   onHover(){
-     if(this.state.clickedMenu === false){
-       website.hover();
-     }
    }
 
    handleMenuClick() {
      if(this.state.clickedMenu === false){
        this.setState({clickedMenu: true});
-       sidebar.showOptions();
+       Sidebar.showSidebar();
      }
 
      else if(this.state.clickedMenu === true){
        this.setState({clickedMenu: false});
-       sidebar.closeOptions();
+       Sidebar.closeSidebar();
      }
    }
-/*
-   handleCrossClick(){
-     if(this.state.clickedMenu === true){
-       this.setState({clickedMenu: false});
-       website.closeOptions();
-     }
-   }
-*/
 
  render() {
 
@@ -52,7 +36,7 @@ class OptionsButton extends React.Component {
     }
 
     return (
-       <div id="menuButtons" onClick={this.handleMenuClick} onMouseOver={this.onHover}>
+       <div id="menuButtons" onClick={this.handleMenuClick}>
          <svg className="MenuButton" viewBox="0 0 452 269">
            <g>
              <g>

@@ -29,10 +29,14 @@ class Video extends React.Component {
     }
     return(
       <div className="finalVideo">
-        <VideoPlayer style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"/>
+        <canvas/>
       </div>
     );
   }
 }
 
 export default Video;
+
+
+{/*        <VideoPlayer style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"/>
+*/}

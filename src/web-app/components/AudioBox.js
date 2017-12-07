@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Line from './Line.js';
-//import CanvasElements from '../test/canvasStyle.js';
-import * as musicElements from '../test/canvasStyle.js';
-
 import * as drop from '../test/dragAndDrop.js';
 
 /* Images */
@@ -15,7 +12,6 @@ import StartButton from '../svg/Start.js';
 import StartStopButton from '../svg/StartStopButton.js';
 
 import PlayerJS from '../audio/player.js';
-
 
 
 class AudioBox extends React.Component {
@@ -69,25 +65,26 @@ class AudioPlayer extends React.Component {
 
     let audio =
     {
-      height: "5rem",
-      width: "85%",
-      position: "relative",
-      backgroundColor: "#323232",
-      /*border: "3px solid #00868B",*/
-      left: "0%",
-      margin: "2% 0 2% 0",
-      overflowY: "scroll",
+      height: "6rem",
+      /* width: 85%; */
+      /* position: relative; */
+      backgroundColor: "rgb(50, 50, 50)",
+      /* left: 0%; */
+      margin: "2%",
+      /* overflow-y: scroll; */
 
     }
     return(
       <div id="testMusic">
-        <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
+        <div id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}>
+        </div>
       </div>
     );
   }
 }
 
 
+//        <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
 
 class Player extends React.Component {
 

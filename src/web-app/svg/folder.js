@@ -47,7 +47,7 @@ class FolderButton extends React.Component {
  render() {
 
    let width= {
-     width: "11%",
+     width: "5%",
    }
    let zero =
    {

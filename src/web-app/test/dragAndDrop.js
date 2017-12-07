@@ -1,8 +1,3 @@
-/*
-export function drag(ev){
-  ev.dataTransfer.setData("text", ev.target.id);
-}*/
-
 export function drag(event){
   event.dataTransfer.setData("text", event.target.id);
   console.log("Hallo");

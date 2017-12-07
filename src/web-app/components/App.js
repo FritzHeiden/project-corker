@@ -7,9 +7,9 @@ import AudioBox from './AudioBox.js';
 import VideoBox from './VideoBox.js';
 import FormPage from './SignUp.js';
 
-import * as website from '../test/website.js';
-import * as sidebar from '../test/sidebar.js';
 import FileService from '../services/file-service.js';
+import {Config} from '../test/filePath.js';
+import {Sidebar} from '../test/sidebar.js';
 
 /* Images */
 import BackgroundImage from '../svg/background.js';
@@ -47,43 +47,6 @@ class App extends React.Component {
             <FinalVideo/>
           </div>
         </div>
-
-        {/*
-          <AudioBox/>
-
-          <VideoBox/>
-          <VideoBox/>
-
-         <SideBar/>
-         <Options/>
-         <BackgroundImage/>
-         <div id="main" className="main">
-          <h1>{title}</h1>
-          <div className="actionBox">
-            <div className="audio">
-              <AudioBox last="false"/>
-            </div>
-          </div>
-          <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-         </div>
-
-
-
-         {/*
-         <div id="main" className="main">
-            <h1>{title}</h1>
-            <div className="actionBox">
-              <div className="audio">
-                <AudioBox last="false"/>
-              </div>
-              {/*not solved well, if I still have time I should work on that later on -->
-              <div className="audio secondAudioBox">
-                <AudioBox last="true"/>
-              </div>
-            </div>
-            <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
-         </div>
-         */}
        </div>
      );
    }
@@ -108,18 +71,20 @@ class SideBar extends React.Component {
     }
 
     checkPath(){
-        let filePath = document.getElementById('inputFolderPath').value;
-        let testFilePath = new FileService('127.0.0.1', 2345);
+      let filePath = document.getElementById('path').value;
+      console.log(filePath);
+      let testFilePath = new FileService('127.0.0.1', 2345);
 
-        testFilePath.getFiles(filePath).then(files => {
-          this.setState({correctPath : true});
-          this.sidebar.closeOptions();
-          console.log('Verzeichnis upgedated');
-        }).catch(error => {
-          console.log(error);
-          this.setState({correctPath : false});
-        })
-      }
+      console.log("getting files ...");
+      testFilePath.getFiles(filePath).then(files => {
+        this.setState({correctPath : true});
+        Sidebar.closeSidebar();
+        Config.path = filePath;
+      }).catch(error => {
+        this.setState({correctPath : false});
+        console.error(error);
+      })
+    }
 
    render() {
      const {title} = this.props;
@@ -142,107 +107,5 @@ class SideBar extends React.Component {
    }
 }
 
-/*
-class MenuOptions extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-    const{imageOne, imageTwo, disOne, disTwo} = this.props;
-
-    return(
-      <div id="menuOps" className="menuOps">
-        <div>
-          <img src={imageOne}/><span>{disOne}</span>
-        </div>
-        <div>
-          <img src={imageTwo}/><span>{disTwo}</span>
-        </div>
-      </div>
-    );
-  }
-}
-*/
-
-
-class MenuButton extends React.Component{
-
-  constructor(props){
-    super(props);
-
-    this.state = {
-      clickedMenu: false
-    }
-    this.handleMenuClick = this.handleMenuClick.bind(this);
-    this.handleCrossClick = this.handleCrossClick.bind(this);
-    this.onHover = this.onHover.bind(this);
-   }
-
-   onHover(){
-     if(this.state.clickedMenu === false){
-       website.hover();
-     }
-   }
-
-   handleMenuClick() {
-     if(this.state.clickedMenu === false){
-       this.setState({clickedMenu: true});
-       website.showMenu();
-     }
-   }
-
-   handleCrossClick(){
-     if(this.state.clickedMenu === true){
-       this.setState({clickedMenu: false});
-       website.closeMenu();
-     }
-   }
-
-
-
-  render() {
-    return (
-      <div>
-
-      {/*
-      <div id="menuButtons" className="menuButtons" onClick={this.handleMenuClick} onMouseOver={this.onHover}>
-        <div className="rect"/>
-        <div className="rect"/>
-        <div className="rect"/>
-
-      <div className="rect" id="crossOne" onClick={this.handleCrossClick}/>
-      <div className="rect" id="crossTwo" onClick={this.handleCrossClick}/>
-      <div className="rect" id="openMenu">
-        <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"}/>
-      </div>
-
-
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 452 269">
-    <g>
-      <g>
-        <line style={[all,one]} x1="445.5" y1="28.5" x2="6.5" y2="28.5"/>
-        <circle style={[all,two]} cx="52" cy="29.5" r="25"/>
-        <line style={[all,one]} x1="445.5" y1="134.5" x2="6.5" y2="134.5"/>
-        <circle style={[all,two]} cx="366" cy="134.5" r="25"/>
-        <line style={[all,one]} x1="445.5" y1="239.5" x2="6.5" y2="239.5"/>
-        <circle style={[all,two]} cx="43" cy="239.5" r="25"/>
-      </g>
-    </g>
-  </svg>
-
-      <div className="rect"/>
-      <div stlye={circle_1}/>
-      <div className="rect"/>
-      <div stlye={circle_2}/>
-      <div className="rect"/>
-      <div className="options" stlye={circle_1}/>
-
-
-*/}
-      </div>
-    );
-  }
-}
 
 export default App;
