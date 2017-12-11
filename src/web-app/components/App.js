@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import Footer from './Footer.js';
 import FinalVideo from './FinalVideo.js';
@@ -23,14 +22,14 @@ class App extends React.Component {
     }
 
    render() {
-     const {title} = this.props;
+     const {title, signUp, footerTitle} = this.props;
 
      return (
        <div>
         <BackgroundImage/>
         <div id="signUp" className="signUp">
               <h1>{title}</h1>
-              <FormPage title="Anmelden"/>
+              <FormPage title={signUp}/>
         </div>
         <div id="online" className="online">
           <SideBar/>
@@ -43,7 +42,7 @@ class App extends React.Component {
               <VideoBox/>
               <AudioBox/>
             </div>
-            <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
+            <Footer title={footerTitle}/>
             <FinalVideo/>
           </div>
         </div>
@@ -59,7 +58,7 @@ class SideBar extends React.Component {
      super(props);
      this.state={
        correctPath: true,
-     }
+     };
      this.handleEnter = this.handleEnter.bind(this);
      this.checkPath = this.checkPath.bind(this);
     }
@@ -87,7 +86,6 @@ class SideBar extends React.Component {
     }
 
    render() {
-     const {title} = this.props;
      const correctPath = this.state.correctPath;
 
      return (
