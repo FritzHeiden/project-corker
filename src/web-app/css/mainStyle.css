@@ -6,7 +6,7 @@ html, body{
 
 h3{
   font-size: 2.0rem;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', Georgia, serif;
   color: #00868B;
   position: relative;
   top: 0.5rem;
@@ -16,7 +16,7 @@ h3{
 
 h2, p{
   color: #95989A;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', Georgia, serif;
 }
 
 button{
@@ -38,7 +38,7 @@ table {
   margin: 0 auto; /* or margin: 0 auto 0 auto */
   width: 85%;
   overflow: scroll;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', Georgia, serif;
 }
 
 table tr td{
@@ -72,7 +72,7 @@ table tr th{
   background: #95989A;
   width:3rem;
   border: 3px solid #323232;
-  margin: -0.5rem 0 0 0rem;
+  margin: -0.5rem 0 0 0;
 }
 
 h1{
@@ -166,7 +166,6 @@ span{
 
 .filter{
   /*height: auto;*/
-  margin-top: 0.5rem;
   height: 50px;
   width: 50px;
   margin: 1rem 0.25rem 1rem;
@@ -296,8 +295,6 @@ span{
   /* height: 29rem; */
   background-color: #494949;
   position: relative;
-  top: -38%;
-  left: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, 0%);
@@ -323,7 +320,7 @@ span{
 
 p{
   color: #95989A;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', Georgia, serif;
 }
 
 h2.options{
@@ -335,7 +332,7 @@ h2.options{
 
 div.errorMessage h3, div.errorMessage p{
   color: #95989A;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', Georgia, serif;
   position: relative;
 }
 
@@ -386,16 +383,13 @@ input[type="text"]:focus{
   background-color: #00868B;
   border: none;
   height: 2.5rem;
-  font-size: 1rem;
   text-align: center;
-  margin: 0;
   align-self: flex-end;
   margin: 3rem 0 1rem 0;
   font-size: 1.5rem;
 }
 
 input[type="text"].path{
-  font-size: 2rem;
   width: 75%;
   background-color: #323232;
   color: #95989A;
@@ -447,7 +441,7 @@ input[type="text"].path{
 
 h2, p{
   color: #95989A;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', Georgia, serif;
 }
 
 .menuOps{
@@ -663,12 +657,12 @@ input[type="text"].closeInput{
 
 .sidenav h3{
   font-size: 1.0rem;
-  font-family: 'Helvetica';
+  font-family: 'Helvetica', Georgia, serif;
   color: #00868B;
   position: relative;
   top: 4rem;
   left: 0;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
 
 .sidenav input[type="text"]{
@@ -721,11 +715,11 @@ input[type="text"].closeInput{
   position: absolute;
   width: 250px;
   height: 120px;
-  padding: 0px;
+  padding: 0;
   background: #494949;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 
 .errorMessage:after

@@ -1,18 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
 import Line from './Line.js';
-import * as drop from '../test/dragAndDrop.js';
-
-/* Images */
-import NextButton from '../svg/Next.js';
-import PauseButton from '../svg/Pause.js';
-import PreviousButton from '../svg/Pre.js';
-import StartButton from '../svg/Start.js';
 import StartStopButton from '../svg/StartStopButton.js';
-
-import PlayerJS from '../audio/player.js';
-
 
 class AudioBox extends React.Component {
   constructor(props){
@@ -20,8 +8,6 @@ class AudioBox extends React.Component {
   }
 
    render() {
-     const {last} = this.props;
-
       return (
           <div className="audioBox">
             <AudioPlayer/>
@@ -66,14 +52,9 @@ class AudioPlayer extends React.Component {
     let audio =
     {
       height: "6rem",
-      /* width: 85%; */
-      /* position: relative; */
       backgroundColor: "rgb(50, 50, 50)",
-      /* left: 0%; */
       margin: "2%",
-      /* overflow-y: scroll; */
-
-    }
+    };
     return(
       <div id="testMusic">
         <div id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}>
@@ -95,9 +76,13 @@ class Player extends React.Component {
   render(){
      return (
        <div className="minimalButtons">
-        <PreviousButton/>
         <StartStopButton/>
-        <NextButton/>
+
+        {/*
+          <PreviousButton/>
+          <NextButton/>
+          */}
+
        </div>
      );
   }
@@ -113,12 +98,12 @@ class Filter extends React.Component {
   }
 
   setStart(e){
-    if(this.state.clicked == 0){
+    if(this.state.clicked === 0){
       this.setState({ startY: e.screenY});
       this.setState({ startX: e.screenX});
       this.setState({ clicked: 1});
     }
-    else if(this.state.clicked == 1){
+    else if(this.state.clicked === 1){
       this.setState({ clicked: 0});
     }
   }
@@ -126,7 +111,7 @@ class Filter extends React.Component {
   /* Doesn't work well */
   changeVolume(event){
 
-    if(this.state.clicked == 1){
+    if(this.state.clicked === 1){
       let elementSize = 50;
 
       var position = this.refs.filterButton.getBoundingClientRect();
@@ -161,19 +146,24 @@ class Filter extends React.Component {
 
     return(
       <div className="filterBox">
+
+
+
+      <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
+      <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
+      <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
+{/*
+
         <div className="filter"
         style={{transform: 'rotate('+this.state.rotate+'deg)', WebkitTransform: 'rotate('+this.state.rotate+'deg)'}} ref = "filterButton" onClick={this.setStart.bind(this)} onMouseMove={this.changeVolume.bind(this)} >
-          <div className="dot">
-
-          </div>
+          <div className="dot"></div>
         </div>
-
-{/*
         <button className="filter" id="filterButton_1" draggable="true" onDragOver={this.mouseDragged} onDragStart={this.mouseDragged}></button>
         <button className="filter" onDrag={this.mouseClicked}></button>
         <button className="filter" onDrag={this.mouseClicked}></button>
         <button className="filter" onDrag={this.mouseClicked}></button>
-        <button className="filter" onDrag={this.mouseClicked}></button>*/}
+        <button className="filter" onDrag={this.mouseClicked}></button>
+*/}
       </div>
     );
   }

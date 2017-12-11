@@ -24,14 +24,14 @@ class App extends React.Component {
     }
 
    render() {
-     const {title} = this.props;
+     const {title, signUp, footerTitle} = this.props;
 
      return (
        <div>
         <BackgroundImage/>
         <div id="signUp" className="signUp">
               <h1>{title}</h1>
-              <FormPage title="Anmelden"/>
+              <FormPage title={signUp}/>
         </div>
         <div id="online" className="online">
           <SideBar/>
@@ -44,7 +44,7 @@ class App extends React.Component {
               <VideoBox/>
               <AudioBox/>
             </div>
-            <Footer title="Ordnerverzeichnis" colOneName="Titel" colTwoName="Künstler" colThreeName="Dauer"/>
+            <Footer title={footerTitle}/>
             <FinalVideo/>
           </div>
         </div>
@@ -56,13 +56,13 @@ class App extends React.Component {
 
 class SideBar extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            correctPath: true,
-        };
-        this.handleEnter = this.handleEnter.bind(this);
-        this.checkPath = this.checkPath.bind(this);
+   constructor(props){
+     super(props);
+     this.state={
+       correctPath: true,
+     };
+     this.handleEnter = this.handleEnter.bind(this);
+     this.checkPath = this.checkPath.bind(this);
     }
 
     handleEnter(e) {
@@ -85,27 +85,24 @@ class SideBar extends React.Component {
         })
     }
 
-    render() {
-        const {title} = this.props;
-        const correctPath = this.state.correctPath;
+   render() {
+     const correctPath = this.state.correctPath;
 
-        return (
-            <div id="mySidenav" className="sidenav">
-                <h3> Wollen Sie ein neuen Ordnerpfad eingeben?</h3>
-                {correctPath ? (
-                    <input className="inputFolderPath" id="inputFolderPath" type="text"
-                           placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
-                ) : (
-                    <div>
-                        <input className="inputFolderPath" id="inputFolderPath" type="text"
-                               placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
-                        <div className="wrongPath"/>
-                        <p>Pfad wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe</p>
-                    </div>
-                )}
-            </div>
-        );
-    }
+     return (
+       <div id="mySidenav" className="sidenav">
+        <h3> Wollen Sie ein neuen Ordnerpfad eingeben?</h3>
+        {correctPath ? (
+          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
+         ) : (
+           <div>
+             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
+             <div className="wrongPath"/>
+             <p>Pfad wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe</p>
+           </div>
+        )}
+       </div>
+     );
+   }
 }
 
 export default App;

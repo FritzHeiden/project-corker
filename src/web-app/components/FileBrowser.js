@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import FileService from '../services/file-service.js';
 import {Config} from '../test/filepath.js';
@@ -12,7 +11,7 @@ class FileBrowser extends React.Component {
 
     this.fileService = new FileService("127.0.0.1", 2345);
     Config.onPathChange = this.updateFileList.bind(this);
-//this.updateFileList();
+//    this.updateFileList();
     this.mouseDragged = this.mouseDragged.bind(this);
   }
 
@@ -21,7 +20,6 @@ class FileBrowser extends React.Component {
     }
 
   updateFileList(path){
-
       //let path = Config.path;
       console.log("From FileBrowser: " + path);
 
@@ -57,30 +55,19 @@ class FileBrowser extends React.Component {
       return file;
     }).map( file => {
 
-      return( <tr><td>{file.filename}</td></tr>)
+      return( <tr draggable="true" onDragStart={this.mouseDragged.bind(this)}><td>{file.filename}</td></tr>)
     });
     console.log(table);
     return(table);
   }
 
  render() {
-   const {title,colOneName} = this.props;
+   const {title} = this.props;
 
-   let colOne =
+   let dataName =
    {
      width: "65%",
    }
-
-   let colTwo =
-   {
-     width: "20%",
-   }
-
-   let colThree =
-   {
-     width: "15%",
-   }
-
 
     return (
       <div>
@@ -88,9 +75,6 @@ class FileBrowser extends React.Component {
         <div className="musicFolder">
           <table>
             <tbody>
-            <tr>
-              <th style={colOne}>{colOneName}</th>
-            </tr>
             <tr>
               <td><Folder/></td>
             </tr>

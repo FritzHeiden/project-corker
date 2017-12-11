@@ -1,19 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {VideoPlayer} from 'react-video-players';
-
 
 import Line from './Line.js';
-import * as drop from '../test/dragAndDrop.js';
-
-/* Images */
-import NextButton from '../svg/Next.js';
-import PauseButton from '../svg/Pause.js';
-import PreviousButton from '../svg/Pre.js';
-import StartButton from '../svg/Start.js';
 import StartStopButton from '../svg/StartStopButton.js';
-
-
 
 class VideoBox extends React.Component {
   constructor(props){
@@ -88,12 +76,13 @@ class Video extends React.Component {
       backgroundColor: "#323232",
       left: "0%",
       margin: "2% 0 2% 0",
-    }
+    };
 
     let DisplayNone =
     {
       display: "none",
-    }
+    };
+
     return(
       <div>
         <video id="film" width="100" height="100">
@@ -140,12 +129,12 @@ class Filter extends React.Component {
   }
 
   setStart(e){
-    if(this.state.clicked == 0){
+    if(this.state.clicked === 0){
       this.setState({ startY: e.screenY});
       this.setState({ startX: e.screenX});
       this.setState({ clicked: 1});
     }
-    else if(this.state.clicked == 1){
+    else if(this.state.clicked === 1){
       this.setState({ clicked: 0});
     }
   }
@@ -153,7 +142,7 @@ class Filter extends React.Component {
   /* Doesn't work well */
   changeVolume(event){
 
-    if(this.state.clicked == 1){
+    if(this.state.clicked === 1){
       let elementSize = 50;
 
       var position = this.refs.filterButton.getBoundingClientRect();

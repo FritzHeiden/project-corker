@@ -11,11 +11,9 @@ class FormPage extends React.Component {
     this.state = {
       correctPath: true,
     };
-
-        this.checkPath = this.checkPath.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
+     this.checkPath = this.checkPath.bind(this);
+     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
-
 
   showErrorMessage(){
     console.log("not found!");

@@ -6,7 +6,7 @@ class Line extends React.Component {
       let line =
       {
         border: "3px solid #323232",
-      }
+      };
 
       return (
          <div style={line}/>
