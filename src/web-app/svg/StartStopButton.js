@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import AudioPlayer from '../audio/player.js';
-
-class StartStopControl extends React.Component {
+export default class StartStopControl extends React.Component {
   constructor(props) {
     super(props);
 
@@ -34,7 +31,7 @@ class StartStopControl extends React.Component {
     let zero =
     {
       fill: "#323232",
-    }
+    };
 
      let one =
      {
@@ -44,7 +41,7 @@ class StartStopControl extends React.Component {
        strokeLinecap: "round",
        strokeLinejoin: "round",
        strokeMiterlimit: "10",
-      }
+      };
 
       let two =
       {
@@ -54,7 +51,7 @@ class StartStopControl extends React.Component {
         strokeLinecap: "round",
         strokeLinejoin: "round",
         strokeMiterlimit: "10",
-      }
+      };
 
     return (
       <div onClick={this.clicked}>
@@ -89,5 +86,3 @@ class StartStopControl extends React.Component {
 StartStopControl.propTypes = {
   changeStartStop: PropTypes.func,
 };
-
-export default StartStopControl;

@@ -6,13 +6,12 @@ class NextImage extends React.Component {
     super(props);
   }
 
-
  render() {
 
    let zero =
    {
      fill: "#323232",
-    }
+    };
 
     let one =
     {
@@ -22,7 +21,7 @@ class NextImage extends React.Component {
       strokeLinecap: "round",
       strokeLinejoin: "round",
       strokeMiterlimit: "10",
-     }
+     };
 
     return (
       <svg x="0px" y="0px" viewBox="0 0 500 500" onClick={this.play}>

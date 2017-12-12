@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
 import {Sidebar} from '../test/sidebar.js';
 
 class OptionsButton extends React.Component {
@@ -9,7 +7,8 @@ class OptionsButton extends React.Component {
 
     this.state = {
       clickedMenu: false
-    }
+    };
+
     this.handleMenuClick = this.handleMenuClick.bind(this);
     //this.handleCrossClick = this.handleCrossClick.bind(this);
    }
@@ -27,14 +26,6 @@ class OptionsButton extends React.Component {
    }
 
  render() {
-
-   let svg =
-   {
-      fill: "none",
-      stroke: "#00868b",
-      strokeMiterlimit: "10",
-    }
-
     return (
        <div id="menuButtons" onClick={this.handleMenuClick}>
          <svg className="MenuButton" viewBox="0 0 452 269">

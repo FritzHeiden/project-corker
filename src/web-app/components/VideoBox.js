@@ -8,8 +8,6 @@ class VideoBox extends React.Component {
   }
 
    render() {
-     const {last} = this.props;
-
       return (
           <div className="audioBox">
             <Video/>
@@ -27,10 +25,10 @@ class Video extends React.Component {
 
     this.state={
       play: false,
-    }
+    };
 
-    this.drop = this.drop.bind(this);
-    this.allowDrop = this.allowDrop.bind(this);
+    Video.drop = Video.drop.bind(this);
+    Video.allowDrop = Video.allowDrop.bind(this);
     this.videoStartStop = this.videoStartStop.bind(this);
 
     /**
@@ -50,19 +48,19 @@ class Video extends React.Component {
     }
   }
 
-  allowDrop(e) {
+  static allowDrop(e) {
     e.preventDefault();
   }
 
-  drop(e) {
+  static drop(e) {
       e.preventDefault();
-      var data = e.dataTransfer.getData("text");
+      //var data = e.dataTransfer.getData("text");
       console.log("dropped");
   }
 
   render(){
 
-    let video =
+     /* let video =
     {
       height: "5rem",
       width: "85%",
@@ -70,7 +68,7 @@ class Video extends React.Component {
       backgroundColor: "#323232",
       left: "0%",
       margin: "2% 0 2% 0",
-    };
+    };*/
 
     let DisplayNone =
     {
@@ -80,7 +78,7 @@ class Video extends React.Component {
     return(
       <div>
         <video id="film" width="100" height="100">
-            <source src="./src/web-app/components/test.ogv" type="video/ogg"/>{/* TODO Findet Video nicht */}
+            <source src="test.ogv" type="video/ogg"/>{/* TODO Findet Video nicht */}
         </video>
         <canvas id="zwischenablage" width="100" height="100" style={DisplayNone}></canvas>
         <canvas id="ziel" width="100" height="100"></canvas>
@@ -153,7 +151,6 @@ class Filter extends React.Component {
       //filter.style.transform = 'rotate('+theta+'deg)';
 
       this.setState({rotate: 90});
-
     }
   }
 
