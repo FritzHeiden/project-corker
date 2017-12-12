@@ -1,22 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import AudioPlayer from '../audio/player.js';
-
-import * as AudioPlayer from '../audio/player.js';
-import AudioPlayer from '../audio/player.js';
-
-    this.state = {click: true};
-    this.clicked = this.clicked.bind(this);
-    this.audioPlayer = new AudioPlayer();
-  }
-  componentDidMount() {
-  }
-
-  clicked(){
-    console.log("clicked!");
-    console.log(this.state.click);
+export default class StartStopControl extends React.Component {
+  constructor(props) {
+    super(props);
 
     if(this.state.click === false)
     {
@@ -59,7 +46,6 @@ import AudioPlayer from '../audio/player.js';
     {
       fill: "#323232",
     };
-
      let one =
          {
              fill: "#323232",
@@ -105,8 +91,12 @@ class StopButton extends React.Component {
 
      let one =
      {
-       fill: "none",
-       stroke: "#95989A",
+       fill: "#323232",
+       stroke: "none",
+       strokeWidth: "8",
+       strokeLinecap: "round",
+       strokeLinejoin: "round",
+       strokeMiterlimit: "10",
       };
 
       let two =

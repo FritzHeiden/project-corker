@@ -1,8 +1,13 @@
 import React from 'react'
+import {Config} from '../test/filePath.js';
+
 import Line from './Line.js';
 import FileService from '../services/file-service.js';
+<<<<<<< HEAD
 import {Config} from '../test/filepath.js';
 
+=======
+>>>>>>> Programmed bars in audiobox; programmed drag and drop so you get the name of the file
 
 class FormPage extends React.Component {
 
@@ -15,7 +20,12 @@ class FormPage extends React.Component {
      this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
+<<<<<<< HEAD
   showErrorMessage(){
+=======
+
+  static showErrorMessage(){
+>>>>>>> Programmed bars in audiobox; programmed drag and drop so you get the name of the file
     console.log("not found!");
     let inputPath = document.getElementById('form').getBoundingClientRect();
     let left = inputPath.left;
@@ -25,7 +35,7 @@ class FormPage extends React.Component {
     document.getElementById('errorMessage').style.top = top - 75 + "px";
   }
 
-  showDj(){
+  static showDj(){
     document.getElementById('signUp').style.display = "none";
     document.getElementById('online').style.display = "block";
   }
@@ -40,11 +50,11 @@ class FormPage extends React.Component {
     testFilePath.getFiles(filePath).then(files => {
       this.setState({correctPath : true});
       Config.path = filePath;
-      this.showDj();
+      FormPage.showDj();
     }).catch(error => {
       this.setState({correctPath : false});
       console.error(error);
-      this.showErrorMessage();
+      FormPage.showErrorMessage();
     })
   }
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import Line from './Line.js';
+import {AudioFileAnalyser} from '../analysis/audio-file-analyser.js';
+import { movebar } from '../test/moveBar.js';
 import StartStopButton from '../svg/StartStopButton.js';
 
 class AudioBox extends React.Component {
@@ -25,8 +27,8 @@ class AudioPlayer extends React.Component {
   constructor(props){
     super(props);
 
-    this.drop = this.drop.bind(this);
-    this.allowDrop = this.allowDrop.bind(this);
+    AudioPlayer.drop = AudioPlayer.drop.bind(this);
+    AudioPlayer.allowDrop = AudioPlayer.allowDrop.bind(this);
 
     //this.canvas = new CanvasElements(document.getElementById('canvasPlayer'));
     //this.canvas.createCavasElements();
@@ -34,17 +36,32 @@ class AudioPlayer extends React.Component {
     //this.musicBeams.createBeam();
   }
 
-  allowDrop(e) {
+  static allowDrop(e) {
     //this.allowDrop(this);
     e.preventDefault();
+    e.dataTransfer.setData("text", e.target.id);
   }
 
-  drop(e) {
+  static drop(e) {
       //drop.drop(this);
       e.preventDefault();
       var data = e.dataTransfer.getData("text");
-      console.log("dropped");
-      //e.target.appendChild(document.getElementById(data));
+      console.log(document.getElementById(data).innerText);
+  }
+
+  static updateSoundBar(){
+
+      let bar = [10];
+      const numbers = [1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5];
+
+      let barStyle={
+
+      };
+
+      let listItems = numbers.map((number) =>
+          <div className='bar' style={barStyle} onLoad={movebar()}></div>
+      );
+      return listItems;
   }
 
   render(){
@@ -55,9 +72,16 @@ class AudioPlayer extends React.Component {
       backgroundColor: "rgb(50, 50, 50)",
       margin: "2%",
     };
+
+    let overflowY =
+    {
+        overflowY: "hidden",
+    };
+
     return(
-      <div id="testMusic">
-        <div id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}>
+      <div id="testMusic" style={overflowY} onDrop={AudioPlayer.drop.bind(this)} onDragOver={AudioPlayer.allowDrop.bind(event)}>
+       <div style={audio}>
+           {AudioPlayer.updateSoundBar()}
         </div>
       </div>
     );
@@ -65,7 +89,7 @@ class AudioPlayer extends React.Component {
 }
 
 
-//        <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
+// <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
 
 class Player extends React.Component {
 
@@ -141,14 +165,10 @@ class Filter extends React.Component {
     }
   }
 
-
   render(){
 
     return(
       <div className="filterBox">
-
-
-
       <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
       <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
       <input className="slider" type="range" min={0} max={100} defaultValue={50}/>

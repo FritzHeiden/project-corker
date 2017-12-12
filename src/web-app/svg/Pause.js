@@ -1,12 +1,12 @@
 import React from 'react';
 
-class PauseButton extends React.Component {
+export default class PauseButton extends React.Component {
  render() {
 
    let zero =
    {
      fill: "#323232",
-    }
+   };
 
     let one =
     {
@@ -16,9 +16,7 @@ class PauseButton extends React.Component {
       strokeLinecap: "round",
       strokeLinejoin: "round",
       strokeMiterlimit: "10",
-    }
-
-
+    };
 
     return (
       <svg x="0px" y="0px" viewBox="0 0 500 500">
@@ -34,5 +32,3 @@ class PauseButton extends React.Component {
     );
  }
 }
-
-export default PauseButton;

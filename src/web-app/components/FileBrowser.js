@@ -7,15 +7,17 @@ import Folder from '../svg/folder.js';
 class FileBrowser extends React.Component {
   constructor(props){
     super(props);
-    this.state = {files: []}
+    this.state = {files: []};
 
     this.fileService = new FileService("127.0.0.1", 2345);
     Config.onPathChange = this.updateFileList.bind(this);
 //    this.updateFileList();
-    this.mouseDragged = this.mouseDragged.bind(this);
+    FileBrowser.mouseDragged = FileBrowser.mouseDragged.bind(this);
+
+    this.tableCounter = 0;
   }
 
-    mouseDragged(event){
+    static mouseDragged(event){
       event.dataTransfer.setData("text", event.target.id);
     }
 
@@ -23,7 +25,7 @@ class FileBrowser extends React.Component {
       //let path = Config.path;
       console.log("From FileBrowser: " + path);
 
-      if(path != ""){
+      if(path !== ""){
         this.fileService.getFiles(path).then( files => {
           let state = this.state;
           console.log(files);
@@ -36,7 +38,6 @@ class FileBrowser extends React.Component {
       }
 
 /*
-
   let path = Filepath.path;
   this.fileService.getFiles(path).then(function(files){
     let state = this.state;
@@ -44,18 +45,20 @@ class FileBrowser extends React.Component {
     this.setState(state);
   }).catch(function(){
 
-  };*/
+};*/
   }
 
 
   updateTable(){
+
     let table = this.state.files.filter( file =>
     {
       //return file.extension === "wav";
       return file;
     }).map( file => {
-
-      return( <tr draggable="true" onDragStart={this.mouseDragged.bind(this)}><td>{file.filename}</td></tr>)
+      this.tableCounter = this.tableCounter + 1;
+      console.log(this.tableCounter);
+      return( <tr><td id={this.tableCounter} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td></tr>)
     });
     console.log(table);
     return(table);
@@ -63,11 +66,6 @@ class FileBrowser extends React.Component {
 
  render() {
    const {title} = this.props;
-
-   let dataName =
-   {
-     width: "65%",
-   }
 
     return (
       <div>
@@ -78,7 +76,7 @@ class FileBrowser extends React.Component {
             <tr>
               <td><Folder/></td>
             </tr>
-            <tr draggable="true" onDragStart={this.mouseDragged.bind(this)}>
+            <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
               <td>Hallo</td>
             </tr>
             {this.updateTable()}

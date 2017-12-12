@@ -1,7 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-import * as sidebar from '../test/sidebar.js';
 import FileService from '../services/file-service.js';
 
 class FolderButton extends React.Component {
@@ -9,7 +6,7 @@ class FolderButton extends React.Component {
     super(props);
     this.state={
       correctPath: true,
-    }
+    };
 
     this.changeDirectory= this.changeDirectory.bind(this);
     this.checktargetDirectory= this.checktargetDirectory.bind(this);
@@ -17,20 +14,19 @@ class FolderButton extends React.Component {
   }
 
   changeDirectory(){
-    this.checktargetDirectory;
+    this.checktargetDirectory();
     setTimeout(this.updateTable, 15);
   }
 
-
   checktargetDirectory(){
-    let filePath = ".."
+    let filePath = "..";
     let testFilePath = new FileService('127.0.0.1', '2345');
 
     testFilePath.getFiles(filePath).then(files => {
       this.setState({correctPath : true});
     }).catch(error => {
       this.setState({correctPath : false});
-    })
+    });
 
   console.log("Gehe ein verzeichnis zurück");
   }
@@ -48,16 +44,17 @@ class FolderButton extends React.Component {
 
    let width= {
      width: "5%",
-   }
+   };
+
    let zero =
    {
      fill: "#323232",
-    }
+    };
 
     let one =
     {
       fill: "#95989A",
-    }
+    };
 
     return (
       <svg viewBox="0 0 48 48" style={width} onDoubleClick={this.changeDirectory}>

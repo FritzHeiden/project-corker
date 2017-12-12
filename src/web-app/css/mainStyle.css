@@ -418,11 +418,11 @@ input[type="text"].path{
   position: relative;
   width: 250px;
   height: 120px;
-  padding: 0px;
+  padding: 0;
   background: #FFFFFF;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 
 .errorMessage:after
@@ -752,4 +752,27 @@ input[type="text"].closeInput{
   margin: 0 4px 0 0;
   background-color: red;
   float: left;
+}
+
+/* Animation Bar */
+.bar{
+  animation-name: moveBar;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 10s;
+  animation-delay: 1s;
+  height: 43px;
+  width: 10px;
+  background-color: #494949;
+  padding: 0 5px 0 5px;
+  margin: 0 2.5px 0 2.5px;
+  float: right;
+  position: relative;
+}
+
+@keyframes moveBar {
+  from{left: 0px;}
+  to {left: -135px;}
 }
