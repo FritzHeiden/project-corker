@@ -93,8 +93,8 @@ export default class AudioPlayer {
         this.paused = true;
     }
 
-    changeVolume(element) {
-        let fraction = parseInt(element.value) / parseInt(element.max);
+    changeVolume(volume, max = 100) {
+        let fraction = volume / max;
         this.gainNode.gain.value = fraction * fraction;
     }
 
@@ -105,16 +105,16 @@ export default class AudioPlayer {
         this.lowpassFilter.frequency.value = 5000; // The cutoff frequency
     }
 
-    changeLowpassFilterFrequency(element) {
+    changeLowpassFilterFrequency(freq) {
         let minValue = 40;
         let maxValue = this.context.sampleRate / 2;
         let numberOfOctaves = Math.log(maxValue / minValue) / Math.LN2;
-        let multiplier = Math.pow(2, numberOfOctaves * (element.value - 1.0));
+        let multiplier = Math.pow(2, numberOfOctaves * (freq - 1.0));
         this.lowpassFilter.frequency.value = maxValue * multiplier;
     }
 
-    changeLowpassFilterQuality(element) {
-        this.lowpassFilter.Q.value = element.value * 30;
+    changeLowpassFilterQuality(quality) {
+        this.lowpassFilter.Q.value = quality * 30;
     }
 
     // Frequencies higher than the frequency get a boost or an attenuation, frequencies lower are unchanged.
@@ -125,8 +125,8 @@ export default class AudioPlayer {
         this.highshelfFilter.frequency.value = 10000;
     }
 
-    changeHighshelfFilterFrequency(element) {
-        this.highshelfFilter.frequency.value = element.value;
+    changeHighshelfFilterFrequency(freq) {
+        this.highshelfFilter.frequency.value = freq;
     }
 
     toggleFilter() {
