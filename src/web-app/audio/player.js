@@ -19,7 +19,7 @@ export default class AudioPlayer {
 
         this.fileService = new FileService('localhost', 2345);
         console.log("Loading audio file ...");
-        this.fileService.getFile('../src/web-app/audio/' + filename)
+        this.fileService.getFile('audio/' + filename)
             .then(file => {
                 this.context.decodeAudioData(file.data, buffer => {
                     this.buffer = buffer;
