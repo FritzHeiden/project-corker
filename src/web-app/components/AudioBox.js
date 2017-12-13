@@ -3,10 +3,12 @@ import Line from './Line.js';
 import {AudioFileAnalyser} from '../analysis/audio-file-analyser.js';
 import { movebar } from '../test/moveBar.js';
 import StartStopButton from '../svg/StartStopButton.js';
+import AudioPlayerJS from '../audio/player.js';
 
 class AudioBox extends React.Component {
   constructor(props){
     super(props);
+    this.audioPlayerJS = new AudioPlayerJS('basic_loop.wav');
   }
 
    render() {
@@ -14,9 +16,9 @@ class AudioBox extends React.Component {
           <div className="audioBox">
             <AudioPlayer/>
             <Line/>
-            <Player/>
+            <Player audioPlayerJS={this.audioPlayerJS}/>
             <Line/>
-            <Filter/>
+            <Filter audioPlayerJS={this.audioPlayerJS}/>
            </div>
       );
    }
@@ -95,13 +97,16 @@ class Player extends React.Component {
 
   constructor(props){
     super(props);
+
+    this.audioPlayerJS = this.props.audioPlayerJS;
+      console.log("test");
+      console.log(this.props);
   }
 
   render(){
      return (
        <div className="minimalButtons">
-        <StartStopButton/>
-
+        <StartStopButton audioPlayerJS={this.audioPlayerJS}/>
         {/*
           <PreviousButton/>
           <NextButton/>
@@ -119,6 +124,8 @@ class Filter extends React.Component {
     this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0, rotate: 0};
     this.changeVolume = this.changeVolume.bind(this);
     this.setStart = this.setStart.bind(this);
+      this.audioPlayerJS = this.props.audioPlayerJS;
+
   }
 
   setStart(e){
@@ -169,9 +176,9 @@ class Filter extends React.Component {
 
     return(
       <div className="filterBox">
-      <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
-      <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
-      <input className="slider" type="range" min={0} max={100} defaultValue={50}/>
+      <input className="slider" type="range" min={0} max={100} defaultValue={100} onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
+      <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
+      <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
 {/*
 
         <div className="filter"
