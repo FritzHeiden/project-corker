@@ -6,7 +6,6 @@ import AudioBox from './AudioBox.js';
 import VideoBox from './VideoBox.js';
 import FormPage from './SignUp.js';
 
-import * as website from '../test/website.js';
 import FileService from '../services/file-service.js';
 import {Config} from '../test/filepath.js';
 import {Sidebar} from '../test/sidebar.js';
@@ -16,11 +15,10 @@ import BackgroundImage from '../svg/background.js';
 import Options from '../svg/Options.js';
 
 
-
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
+   constructor(props){
+     super(props);
     }
 
    render() {
@@ -65,24 +63,26 @@ class SideBar extends React.Component {
      this.checkPath = this.checkPath.bind(this);
     }
 
-    handleEnter(e) {
-        if (e.key === 'Enter') {
-            this.checkPath();
-        }
+    handleEnter(e){
+      if (e.key === 'Enter') {
+        this.checkPath();
+      }
     }
 
-    checkPath() {
-        let filePath = document.getElementById('inputFolderPath').value;
-        let testFilePath = new FileService('127.0.0.1', 2345);
+    checkPath(){
+      let filePath = document.getElementById('path').value;
+      console.log(filePath);
+      let testFilePath = new FileService('127.0.0.1', 2345);
 
-        testFilePath.getFiles(filePath).then(files => {
-            this.setState({correctPath: true});
-            this.sidebar.closeOptions();
-            console.log('Verzeichnis upgedated');
-        }).catch(error => {
-            console.log(error);
-            this.setState({correctPath: false});
-        })
+      console.log("getting files ...");
+      testFilePath.getFiles(filePath).then(files => {
+        this.setState({correctPath : true});
+        Sidebar.closeSidebar();
+        Config.path = filePath;
+      }).catch(error => {
+        this.setState({correctPath : false});
+        console.error(error);
+      })
     }
 
    render() {
@@ -104,5 +104,6 @@ class SideBar extends React.Component {
      );
    }
 }
+
 
 export default App;

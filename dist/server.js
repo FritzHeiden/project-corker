@@ -19183,6 +19183,7 @@ var FileHandler = function () {
         key: '_getFiles',
         value: function _getFiles(request, response) {
             var requestPath = FileHandler._getPath(request);
+            requestPath = requestPath.replace(/\//g, "/");
             response.set("Access-Control-Allow-Origin", "*");
             this._listDir(requestPath).then(function (files) {
                 return response.send(files);
@@ -19195,6 +19196,7 @@ var FileHandler = function () {
         key: '_getFile',
         value: function _getFile(request, response) {
             var requestPath = FileHandler._getPath(request);
+            requestPath = requestPath.replace(/\//g, "/");
             response.set("Access-Control-Allow-Origin", "*");
             this._isFile(requestPath).then(function (isFile) {
                 if (isFile) {
@@ -19212,6 +19214,7 @@ var FileHandler = function () {
         value: function _listDir(dir) {
             var _this = this;
 
+            dir = dir.replace(/\//g, "/");
             return new Promise(function (resolve, reject) {
                 var getFiles = new Promise(function (resolve, reject) {
                     _fs2.default.readdir(dir, function (err, files) {
@@ -19255,6 +19258,7 @@ var FileHandler = function () {
         value: function _isFile(path) {
             var _this2 = this;
 
+            path = path.replace(/\//g, "/");
             return new Promise(function (resolve, reject) {
                 _this2._getStats(path).then(function (stats) {
                     return resolve(!stats.isDirectory());

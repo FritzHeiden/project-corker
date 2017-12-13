@@ -3,11 +3,6 @@ import {Config} from '../test/filepath.js';
 
 import Line from './Line.js';
 import FileService from '../services/file-service.js';
-<<<<<<< HEAD
-import {Config} from '../test/filepath.js';
-
-=======
->>>>>>> Programmed bars in audiobox; programmed drag and drop so you get the name of the file
 
 class FormPage extends React.Component {
 
@@ -20,12 +15,8 @@ class FormPage extends React.Component {
      this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
-<<<<<<< HEAD
-  showErrorMessage(){
-=======
 
   static showErrorMessage(){
->>>>>>> Programmed bars in audiobox; programmed drag and drop so you get the name of the file
     console.log("not found!");
     let inputPath = document.getElementById('form').getBoundingClientRect();
     let left = inputPath.left;

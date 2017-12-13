@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Line from './Line.js';
 import StartStopButton from '../svg/StartStopButton.js';
 
@@ -12,8 +11,6 @@ class VideoBox extends React.Component {
       return (
           <div className="audioBox">
             <Video/>
-            <Line/>
-            <Player/>
             <Line/>
             <Filter/>
            </div>
@@ -55,17 +52,10 @@ class Video extends React.Component {
     e.preventDefault();
   }
 
-<<<<<<< HEAD
-  drop(e) {
-
-      //drop.drop(this);
-=======
   static drop(e) {
->>>>>>> Programmed bars in audiobox; programmed drag and drop so you get the name of the file
       e.preventDefault();
       //var data = e.dataTransfer.getData("text");
       console.log("dropped");
-      //e.target.appendChild(document.getElementById(data));
   }
 
   render(){
@@ -93,6 +83,9 @@ class Video extends React.Component {
         <canvas id="zwischenablage" width="100" height="100" style={DisplayNone}></canvas>
         <canvas id="ziel" width="100" height="100"></canvas>
 
+        {/* canvas elemet
+        <VideoPlayer id="testVideo" style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"
+          play={this.state.play}/>*/}
         <Line/>
         <div className="minimalButtons">
          <StartStopButton changeStartStop={this.videoStartStop}/>
@@ -102,23 +95,11 @@ class Video extends React.Component {
 
     );
   }
-}
-
-class Player extends React.Component {
-
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-     return (
-       <div className="minimalButtons">
-        <PreviousButton/>
-        <StartStopButton/>
-        <NextButton/>
-       </div>
-     );
-  }
+  /*
+    <PreviousButton/>
+    <StartStopButton changeStartStop={this.videoStartStop}/>
+    <NextButton/>
+    */
 }
 
 class Filter extends React.Component {
