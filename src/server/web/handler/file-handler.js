@@ -9,6 +9,7 @@ export default class FileHandler {
 
     _getFiles(request, response) {
         let requestPath = FileHandler._getPath(request);
+        requestPath = requestPath.replace(/\//g, "/");
         response.set("Access-Control-Allow-Origin", "*");
         this._listDir(requestPath)
             .then(files => response.send(files))
@@ -20,6 +21,7 @@ export default class FileHandler {
 
     _getFile(request, response) {
         let requestPath = FileHandler._getPath(request);
+        requestPath = requestPath.replace(/\//g, "/");
         response.set("Access-Control-Allow-Origin", "*");
         this._isFile(requestPath)
             .then(isFile => {
@@ -36,6 +38,7 @@ export default class FileHandler {
     }
 
     _listDir(dir) {
+        dir = dir.replace(/\//g, "/");
         return new Promise((resolve, reject) => {
             let getFiles = new Promise((resolve, reject) => {
                 fs.readdir(dir, (err, files) => {
@@ -68,6 +71,7 @@ export default class FileHandler {
     }
 
     _isFile(path) {
+        path = path.replace(/\//g, "/");
         return new Promise((resolve, reject) => {
             this._getStats(path)
                 .then(stats => resolve(!stats.isDirectory()))
