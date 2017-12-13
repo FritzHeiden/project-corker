@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import AudioPlayer from '../audio/player.js';
 
 export default class StartStopControl extends React.Component {
   constructor(props) {
@@ -7,21 +8,21 @@ export default class StartStopControl extends React.Component {
 
     this.state = {click: false};
     this.clicked = this.clicked.bind(this);
+    this.audioPlayer = new AudioPlayer('basic_loop.wav');
   }
-  componentDidMount() {
-    this.clicked();
-  }
-
+  
   clicked(){
     console.log(this.state.click);
 
     if(this.state.click === false)
     {
       this.setState({click: true});
+      this.audioPlayer.pausePlay();
     }
     else if(this.state.click === true)
     {
       this.setState({click: false});
+      this.audioPlayer.pausePlay();
     }
   }
 
