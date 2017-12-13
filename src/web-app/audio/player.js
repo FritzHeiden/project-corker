@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import FileService from '../services/file-service.js';
 
 export default class AudioPlayer {
@@ -59,7 +58,6 @@ export default class AudioPlayer {
         // } else {
         //     this.gainNode.connect(this.context.destination);
         // }
-=======
         this.request = new XMLHttpRequest();
 
         this.request.open('GET', './basic_loop.wav', true);
@@ -105,7 +103,6 @@ export default class AudioPlayer {
         } else {
             this.gainNode.connect(this.context.destination);
         }
->>>>>>> path will be checked
     }
 
     pausePlay() {

@@ -19183,7 +19183,10 @@ var FileHandler = function () {
         key: '_getFiles',
         value: function _getFiles(request, response) {
             var requestPath = FileHandler._getPath(request);
+<<<<<<< HEAD
             requestPath = requestPath.replace(/\//g, "/");
+=======
+>>>>>>> 60ee45dc4ea8a4624a8794e40c0547079d8f90d2
             response.set("Access-Control-Allow-Origin", "*");
             this._listDir(requestPath).then(function (files) {
                 return response.send(files);
@@ -19196,7 +19199,10 @@ var FileHandler = function () {
         key: '_getFile',
         value: function _getFile(request, response) {
             var requestPath = FileHandler._getPath(request);
+<<<<<<< HEAD
             requestPath = requestPath.replace(/\//g, "/");
+=======
+>>>>>>> 60ee45dc4ea8a4624a8794e40c0547079d8f90d2
             response.set("Access-Control-Allow-Origin", "*");
             this._isFile(requestPath).then(function (isFile) {
                 if (isFile) {
