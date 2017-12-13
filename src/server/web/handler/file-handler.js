@@ -58,9 +58,9 @@ export default class FileHandler {
                     let responseFiles = {directories: [], files: []};
                     for (let i = 0; i < stats.length; i++) {
                         if (stats[i].isDirectory()) {
-                            responseFiles.directories.push(stats[i].file.split("/").pop());
+                            responseFiles.directories.push(stats[i].file.replace(/\//g, "/").split("/").pop());
                         } else {
-                            responseFiles.files.push(stats[i].file.split("/").pop());
+                            responseFiles.files.push(stats[i].file.replace(/\//g, "/").split("/").pop());
                         }
                     }
 

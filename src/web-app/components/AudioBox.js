@@ -79,7 +79,7 @@ class AudioPlayer extends React.Component {
     };
 
     return(
-      <div id="testMusic" style={overflowY} onDrop={AudioPlayer.drop.bind(this)} onDragOver={AudioPlayer.allowDrop.bind(event)}>
+      <div id="testMusic" style={overflowY} onDrop={AudioPlayer.drop.bind(this)} onDragOver={AudioPlayer.allowDrop.bind(this.event)}>
        <div style={audio}>
            {AudioPlayer.updateSoundBar()}
         </div>

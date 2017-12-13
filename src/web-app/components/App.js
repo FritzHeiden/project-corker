@@ -70,8 +70,8 @@ class SideBar extends React.Component {
     }
 
     checkPath(){
-      let filePath = document.getElementById('path').value;
-      console.log(filePath);
+      let filePath = document.getElementById('inputFolderPath').value;
+      console.log("From Sidebar: " + filePath);
       let testFilePath = new FileService('127.0.0.1', 2345);
 
       console.log("getting files ...");
