@@ -1,20 +1,63 @@
-//import FileService from '../services/file-service.js';
+import FileService from '../services/file-service.js';
 
 export default class AudioPlayer {
 
-    constructor() {
+    constructor(filename) {
         this.source = {};
         this.buffer = {};
-        this.gainNode = {};
-        this.startedAt = {};
-        this.pausedAt = {};
+        this.startedAt = 0;
+        this.pausedAt = 0;
         this.lowpassFilter = {};
         this.highshelfFilter = {};
 
         this.context = new (window.AudioContext || window.webkitAudioContext)();
+        this.gainNode = this.context.createGain();
+
         this.paused = true;
         this.lowpassConnected = false;
         this.highshelfConnected = false;
+
+        this.fileService = new FileService();
+        console.log("Loading audio file ...");
+        this.fileService.getFile('../src/web-app/audio/' + filename)
+            .then(file => {
+                this.context.decodeAudioData(file.data, buffer => {
+                    this.buffer = buffer;
+                    console.log(this.buffer);
+                }, error => {
+                    console.error("Loading audio failed!");
+                    console.error(error);
+                });
+            }).catch(error => console.error(error))
+    }
+
+    _connectNodes() {
+        this._initLowpass();
+        this._initHighshelf();
+
+        this.lowpassConnected = false;
+        this.highshelfConnected = false;
+
+        this.source.connect(this.gainNode);
+        this.gainNode.connect(this.context.destination);
+
+        // if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+        //     this.gainNode.connect(this.lowpassFilter);
+        //     this.lowpassFilter.connect(this.highshelfFilter);
+        //     this.highshelfFilter.connect(this.context.destination);
+        //     this.lowpassConnected = true;
+        //     this.highshelfConnected = true;
+        // } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
+        //     this.gainNode.connect(this.lowpassFilter);
+        //     this.lowpassFilter.connect(this.context.destination);
+        //     this.lowpassConnected = true;
+        // } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+        //     this.gainNode.connect(this.highshelfFilter);
+        //     this.highshelfFilter.connect(this.context.destination);
+        //     this.highshelfConnected = true;
+        // } else {
+        //     this.gainNode.connect(this.context.destination);
+        // }
         this.request = new XMLHttpRequest();
 
         this.request.open('GET', './basic_loop.wav', true);
@@ -71,17 +114,18 @@ export default class AudioPlayer {
     }
 
     _play() {
-        this.gainNode = this.context.createGain();
+        //this.gainNode = this.context.createGain();
         this.source = this.context.createBufferSource();
         this.source.buffer = this.buffer;
         this.source.loop = true;
-        connectNodes();
+        this._connectNodes();
 
         this.paused = false;
 
         if (this.pausedAt) {
-            this.startedAt = Date.now() - pausedAt;
-            this.source.start(0, pausedAt / 1000);
+            this.startedAt = Date.now() - this.pausedAt;
+            this.source.start(0, this.pausedAt / 1000);
+
         }
         else {
             this.startedAt = Date.now();
@@ -91,7 +135,7 @@ export default class AudioPlayer {
 
     _stop() {
         this.source.stop(0);
-        this.pausedAt = Date.now() - startedAt;
+        this.pausedAt = Date.now() - this.startedAt;
         this.paused = true;
     }
 
@@ -101,7 +145,7 @@ export default class AudioPlayer {
     }
 
     // Frequencies below the cutoff pass through, frequencies above it are attenuated
-    initLowpass() {
+    _initLowpass() {
         this.lowpassFilter = this.context.createBiquadFilter();
         this.lowpassFilter.type = 'lowpass';
         this.lowpassFilter.frequency.value = 5000; // The cutoff frequency
@@ -120,7 +164,7 @@ export default class AudioPlayer {
     }
 
     // Frequencies higher than the frequency get a boost or an attenuation, frequencies lower are unchanged.
-    initHighshelf() {
+    _initHighshelf() {
         this.highshelfFilter = this.context.createBiquadFilter();
         this.highshelfFilter.type = 'highshelf';
         this.highshelfFilter.gain.value = 50;
@@ -142,6 +186,6 @@ export default class AudioPlayer {
             this.highshelfFilter.disconnect(0);
         }
 
-        connectNodes();
+        this._connectNodes();
     }
 }
