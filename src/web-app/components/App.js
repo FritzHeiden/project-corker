@@ -7,12 +7,12 @@ import VideoBox from './VideoBox.js';
 import FormPage from './SignUp.js';
 
 import FileService from '../services/file-service.js';
-import {Config} from '../test/filePath.js';
+import {Config} from '../test/filepath.js';
 import {Sidebar} from '../test/sidebar.js';
 
 /* Images */
 import BackgroundImage from '../svg/background.js';
-import Options from '../svg/options.js';
+import Options from '../svg/Options.js';
 
 
 class App extends React.Component {

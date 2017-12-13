@@ -1,5 +1,5 @@
 import React from 'react'
-import {Config} from '../test/filePath.js';
+import {Config} from '../test/filepath.js';
 
 import Line from './Line.js';
 import FileService from '../services/file-service.js';
