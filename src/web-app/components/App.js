@@ -8,7 +8,7 @@ import FormPage from './SignUp.js';
 
 import * as website from '../test/website.js';
 import FileService from '../services/file-service.js';
-import {Config} from '../test/filePath.js';
+import {Config} from '../test/filepath.js';
 import {Sidebar} from '../test/sidebar.js';
 
 /* Images */
