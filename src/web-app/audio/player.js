@@ -40,24 +40,27 @@ export default class AudioPlayer {
 
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.context.destination);
-
-        // if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-        //     this.gainNode.connect(this.lowpassFilter);
-        //     this.lowpassFilter.connect(this.highshelfFilter);
-        //     this.highshelfFilter.connect(this.context.destination);
-        //     this.lowpassConnected = true;
-        //     this.highshelfConnected = true;
-        // } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
-        //     this.gainNode.connect(this.lowpassFilter);
-        //     this.lowpassFilter.connect(this.context.destination);
-        //     this.lowpassConnected = true;
-        // } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-        //     this.gainNode.connect(this.highshelfFilter);
-        //     this.highshelfFilter.connect(this.context.destination);
-        //     this.highshelfConnected = true;
-        // } else {
-        //     this.gainNode.connect(this.context.destination);
-        // }
+/*
+        if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+             this.gainNode.connect(this.lowpassFilter);
+             this.lowpassFilter.connect(this.highshelfFilter);
+             this.highshelfFilter.connect(this.context.destination);
+             this.lowpassConnected = true;
+             this.highshelfConnected = true;
+        }
+        else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
+             this.gainNode.connect(this.lowpassFilter);
+             this.lowpassFilter.connect(this.context.destination);
+             this.lowpassConnected = true;
+        }
+        else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+             this.gainNode.connect(this.highshelfFilter);
+             this.highshelfFilter.connect(this.context.destination);
+             this.highshelfConnected = true;
+        }
+        else {
+             this.gainNode.connect(this.context.destination);
+        }*/
     }
 
     pausePlay() {

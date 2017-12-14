@@ -1,7 +1,6 @@
 import React from 'react';
 import Line from './Line.js';
-import {AudioFileAnalyser} from '../analysis/audio-file-analyser.js';
-import { movebar } from '../test/moveBar.js';
+import AudioFileAnalyser from '../analysis/audio-file-analyser.js';
 import StartStopButton from '../svg/StartStopButton.js';
 import AudioPlayerJS from '../audio/player.js';
 
@@ -29,39 +28,36 @@ class AudioPlayer extends React.Component {
   constructor(props){
     super(props);
 
-    AudioPlayer.drop = AudioPlayer.drop.bind(this);
-    AudioPlayer.allowDrop = AudioPlayer.allowDrop.bind(this);
-
-    //this.canvas = new CanvasElements(document.getElementById('canvasPlayer'));
-    //this.canvas.createCavasElements();
-    //this.musicBeams = new AudioHeights();
-    //this.musicBeams.createBeam();
+    this.drop = this.drop.bind(this);
+    this.allowDrop = this.allowDrop.bind(this);
+    this.updateSoundBar = this.updateSoundBar.bind(this);
   }
 
-  static allowDrop(e) {
+  allowDrop(e) {
     //this.allowDrop(this);
     e.preventDefault();
     e.dataTransfer.setData("text", e.target.id);
   }
 
-  static drop(e) {
+  drop(e) {
       //drop.drop(this);
       e.preventDefault();
       var data = e.dataTransfer.getData("text");
       console.log(document.getElementById(data).innerText);
   }
 
-  static updateSoundBar(){
+  updateSoundBar(){
 
       let bar = [10];
       const numbers = [1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5];
 
       let barStyle={
-
+          height: '',
       };
+      let bars = AudioFileAnalyser.analyseAmplitudeByAverage('audio/basic_loop.wav', 128);
 
       let listItems = numbers.map((number) =>
-          <div className='bar' style={barStyle} onLoad={movebar()}></div>
+           <div className='bar'></div>
       );
       return listItems;
   }
@@ -81,9 +77,9 @@ class AudioPlayer extends React.Component {
     };
 
     return(
-      <div id="testMusic" style={overflowY} onDrop={AudioPlayer.drop.bind(this)} onDragOver={AudioPlayer.allowDrop.bind(this.event)}>
+      <div id="testMusic" style={overflowY} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this.event)}>
        <div style={audio}>
-           {AudioPlayer.updateSoundBar()}
+           {this.updateSoundBar()}
         </div>
       </div>
     );
@@ -175,11 +171,20 @@ class Filter extends React.Component {
   render(){
 
     return(
-      <div className="filterBox">
+        <div className="filterBox">
+        <div className="checkboxThree">
+            <input type="checkbox" value="1" id="checkboxThreeInputMob" name="slider"/>
+            <label htmlFor="checkboxThreeInputMob"></label>
+        </div>
+        <div className="checkboxThree">
+            <input type="checkbox" value="1" id="checkboxThreeInputMob" name="slider"/>
+            <label htmlFor="checkboxThreeInputMob"></label>
+        </div>
+
+    {/*
       <input className="slider" type="range" min={0} max={100} defaultValue={100} onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
       <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
       <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
-{/*
 
         <div className="filter"
         style={{transform: 'rotate('+this.state.rotate+'deg)', WebkitTransform: 'rotate('+this.state.rotate+'deg)'}} ref = "filterButton" onClick={this.setStart.bind(this)} onMouseMove={this.changeVolume.bind(this)} >
@@ -190,7 +195,7 @@ class Filter extends React.Component {
         <button className="filter" onDrag={this.mouseClicked}></button>
         <button className="filter" onDrag={this.mouseClicked}></button>
         <button className="filter" onDrag={this.mouseClicked}></button>
-*/}
+    */}
       </div>
     );
   }
