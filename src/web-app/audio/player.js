@@ -29,24 +29,39 @@ export default class AudioPlayer {
                     console.error(error);
                 });
             }).catch(error => console.error(error))
+
+        this._initLowpass();
+        this._initHighshelf();
     }
 
     _connectNodes() {
-        this._initLowpass();
-        this._initHighshelf();
-
         this.lowpassConnected = false;
         this.highshelfConnected = false;
 
         this.source.connect(this.gainNode);
+
         this.gainNode.connect(this.context.destination);
 /*
+>>>>>>> Add checkbox
         if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
              this.gainNode.connect(this.lowpassFilter);
              this.lowpassFilter.connect(this.highshelfFilter);
              this.highshelfFilter.connect(this.context.destination);
              this.lowpassConnected = true;
              this.highshelfConnected = true;
+<<<<<<< HEAD
+         } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
+             this.gainNode.connect(this.lowpassFilter);
+             this.lowpassFilter.connect(this.context.destination);
+             this.lowpassConnected = true;
+         } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+             this.gainNode.connect(this.highshelfFilter);
+             this.highshelfFilter.connect(this.context.destination);
+             this.highshelfConnected = true;
+         } else {
+             this.gainNode.connect(this.context.destination);
+         }
+=======
         }
         else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
              this.gainNode.connect(this.lowpassFilter);
@@ -127,11 +142,11 @@ export default class AudioPlayer {
         this.highshelfFilter = this.context.createBiquadFilter();
         this.highshelfFilter.type = 'highshelf';
         this.highshelfFilter.gain.value = 50;
-        this.highshelfFilter.frequency.value = 10000;
+        this.highshelfFilter.frequency.value = 9500;
     }
 
     changeHighshelfFilterFrequency(freq) {
-        this.highshelfFilter.frequency.value = freq;
+        this.highshelfFilter.frequency.value = freq + 50;
     }
 
     toggleFilter() {
