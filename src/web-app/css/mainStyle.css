@@ -776,3 +776,62 @@ input[type="text"].closeInput{
   from{left: 0px;}
   to {left: -135px;}
 }
+
+input[type=checkbox] {
+  visibility: hidden;
+}
+
+.checkboxThree input[type=checkbox] {
+  visibility: hidden;
+}
+
+.checkboxThree {
+  width: 45%;
+  height: 2.5rem;
+  background: #333;
+  position: relative;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+  margin-top: 1rem;
+}
+
+.checkboxThree:before {
+  content: "On";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  height: 2px;
+  color: rgb(106, 175, 44);
+  font-size: 1.5rem;
+  font-family: Helvetica;
+}
+
+.checkboxThree:after {
+  content: "Off";
+  position: absolute;
+  top: 0.5rem;
+  left: 3.8rem;
+  height: 2px;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  font-family: Helvetica;
+}
+
+.checkboxThree label {
+  display: block;
+  width: 3rem;
+  height: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  z-index: 1;
+  left: 0.5rem;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+  background: rgb(255, 255, 255);
+}
+
+.checkboxThree input[type=checkbox]:checked + label {
+  left: 3rem;
+  background: rgb(106, 175, 44);
+}

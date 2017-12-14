@@ -1,5 +1,7 @@
 import React from 'react';
 import FileService from '../services/file-service.js';
+import {Sidebar} from "../test/sidebar";
+import {Config} from "../test/filepath";
 
 class FolderButton extends React.Component {
   constructor(props){
@@ -19,15 +21,18 @@ class FolderButton extends React.Component {
   }
 
   checktargetDirectory(){
-    let filePath = "..";
-    let testFilePath = new FileService('127.0.0.1', '2345');
+    let filePath = ".";
+    let testFilePath = new FileService('127.0.0.1', 2345);
 
+    console.log("getting files ...");
     testFilePath.getFiles(filePath).then(files => {
-      this.setState({correctPath : true});
+        this.setState({correctPath : true});
+        Sidebar.closeSidebar();
+        Config.path = filePath;
     }).catch(error => {
-      this.setState({correctPath : false});
+        this.setState({correctPath : false});
+        console.error(error);
     });
-
   console.log("Gehe ein verzeichnis zurück");
   }
 

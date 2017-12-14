@@ -40,12 +40,16 @@ export default class AudioPlayer {
 
         this.source.connect(this.gainNode);
 
+        this.gainNode.connect(this.context.destination);
+/*
+>>>>>>> Add checkbox
         if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
              this.gainNode.connect(this.lowpassFilter);
              this.lowpassFilter.connect(this.highshelfFilter);
              this.highshelfFilter.connect(this.context.destination);
              this.lowpassConnected = true;
              this.highshelfConnected = true;
+<<<<<<< HEAD
          } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
              this.gainNode.connect(this.lowpassFilter);
              this.lowpassFilter.connect(this.context.destination);
@@ -57,6 +61,21 @@ export default class AudioPlayer {
          } else {
              this.gainNode.connect(this.context.destination);
          }
+=======
+        }
+        else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
+             this.gainNode.connect(this.lowpassFilter);
+             this.lowpassFilter.connect(this.context.destination);
+             this.lowpassConnected = true;
+        }
+        else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
+             this.gainNode.connect(this.highshelfFilter);
+             this.highshelfFilter.connect(this.context.destination);
+             this.highshelfConnected = true;
+        }
+        else {
+             this.gainNode.connect(this.context.destination);
+        }*/
     }
 
     pausePlay() {
