@@ -198,6 +198,21 @@ class Filter extends React.Component {
                 <input type="checkbox" value="1" id="highshelfToggle" name="slider"/>
                 <label htmlFor="highshelfToggle"></label>
             </div>
+=======
+        <div className="checkboxThree">
+            <input type="checkbox" value="1" id="checkboxThreeInputMob" name="slider"/>
+            <label htmlFor="checkboxThreeInputMob"></label>
+        </div>
+        <div className="checkboxThree">
+            <input type="checkbox" value="1" id="checkboxThreeInputMob" name="slider"/>
+            <label htmlFor="checkboxThreeInputMob"></label>
+        </div>
+
+    {/*
+      <input className="slider" type="range" min={0} max={100} defaultValue={100} onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
+      <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
+      <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
+>>>>>>> 214992b1436f1a50aeaf6a04ab0c8f4ceb0235ff
 
         <div className="filter"
         style={{transform: 'rotate('+this.state.rotate+'deg)', WebkitTransform: 'rotate('+this.state.rotate+'deg)'}} ref = "filterButton" onClick={this.setStart.bind(this)} onMouseMove={this.changeVolume.bind(this)} >
