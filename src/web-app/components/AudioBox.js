@@ -1,5 +1,6 @@
 import React from 'react';
 import Line from './Line.js';
+import Checkbox from './Checkbox.js';
 import AudioFileAnalyser from '../analysis/audio-file-analyser.js';
 import StartStopButton from '../svg/StartStopButton.js';
 import AudioPlayerJS from '../audio/player.js';
@@ -117,10 +118,11 @@ class Filter extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0, rotate: 0};
-    this.changeVolume = this.changeVolume.bind(this);
+    //this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0, rotate: 0};
+
+      this.changeVolume = this.changeVolume.bind(this);
     this.setStart = this.setStart.bind(this);
-      this.audioPlayerJS = this.props.audioPlayerJS;
+    this.audioPlayerJS = this.props.audioPlayerJS;
 
   }
 
@@ -170,21 +172,32 @@ class Filter extends React.Component {
 
   render(){
 
+      let lowPass={
+          width: '59%',
+      };
+
     return(
         <div className="filterBox">
-        <div className="checkboxThree">
-            <input type="checkbox" value="1" id="checkboxThreeInputMob" name="slider"/>
-            <label htmlFor="checkboxThreeInputMob"></label>
-        </div>
-        <div className="checkboxThree">
-            <input type="checkbox" value="1" id="checkboxThreeInputMob" name="slider"/>
-            <label htmlFor="checkboxThreeInputMob"></label>
+            <p className="filterTitle" style={lowPass}>Tiefpassfilter:</p>
+            <Checkbox/>
+            <p className="filterTitle">Hochpassfilter:</p>
+            <Checkbox/>
+
+        <div className="sliderBox">
+            <input className="filterSlider" type="range" min={0} max={100} defaultValue={100} onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
+            <input className="filterSlider" type="range" min={0} max={100} defaultValue={100}/>
+            <input className="filterSlider" type="range" min={0} max={100} defaultValue={100}/>
         </div>
 
+
+
     {/*
-      <input className="slider" type="range" min={0} max={100} defaultValue={100} onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
-      <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
-      <input className="slider" type="range" min={0} max={100} defaultValue={100}/>
+
+
+            <div className="checkboxThree">
+                <input type="checkbox" value="1" id="highshelfToggle" name="slider"/>
+                <label htmlFor="highshelfToggle"></label>
+            </div>
 
         <div className="filter"
         style={{transform: 'rotate('+this.state.rotate+'deg)', WebkitTransform: 'rotate('+this.state.rotate+'deg)'}} ref = "filterButton" onClick={this.setStart.bind(this)} onMouseMove={this.changeVolume.bind(this)} >

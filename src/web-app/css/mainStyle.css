@@ -159,9 +159,7 @@ span{
 }
 
 .filterBox{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+
 }
 
 .filter{
@@ -778,24 +776,21 @@ input[type="text"].closeInput{
 }
 
 input[type=checkbox] {
-  visibility: hidden;
+  visibility: visible;
 }
 
-.checkboxThree input[type=checkbox] {
-  visibility: hidden;
-}
-
-.checkboxThree {
-  width: 45%;
-  height: 2.5rem;
+input[type=checkbox] {
+  width: 25%;
+  height: 2rem;
   background: #333;
   position: relative;
   margin-right: 2.5%;
   margin-left: 2.5%;
   margin-top: 1rem;
+  float: left;
 }
 
-.checkboxThree:before {
+.input[type=checkbox]:before {
   content: "On";
   position: absolute;
   top: 0.5rem;
@@ -806,7 +801,7 @@ input[type=checkbox] {
   font-family: Helvetica;
 }
 
-.checkboxThree:after {
+.input[type=checkbox]:after {
   content: "Off";
   position: absolute;
   top: 0.5rem;
@@ -831,7 +826,17 @@ input[type=checkbox] {
   background: rgb(255, 255, 255);
 }
 
-.checkboxThree input[type=checkbox]:checked + label {
+.input[type=checkbox] input[type=checkbox]:checked + label {
   left: 3rem;
   background: rgb(106, 175, 44);
+}
+
+.sliderBox{
+  padding-top: 5rem;
+}
+
+.filterTitle{
+  float: left;
+  font-size: 1.25rem;
+  margin: 1.25rem 0 0 1.5rem;
 }
