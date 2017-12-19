@@ -12,7 +12,7 @@ class Sidebar{
   closeSidebar() {
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("main").style.marginLeft = "0";
-      document.body.style.backgroundColor = "#323232";
+      document.body.style.backgroundColor = "#1e1e1e";
       setTimeout(function(){
         document.getElementById('inputFolderPath').value = "";
       },1000);

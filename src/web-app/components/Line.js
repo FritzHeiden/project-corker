@@ -5,7 +5,7 @@ class Line extends React.Component {
 
       let line =
       {
-        border: "3px solid #323232",
+        border: "3px solid #1e1e1e",
       };
 
       return (

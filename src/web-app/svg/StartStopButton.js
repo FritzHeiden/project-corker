@@ -31,12 +31,12 @@ export default class StartStopControl extends React.Component {
 
     let zero =
     {
-      fill: "#323232",
+      fill: "#1e1e1e",
     };
 
      let one =
      {
-       fill: "#323232",
+       fill: "#1e1e1e",
        stroke: "none",
        strokeWidth: "8",
        strokeLinecap: "round",
@@ -47,7 +47,7 @@ export default class StartStopControl extends React.Component {
       let two =
       {
         fill: "none",
-        stroke: "#95989A",
+        stroke: "#1e1e1e",
         strokeWidth: "8",
         strokeLinecap: "round",
         strokeLinejoin: "round",

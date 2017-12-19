@@ -1,5 +1,5 @@
 html, body{
-  background-color: #323232;
+  background-color: #1e1e1e;
   margin: 0;
   padding: 0;
 }
@@ -7,7 +7,7 @@ html, body{
 h3{
   font-size: 2.0rem;
   font-family: 'Helvetica', Georgia, serif;
-  color: #00868B;
+  color: white;
   position: relative;
   top: 0.5rem;
   left: -16%;
@@ -15,15 +15,15 @@ h3{
 }
 
 h2, p{
-  color: #95989A;
+  color: white;
   font-family: 'Helvetica', Georgia, serif;
 }
 
 button{
-  border: 3px solid #00868B;
+  border: 3px solid #e5004b;
   color: white;
   margin-top: 0.5rem;
-  background: #323232;
+  background: #1e1e1e;
   cursor: pointer;
 }
 
@@ -42,11 +42,11 @@ table {
 }
 
 table tr td{
-  border-bottom:1pt solid #323232;
+  border-bottom:1pt solid #1e1e1e;
 }
 
 table tr th{
-  border-bottom:1pt solid #323232;
+  border-bottom:1pt solid #1e1e1e;
 }
 
 .sliderDot::-webkit-slider-thumb {
@@ -55,7 +55,7 @@ table tr th{
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #00868B;
+    background: #e5004b;
     cursor: pointer;
 }
 
@@ -63,7 +63,7 @@ table tr th{
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #00868B;
+    background: #e5004b;
     cursor: pointer;
 }
 
@@ -80,7 +80,7 @@ h1{
   top: 1rem;
   font-size: 4rem;
   font-family: 'Merriweather', serif;
-  color: #00868B;
+  color: #e5004b;
 }
 img{
   width: 20%;
@@ -103,8 +103,7 @@ span{
   stroke-linejoin: round;
   width: 5rem;
   fill:none;
-  z-index: 100;
-  background-color: #323232;
+  z-index: 102;
   padding: 0.5rem;
 }
 
@@ -168,14 +167,14 @@ span{
   width: 50px;
   margin: 1rem 0.25rem 1rem;
   border-radius: 100%;
-  background-color: #323232;
-  border: 2px solid #00868B;
+  background-color: #1e1e1e;
+  border: 2px solid #e5004b;
 }
 
 .dot{
   height: 10%;
   width: 10%;
-  background-color: #95989A;
+  background-color: #e5004b;
   border-radius: 100%;
   position: relative;
   left: 50%;
@@ -189,7 +188,7 @@ span{
   /* margin-top: 7.5%; */
   /* left: 7.5%; */
   background-color: white;
-  border: 3px solid #00868B;
+  border: 3px solid #e5004b;
   left: 7.5%;
   /* padding-top: 1rem; */
   /* margin-top: 9rem; */
@@ -270,7 +269,7 @@ span{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #00868B;
+  background: #e5004b;
   cursor: pointer;
 }
 
@@ -278,7 +277,7 @@ span{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #00868B;
+  background: #e5004b;
   cursor: pointer;
 }
 
@@ -317,7 +316,7 @@ span{
 }*/
 
 p{
-  color: #95989A;
+  color: white;
   font-family: 'Helvetica', Georgia, serif;
 }
 
@@ -329,13 +328,13 @@ h2.options{
 }
 
 div.errorMessage h3, div.errorMessage p{
-  color: #95989A;
+  color: white;
   font-family: 'Helvetica', Georgia, serif;
   position: relative;
 }
 
 div.errorMessage h3{
-  color: #FC3F3F;
+  color: white;
   font-size: 2.0rem;
   margin-bottom: -0.5rem;
   top: -1.25rem;
@@ -373,12 +372,12 @@ input[type="text"]{
 }*/
 
 input[type="text"]:focus{
-  border: 2px solid #00868B;
+  border: 2px solid #e5004b;
 }
 
 .pushButton{
   width: 75%;
-  background-color: #00868B;
+  background-color: #e5004b;
   border: none;
   height: 2.5rem;
   text-align: center;
@@ -438,7 +437,7 @@ input[type="text"].path{
 }
 
 h2, p{
-  color: #95989A;
+  color: white;
   font-family: 'Helvetica', Georgia, serif;
 }
 
@@ -619,7 +618,7 @@ input[type="text"].closeInput{
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 101; /* Stay on top */
     top: 0;
     left: 0;
     background-color: #111; /* Black*/
@@ -656,7 +655,7 @@ input[type="text"].closeInput{
 .sidenav h3{
   font-size: 1.0rem;
   font-family: 'Helvetica', Georgia, serif;
-  color: #00868B;
+  color: white;
   position: relative;
   top: 4rem;
   left: 0;
@@ -664,12 +663,12 @@ input[type="text"].closeInput{
 }
 
 .sidenav input[type="text"]{
-  background-color: #323232;
+  background-color: #1e1e1e;
   width: 95%;
   height: 2rem;
   margin: 5rem 0 0 0;
   font-size: 20px;
-  border: 2px solid #323232;
+  border: 2px solid #1e1e1e;
   color: #95989A;
   text-align: center;
 }
@@ -784,7 +783,6 @@ input[type=checkbox] {
 .input[type=checkbox] {
   width: 45%;
   height: 2.5rem;
-  background: #333;
   position: relative;
   margin-right: 2.5%;
   margin-left: 2.5%;
@@ -793,11 +791,41 @@ input[type=checkbox] {
 }
 
 .sliderBox{
-  padding-top: 5rem;
+  padding-top: 2rem;
 }
 
 .filterTitle{
   float: left;
   font-size: 1.25rem;
   margin: 1.25rem 0 0 1.5rem;
+}
+
+
+
+.sliderFilter{
+    margin: 0 0 1.5rem 0 ;
+    -webkit-appearance: none;
+    width: 75%;
+    height: 7.5px;
+    border-radius: 10px;
+    background: #1e1e1e;
+    -webkit-transition: .2s;
+}
+
+.sliderFilter::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #e5004b;
+    cursor: pointer;
+}
+
+.sliderFilter::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #e5004b;
+    cursor: pointer;
 }
