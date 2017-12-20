@@ -17,18 +17,22 @@ export default class AudioPlayer {
         this.lowpassConnected = false;
         this.highshelfConnected = false;
 
+        // Checkbox frontend state
+        this.lowpassChecked = false;
+        this.highshelfChecked = false;
+
         this.fileService = new FileService('localhost', 2345);
-        console.log("Loading audio file ...");
+        console.log('Loading audio file ...');
         this.fileService.getFile('audio/' + filename)
             .then(file => {
                 this.context.decodeAudioData(file.data, buffer => {
                     this.buffer = buffer;
                     console.log(this.buffer);
                 }, error => {
-                    console.error("Loading audio failed!");
+                    console.error('Loading audio failed!');
                     console.error(error);
                 });
-            }).catch(error => console.error(error))
+            }).catch(error => console.error(error));
 
         this._initLowpass();
         this._initHighshelf();
@@ -40,42 +44,23 @@ export default class AudioPlayer {
 
         this.source.connect(this.gainNode);
 
-        this.gainNode.connect(this.context.destination);
-/*
->>>>>>> Add checkbox
-        if (document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-             this.gainNode.connect(this.lowpassFilter);
-             this.lowpassFilter.connect(this.highshelfFilter);
-             this.highshelfFilter.connect(this.context.destination);
-             this.lowpassConnected = true;
-             this.highshelfConnected = true;
-<<<<<<< HEAD
-         } else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
-             this.gainNode.connect(this.lowpassFilter);
-             this.lowpassFilter.connect(this.context.destination);
-             this.lowpassConnected = true;
-         } else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-             this.gainNode.connect(this.highshelfFilter);
-             this.highshelfFilter.connect(this.context.destination);
-             this.highshelfConnected = true;
-         } else {
-             this.gainNode.connect(this.context.destination);
-         }
-=======
-        }
-        else if (document.getElementById("lowpassToggle").checked && !document.getElementById("highshelfToggle").checked) {
-             this.gainNode.connect(this.lowpassFilter);
-             this.lowpassFilter.connect(this.context.destination);
-             this.lowpassConnected = true;
-        }
-        else if (!document.getElementById("lowpassToggle").checked && document.getElementById("highshelfToggle").checked) {
-             this.gainNode.connect(this.highshelfFilter);
-             this.highshelfFilter.connect(this.context.destination);
-             this.highshelfConnected = true;
-        }
-        else {
-             this.gainNode.connect(this.context.destination);
-        }*/
+        if (this.lowpassChecked && this.highshelfChecked) {
+              this.gainNode.connect(this.lowpassFilter);
+              this.lowpassFilter.connect(this.highshelfFilter);
+              this.highshelfFilter.connect(this.context.destination);
+              this.lowpassConnected = true;
+              this.highshelfConnected = true;
+          } else if (this.lowpassChecked && !this.highshelfChecked) {
+              this.gainNode.connect(this.lowpassFilter);
+              this.lowpassFilter.connect(this.context.destination);
+              this.lowpassConnected = true;
+          } else if (!this.lowpassChecked && this.highshelfChecked) {
+              this.gainNode.connect(this.highshelfFilter);
+              this.highshelfFilter.connect(this.context.destination);
+              this.highshelfConnected = true;
+          } else {
+              this.gainNode.connect(this.context.destination);
+          }
     }
 
     pausePlay() {
@@ -87,7 +72,6 @@ export default class AudioPlayer {
     }
 
     _play() {
-        //this.gainNode = this.context.createGain();
         this.source = this.context.createBufferSource();
         this.source.buffer = this.buffer;
         this.source.loop = true;
@@ -146,10 +130,14 @@ export default class AudioPlayer {
     }
 
     changeHighshelfFilterFrequency(freq) {
-        this.highshelfFilter.frequency.value = freq + 50;
+        this.highshelfFilter.frequency.value = freq + 500;
     }
 
-    toggleFilter() {
+    toggleFilter(lowpassChecked, highshelfChecked) {
+        
+        this.lowpassChecked = lowpassChecked;
+        this.highshelfChecked = highshelfChecked;
+
         this.source.disconnect(0);
         this.gainNode.disconnect(0);
 
