@@ -17,7 +17,7 @@ class FormPage extends React.Component {
 
 
   static showErrorMessage(){
-    console.log("not found!");
+    // console.log("not found!");
     let inputPath = document.getElementById('form').getBoundingClientRect();
     let left = inputPath.left;
     let top = inputPath.top;
@@ -34,10 +34,10 @@ class FormPage extends React.Component {
 
   checkPath(){
     let filePath = document.getElementById('path').value;
-    console.log(filePath);
+    // console.log(filePath);
     let testFilePath = new FileService('127.0.0.1', 2345);
 
-    console.log("getting files ...");
+    // console.log("getting files ...");
     testFilePath.getFiles(filePath).then(files => {
       this.setState({correctPath : true});
       Config.path = filePath;

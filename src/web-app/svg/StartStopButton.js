@@ -12,7 +12,7 @@ export default class StartStopControl extends React.Component {
   }
   
   clicked(){
-    console.log(this.state.click);
+    // console.log(this.state.click);
 
     if(this.state.click === false)
     {

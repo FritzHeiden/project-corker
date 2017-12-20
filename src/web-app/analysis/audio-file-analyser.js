@@ -1,63 +1,45 @@
 export default class AudioFileAnalyser {
-    static analyseAmplitudeByAverage(audioFile, resolution) {
-        return new Promise((resolve, reject) => {
-            try {
-                let amplitude = [];
+  static async analyseAmplitudeByAverage (audioBuffer, resolution) {
+    let amplitude = []
 
-                let data = audioFile.audioBuffer.getChannelData(0);
-                for (let i = 0; i < data.length; i += resolution) {
-                    let sum = 0;
-                    for (let j = 0; j < resolution; j++) {
-                        let value = data[i + j];
-                        if (typeof value === 'number') {
-                            sum += Math.abs(value);
-                        }
-                    }
-                    amplitude.push(sum / resolution);
-                }
-                resolve(amplitude);
-            } catch (e) {
-                reject(e);
-            }
-        });
+    let data = audioBuffer.getChannelData(0)
+    for (let i = 0; i < data.length; i += resolution) {
+      let sum = 0
+      for (let j = 0; j < resolution; j++) {
+        let value = data[i + j]
+        if (typeof value === 'number') {
+          sum += Math.abs(value)
+        }
+      }
+      amplitude.push(sum / resolution)
     }
+    return amplitude
+  }
 
-    static analyseAmplitudeByCherryPicking(audioFile, resolution) {
-        return new Promise((resolve, reject) => {
-            try {
-                let amplitude = [];
+  static async analyseAmplitudeByCherryPicking (audioBuffer, resolution) {
+    let amplitude = []
 
-                let data = audioFile.audioBuffer.getChannelData(0);
-                for (let i = 0; i < data.length; i += resolution) {
-                    amplitude.push(Math.abs(data[i]));
-                }
-                resolve(amplitude);
-            } catch (e) {
-                reject(e);
-            }
-        });
+    let data = audioBuffer.getChannelData(0)
+    for (let i = 0; i < data.length; i += resolution) {
+      amplitude.push(Math.abs(data[i]))
     }
+    return amplitude
+  }
 
-    static analyseAmplitudeByNormalization(audioFile, resolution) {
-        return new Promise((resolve, reject) => {
-            try {
-                let amplitude = [];
+  static async analyseAmplitudeByNormalization (audioBuffer, resolution) {
+    let amplitude = []
 
-                let data = audioFile.audioBuffer.getChannelData(0);
-                for (let i = 0; i < data.length; i += resolution) {
-                    let sum = 0;
-                    for (let j = 0; j < resolution; j++) {
-                        let value = data[i + j];
-                        if (typeof value === 'number') {
-                            sum += Math.abs(value);
-                        }
-                    }
-                    amplitude.push(sum / resolution);
-                }
-                resolve(amplitude);
-            } catch (e) {
-                reject(e);
-            }
-        }); 
+    let data = audioBuffer.getChannelData(0)
+    for (let i = 0; i < data.length; i += resolution) {
+      let sum = 0
+      for (let j = 0; j < resolution; j++) {
+        let value = data[i + j]
+        if (typeof value === 'number') {
+          sum += Math.abs(value)
+        }
+      }
+      amplitude.push(sum / resolution)
     }
+    return amplitude
+  }
 }

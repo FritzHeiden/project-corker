@@ -1,109 +1,110 @@
-import React from 'react';
+import React from 'react'
 
-import Footer from './Footer.js';
-import FinalVideo from './FinalVideo.js';
-import AudioBox from './AudioBox.js';
-import VideoBox from './VideoBox.js';
-import FormPage from './SignUp.js';
+import Footer from './Footer.js'
+import FinalVideo from './FinalVideo.js'
+import AudioBox from './AudioBox.js'
+import VideoBox from './VideoBox.js'
+import FormPage from './SignUp.js'
 
-import FileService from '../services/file-service.js';
-import {Config} from '../test/filepath.js';
-import {Sidebar} from '../test/sidebar.js';
-
+import FileService from '../services/file-service.js'
+import { Config } from '../test/filepath.js'
+import { Sidebar } from '../test/sidebar.js'
 /* Images */
-import BackgroundImage from '../svg/background.js';
-import Options from '../svg/Options.js';
-
+import BackgroundImage from '../svg/background.js'
+import Options from '../svg/Options.js'
 
 class App extends React.Component {
 
-   constructor(props){
-     super(props);
-    }
+  constructor (props) {
+    super(props)
 
-   render() {
-     const {title, signUp, footerTitle} = this.props;
+    this._fileService = new FileService('localhost', 2345)
+    this._audioContext = new (window.AudioContext || window.webkitAudioContext)()
+  }
 
-     return (
-       <div>
+  render () {
+    const {title, signUp, footerTitle} = this.props
+
+    return (
+      <div>
         <BackgroundImage/>
         <div id="signUp" className="signUp">
-            <h1 style={{opacity: "0"}}>{title}</h1>
-            <FormPage title={signUp}/>
+          <h1 style={{opacity: '0'}}>{title}</h1>
+          <FormPage title={signUp}/>
         </div>
         <div id="online" className="online">
           <SideBar/>
           <Options/>
           <div id="main" className="main">
-            <h1 style={{opacity: "0"}}>{title}</h1>
+            <h1 style={{opacity: '0'}}>{title}</h1>
             <div className="actionBox">
-              <AudioBox/>
+              <AudioBox fileService={this._fileService} audioContext={this._audioContext}/>
               <VideoBox/>
               <VideoBox/>
-              <AudioBox/>
+              <AudioBox fileService={this._fileService} audioContext={this._audioContext}/>
             </div>
-            <Footer title={footerTitle}/>
+            <Footer title={footerTitle} fileService={this._fileService}/>
             <FinalVideo/>
           </div>
         </div>
-       </div>
-     );
-   }
+      </div>
+    )
+  }
 }
-
 
 class SideBar extends React.Component {
-
-   constructor(props){
-     super(props);
-     this.state={
-       correctPath: true,
-     };
-     this.handleEnter = this.handleEnter.bind(this);
-     this.checkPath = this.checkPath.bind(this);
+  constructor (props) {
+    super(props)
+    this.state = {
+      correctPath: true,
     }
+    this.handleEnter = this.handleEnter.bind(this)
+    this.checkPath = this.checkPath.bind(this)
+  }
 
-    handleEnter(e){
-      if (e.key === 'Enter') {
-        this.checkPath();
-      }
+  handleEnter (e) {
+    if (e.key === 'Enter') {
+      this.checkPath()
     }
+  }
 
-    checkPath(){
-      let filePath = document.getElementById('inputFolderPath').value;
-      console.log("From Sidebar: " + filePath);
-      let testFilePath = new FileService('127.0.0.1', 2345);
+  checkPath () {
+    let filePath = document.getElementById('inputFolderPath').value
+    console.log('From Sidebar: ' + filePath)
+    let testFilePath = new FileService('127.0.0.1', 2345)
 
-      console.log("getting files ...");
-      testFilePath.getFiles(filePath).then(files => {
-        this.setState({correctPath : true});
-        Sidebar.closeSidebar();
-        Config.path = filePath;
-      }).catch(error => {
-        this.setState({correctPath : false});
-        console.error(error);
-      })
-    }
+    console.log('getting files ...')
+    testFilePath.getFiles(filePath).then(files => {
+      this.setState({correctPath: true})
+      Sidebar.closeSidebar()
+      Config.path = filePath
+    }).catch(error => {
+      this.setState({correctPath: false})
+      console.error(error)
+    })
+  }
 
-   render() {
-     const correctPath = this.state.correctPath;
+  render () {
+    const correctPath = this.state.correctPath
 
-     return (
-       <div id="mySidenav" className="sidenav">
+    return (
+      <div id="mySidenav" className="sidenav">
         <h3>Do you wanna change the file path?</h3>
         {correctPath ? (
-          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"New file path"} onKeyPress={this.handleEnter.bind(this)}/>
-         ) : (
-           <div>
-             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"New file path"} onKeyPress={this.handleEnter.bind(this)}/>
-             <div className="wrongPath"/>
-             <p>Path not found! Please check the spelling.</p>
-           </div>
+          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={'New file path'}
+                 onKeyPress={this.handleEnter.bind(this)}/>
+        ) : (
+          <div>
+            <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={'New file path'}
+                   onKeyPress={this.handleEnter.bind(this)}/>
+            <div className="wrongPath"/>
+            <p>Path not found! Please check the spelling.</p>
+          </div>
+
         )}
-       </div>
-     );
-   }
+      </div>
+    )
+  }
 }
 
-
-export default App;
+export default App

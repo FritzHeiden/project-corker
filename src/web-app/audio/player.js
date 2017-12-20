@@ -2,7 +2,7 @@ import FileService from '../services/file-service.js';
 
 export default class AudioPlayer {
 
-    constructor(filename) {
+    constructor(audioContext) {
         this.source = {};
         this.buffer = {};
         this.startedAt = 0;
@@ -10,27 +10,12 @@ export default class AudioPlayer {
         this.lowpassFilter = {};
         this.highshelfFilter = {};
 
-        this.context = new (window.AudioContext || window.webkitAudioContext)();
+        this.context = audioContext;
         this.gainNode = this.context.createGain();
 
         this.paused = true;
         this.lowpassConnected = false;
         this.highshelfConnected = false;
-
-        this.destinationConnected = false;
-
-        this.fileService = new FileService('localhost', 2345);
-        console.log('Loading audio file ...');
-        this.fileService.getFile('audio/' + filename)
-            .then(file => {
-                this.context.decodeAudioData(file.data, buffer => {
-                    this.buffer = buffer;
-                    console.log(this.buffer);
-                }, error => {
-                    console.error('Loading audio failed!');
-                    console.error(error);
-                });
-            }).catch(error => console.error(error));
 
         this._initLowpass();
         this._initHighshelf();
@@ -59,6 +44,10 @@ export default class AudioPlayer {
               this.gainNode.connect(this.context.destination);
               this.destinationConnected = true;
           }
+    }
+
+    loadAudioFile (audioFile) {
+        this.buffer = audioFile.audioBuffer
     }
 
     pausePlay() {

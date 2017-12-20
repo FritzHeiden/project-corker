@@ -39,7 +39,7 @@ class Video extends React.Component {
   }
 
   videoStartStop(){
-    console.log("TestFunction");
+    // console.log("TestFunction");
     if(this.state.play === false){
       this.setState({play : true});
     }
@@ -55,7 +55,7 @@ class Video extends React.Component {
   static drop(e) {
       e.preventDefault();
       //var data = e.dataTransfer.getData("text");
-      console.log("dropped");
+      // console.log("dropped");
   }
 
   render(){
@@ -137,8 +137,8 @@ class Filter extends React.Component {
 
       this.setState({ endY: event.screenY});
       this.setState({ endX: event.screenX});
-      console.log("Ende der Line: " + this.state.endX + ", " + this.state.endY);
-      console.log("Mittelpunkt Kreis: " + middleX +", " + middleY);
+      // console.log("Ende der Line: " + this.state.endX + ", " + this.state.endY);
+      // console.log("Mittelpunkt Kreis: " + middleX +", " + middleY);
 
 
       let dy = this.state.endY - middleY;

@@ -33,15 +33,15 @@ class FolderButton extends React.Component {
         this.setState({correctPath : false});
         console.error(error);
     });
-  console.log("Gehe ein verzeichnis zurück");
+  // console.log("Gehe ein verzeichnis zurück");
   }
 
   updateTable(){
     if(this.state.correctPath === true){
-      console.log("Update Tabelle");
+      // console.log("Update Tabelle");
     }
     else{
-      console.log("FEHLER!!!!");
+      // console.log("FEHLER!!!!");
     }
   }
 

@@ -3,3 +3,8 @@
 **/package-lock.json
 **/dist/**/*.js
 **/dist/audio/*
+<<<<<<< HEAD
+=======
+*.log
+*.lock
+>>>>>>> made filesystem global; made audio context global
