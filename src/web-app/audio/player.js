@@ -17,9 +17,7 @@ export default class AudioPlayer {
         this.lowpassConnected = false;
         this.highshelfConnected = false;
 
-        // Checkbox frontend state
-        this.lowpassChecked = false;
-        this.highshelfChecked = false;
+        this.destinationConnected = false;
 
         this.fileService = new FileService('localhost', 2345);
         console.log('Loading audio file ...');
@@ -39,27 +37,27 @@ export default class AudioPlayer {
     }
 
     _connectNodes() {
-        this.lowpassConnected = false;
-        this.highshelfConnected = false;
 
         this.source.connect(this.gainNode);
 
-        if (this.lowpassChecked && this.highshelfChecked) {
+        if (this.lowpassConnected && this.highshelfConnected) {
               this.gainNode.connect(this.lowpassFilter);
               this.lowpassFilter.connect(this.highshelfFilter);
               this.highshelfFilter.connect(this.context.destination);
-              this.lowpassConnected = true;
-              this.highshelfConnected = true;
-          } else if (this.lowpassChecked && !this.highshelfChecked) {
+
+          } else if (this.lowpassConnected && !this.highshelfConnected) {
               this.gainNode.connect(this.lowpassFilter);
               this.lowpassFilter.connect(this.context.destination);
               this.lowpassConnected = true;
-          } else if (!this.lowpassChecked && this.highshelfChecked) {
+
+          } else if (!this.lowpassConnected && this.highshelfConnected) {
               this.gainNode.connect(this.highshelfFilter);
               this.highshelfFilter.connect(this.context.destination);
               this.highshelfConnected = true;
+
           } else {
               this.gainNode.connect(this.context.destination);
+              this.destinationConnected = true;
           }
     }
 
@@ -109,11 +107,11 @@ export default class AudioPlayer {
         this.lowpassFilter.frequency.value = 5000; // The cutoff frequency
     }
 
-    changeLowpassFilterFrequency(freq) {
+    changeLowpassFilterFrequency(value) {
         let minValue = 40;
         let maxValue = this.context.sampleRate / 2;
         let numberOfOctaves = Math.log(maxValue / minValue) / Math.LN2;
-        let multiplier = Math.pow(2, numberOfOctaves * (freq - 1.0));
+        let multiplier = Math.pow(2, numberOfOctaves * (value - 1.0));
         this.lowpassFilter.frequency.value = maxValue * multiplier;
     }
 
@@ -133,19 +131,42 @@ export default class AudioPlayer {
         this.highshelfFilter.frequency.value = freq + 500;
     }
 
-    toggleFilter(lowpassChecked, highshelfChecked) {
-        
-        this.lowpassChecked = lowpassChecked;
-        this.highshelfChecked = highshelfChecked;
+    _disconnectNodes() {
 
-        this.source.disconnect(0);
-        this.gainNode.disconnect(0);
-
+        if(this.destinationConnected) {
+            this.source.disconnect(0);
+            this.gainNode.disconnect(0);
+            this.destinationConnected = false;
+        }
         if (this.lowpassConnected) {
             this.lowpassFilter.disconnect(0);
         }
         if (this.highshelfConnected) {
             this.highshelfFilter.disconnect(0);
+        }
+    }
+
+    toggleLowpass() {
+
+        this._disconnectNodes();
+
+        if (this.lowpassConnected) {
+            this.lowpassConnected = false;
+        } else {
+            this.lowpassConnected = true;
+        }
+
+        this._connectNodes();
+    }
+
+    toggleHighshelf() {
+
+        this._disconnectNodes();
+
+        if (this.highshelfConnected) {
+            this.highshelfConnected = false;
+        } else {
+            this.highshelfConnected = true;
         }
 
         this._connectNodes();
