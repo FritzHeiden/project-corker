@@ -91,14 +91,14 @@ export default class AudioPlayer {
 
     changeVolume(volume, max = 100) {
         let fraction = volume / max;
-        this.gainNode.gain.value = fraction * fraction;
+        this.gainNode.gain.setValueAtTime(fraction * fraction, this.context.currentTime);
     }
 
     // Frequencies below the cutoff pass through, frequencies above it are attenuated
     _initLowpass() {
         this.lowpassFilter = this.context.createBiquadFilter();
         this.lowpassFilter.type = 'lowpass';
-        this.lowpassFilter.frequency.value = 5000; // The cutoff frequency
+        this.lowpassFilter.frequency.setValueAtTime(5000, this.context.currentTime);
     }
 
     changeLowpassFilterFrequency(value) {
@@ -106,23 +106,23 @@ export default class AudioPlayer {
         let maxValue = this.context.sampleRate / 2;
         let numberOfOctaves = Math.log(maxValue / minValue) / Math.LN2;
         let multiplier = Math.pow(2, numberOfOctaves * (value - 1.0));
-        this.lowpassFilter.frequency.value = maxValue * multiplier;
+        this.lowpassFilter.frequency.setValueAtTime(maxValue * multiplier, this.context.currentTime);
     }
 
     changeLowpassFilterQuality(quality) {
-        this.lowpassFilter.Q.value = quality * 30;
+        this.lowpassFilter.Q.setValueAtTime(quality * 30, this.context.currentTime);
     }
 
     // Frequencies higher than the frequency get a boost or an attenuation, frequencies lower are unchanged.
     _initHighshelf() {
         this.highshelfFilter = this.context.createBiquadFilter();
         this.highshelfFilter.type = 'highshelf';
-        this.highshelfFilter.gain.value = 50;
-        this.highshelfFilter.frequency.value = 9500;
+        this.highshelfFilter.gain.setValueAtTime(50, this.context.currentTime);
+        this.highshelfFilter.frequency.setValueAtTime(9500, this.context.currentTime);
     }
 
     changeHighshelfFilterFrequency(freq) {
-        this.highshelfFilter.frequency.value = freq + 500;
+        this.highshelfFilter.frequency.setValueAtTime(freq + 500, this.context.currentTime);
     }
 
     _disconnectNodes() {
