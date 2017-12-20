@@ -9,8 +9,7 @@ h3{
   font-family: 'Helvetica', Georgia, serif;
   color: white;
   position: relative;
-  top: 0.5rem;
-  left: -16%;
+  left: -15%;
   margin-bottom: -0.5rem;
 }
 
@@ -451,13 +450,6 @@ h2, p{
   margin-left: 0;
 }
 
-/*
-.inputFolderPath{
-  width: 0rem;
-  display: none;
-}*/
-
-
 input[type="text"].showInput{
   animation: showInput 0.5s ease-in-out 0s;
   animation-fill-mode: forwards;
@@ -663,14 +655,21 @@ input[type="text"].closeInput{
 }
 
 .sidenav input[type="text"]{
-  background-color: #1e1e1e;
+  background-color: #494949;
   width: 95%;
   height: 2rem;
   margin: 5rem 0 0 0;
   font-size: 20px;
-  border: 2px solid #1e1e1e;
-  color: #95989A;
+  border: 2px solid #494949;
+  color: white;
   text-align: center;
+}
+
+
+.sidenav input[type="text"]::placeholder { /* Most modern browsers support this now. */
+  color: white;
+  font-size: 1rem;
+  font-family: 'Helvetica', Georgia, serif;
 }
 
 

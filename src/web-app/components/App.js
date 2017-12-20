@@ -28,14 +28,14 @@ class App extends React.Component {
        <div>
         <BackgroundImage/>
         <div id="signUp" className="signUp">
-              <h1>{title}</h1>
-              <FormPage title={signUp}/>
+            <h1 style={{opacity: "0"}}>{title}</h1>
+            <FormPage title={signUp}/>
         </div>
         <div id="online" className="online">
           <SideBar/>
           <Options/>
           <div id="main" className="main">
-            <h1>{title}</h1>
+            <h1 style={{opacity: "0"}}>{title}</h1>
             <div className="actionBox">
               <AudioBox/>
               <VideoBox/>
@@ -90,14 +90,14 @@ class SideBar extends React.Component {
 
      return (
        <div id="mySidenav" className="sidenav">
-        <h3> Wollen Sie ein neuen Ordnerpfad eingeben?</h3>
+        <h3>Do you wanna change the file path?</h3>
         {correctPath ? (
-          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
+          <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"New file path"} onKeyPress={this.handleEnter.bind(this)}/>
          ) : (
            <div>
-             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"Neue Ordnerangabe"} onKeyPress={this.handleEnter.bind(this)}/>
+             <input className="inputFolderPath" id="inputFolderPath" type="text" placeholder={"New file path"} onKeyPress={this.handleEnter.bind(this)}/>
              <div className="wrongPath"/>
-             <p>Pfad wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe</p>
+             <p>Path not found! Please check the spelling.</p>
            </div>
         )}
        </div>

@@ -64,17 +64,17 @@ class FormPage extends React.Component {
         <h2 className="options">{title}</h2>
         <Line/>
         {correctPath ? (
-          <input id="path" className="path" type="text" name="folder" placeholder={'Musikverzeichnis'} onKeyPress={this.handleKeyPress.bind(this)}/>
+          <input id="path" className="path" type="text" name="folder" placeholder={'Music file path'} onKeyPress={this.handleKeyPress.bind(this)}/>
         ) : (
            <div>
-            <input id="path" className="path" type="text" name="folder" placeholder={'Musikverzeichnis'} onKeyPress={this.handleKeyPress.bind(this)}/>
+            <input id="path" className="path" type="text" name="folder" placeholder={'Music file path'} onKeyPress={this.handleKeyPress.bind(this)}/>
             <div className="wrongPathSignUp"/>
             <div className="errorMessage" id="errorMessage">
-              <p> Musikverzeichnis wurde nicht gefunden! Bitte überprüfen Sie Ihre eingabe. </p>
+              <p> Music file path not found! Please check your spelling.</p>
             </div>
            </div>
         )}
-        <button className="pushButton" onClick={this.checkPath.bind(this)}>Fertig</button>
+        <button className="pushButton" onClick={this.checkPath.bind(this)}>Log in</button>
       </div>
     );
   }

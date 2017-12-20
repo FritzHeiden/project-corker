@@ -23,7 +23,7 @@ class FileBrowser extends React.Component {
 
   updateFileList(path){
       //let path = Config.path;
-      console.log("From FileBrowser: " + path);
+     // console.log("From FileBrowser: " + path);
 
       if(path !== ""){
         this.fileService.getFiles(path).then( files => {
@@ -77,7 +77,7 @@ class FileBrowser extends React.Component {
               <td><Folder/></td>
             </tr>
             <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
-              <td>Hallo</td>
+              <td></td>
             </tr>
             {this.updateTable()}
           </tbody>

@@ -27,13 +27,13 @@ class Checkbox extends React.Component {
 
         return (
             <div>
-                <p className="filterTitle" style={lowPass}>Tiefpassfilter:</p>
+                <p className="filterTitle" style={lowPass}>Low pass filter:</p>
                 <input
                     className="container"
                     type="checkbox"
                     onClick={this.clickLowPass}
                 />
-                <p className="filterTitle">Hochpassfilter:</p>
+                <p className="filterTitle">High shelf filter:</p>
                 <input
                     className="container"
                     type="checkbox"

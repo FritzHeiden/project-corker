@@ -91,4 +91,4 @@ if (!String.prototype.format) {
 // }
 
 
-ReactDOM.render(<App title="Project: JRectD" signUp="Anmelden" footerTitle="Ordnerverzeichnis"/>, document.getElementById('root'));
+ReactDOM.render(<App title="Project: JRectD" signUp="Log in" footerTitle="File path"/>, document.getElementById('root'));

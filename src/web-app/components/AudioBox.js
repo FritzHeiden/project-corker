@@ -24,7 +24,6 @@ class AudioBox extends React.Component {
    }
 }
 
-
 class AudioPlayer extends React.Component {
 
   constructor(props){
