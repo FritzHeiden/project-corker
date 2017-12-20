@@ -2,34 +2,46 @@ import React from "react";
 
 class Checkbox extends React.Component {
 
-    constructor(){
-        super();
-        this.state = {
-            isGoing: false,
-        };
-        this.handleInputChange = this.handleInputChange.bind(this);
+    constructor(props){
+        super(props);
+
+        this.clickLowPass = this.clickLowPass.bind(this);
+        this.clickHighshelf = this.clickHighshelf.bind(this);
+
+        this.audioPlayerJS = this.props.audioPlayerJS;
     }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-
-        this.setState({
-            [name]: value
-        });
+    clickLowPass(event) {
+        this.audioPlayerJS.toggleLowpass();
     }
+
+    clickHighshelf(event) {
+        this.audioPlayerJS.toggleHighshelf();
+    }
+
     render(){
+
+        let lowPass={
+            width: '59%',
+        };
+
         return (
-             <input
-                className="container"
-                name="isGoing"
-                type="checkbox"
-                onClick={this.handleInputChange}
-                checked={this.state.isGoing}
-                readOnly
-            />
+            <div>
+                <p className="filterTitle" style={lowPass}>Tiefpassfilter:</p>
+                <input
+                    className="container"
+                    type="checkbox"
+                    onClick={this.clickLowPass}
+                />
+                <p className="filterTitle">Hochpassfilter:</p>
+                <input
+                    className="container"
+                    type="checkbox"
+                    onClick={this.clickHighshelf}
+                />
+
+            </div>
+
         );
     }
 }

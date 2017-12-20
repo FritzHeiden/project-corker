@@ -8,7 +8,7 @@ import AudioPlayerJS from '../audio/player.js';
 class AudioBox extends React.Component {
   constructor(props){
     super(props);
-    this.audioPlayerJS = new AudioPlayerJS('basic_loop.wav');
+    this.audioPlayerJS = new AudioPlayerJS('04-EnjoyTheSilence.mp3');
   }
 
    render() {
@@ -23,6 +23,7 @@ class AudioBox extends React.Component {
       );
    }
 }
+
 
 class AudioPlayer extends React.Component {
 
@@ -171,22 +172,14 @@ class Filter extends React.Component {
   }
 
   render(){
-
-      let lowPass={
-          width: '59%',
-      };
-
     return(
         <div className="filterBox">
-            <p className="filterTitle" style={lowPass}>Tiefpassfilter:</p>
-            <Checkbox/>
-            <p className="filterTitle">Hochpassfilter:</p>
-            <Checkbox/>
-
+            <Checkbox audioPlayerJS={this.audioPlayerJS}/>
             <div className="sliderBox">
                 <input className="sliderFilter" type="range" min={0} max={100} defaultValue={100} onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
-                <input className="sliderFilter" type="range" min={0} max={100} defaultValue={100}/>
-                <input className="sliderFilter" type="range" min={0} max={100} defaultValue={100}/>
+                <input className="sliderFilter" type="range" min={0} max={1} step={0.01} defaultValue={1} onChange={event => this.audioPlayerJS.changeLowpassFilterFrequency(event.target.value)}/>
+                <input className="sliderFilter" type="range" min={0} max={1} step={0.01} defaultValue={0} onChange={event => this.audioPlayerJS.changeLowpassFilterQuality(event.target.value)}/>
+                <input className="sliderFilter" type="range" min={0} max={9500} step={1} defaultValue={9500} onChange={event => this.audioPlayerJS.changeHighshelfFilterFrequency(parseInt(event.target.value))}/>
             </div>
       </div>
     );

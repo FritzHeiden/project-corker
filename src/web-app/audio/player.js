@@ -95,8 +95,6 @@ export default class AudioPlayer {
 
     changeVolume(volume, max = 100) {
         let fraction = volume / max;
-        console.log(volume);
-        console.log(max);
         this.gainNode.gain.value = fraction * fraction;
     }
 
