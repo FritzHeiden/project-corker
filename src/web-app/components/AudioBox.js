@@ -28,10 +28,6 @@ class AudioPlayer extends React.Component {
 
   constructor(props){
     super(props);
-
-    this.drop = this.drop.bind(this);
-    this.allowDrop = this.allowDrop.bind(this);
-    this.updateSoundBar = this.updateSoundBar.bind(this);
   }
 
   allowDrop(e) {
@@ -48,18 +44,11 @@ class AudioPlayer extends React.Component {
   }
 
   updateSoundBar(){
-
-      let bar = [10];
       const numbers = [1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5];
 
-      let barStyle={
-          height: '',
-      };
-      let bars = AudioFileAnalyser.analyseAmplitudeByAverage('audio/basic_loop.wav', 128);
-
-      let listItems = numbers.map((number) =>
-           <div className='bar'></div>
-      );
+      let listItems = numbers.map((number, index) =>
+          <div className='bar' style={{height: number}} key={index}></div>
+        );
       return listItems;
   }
 
