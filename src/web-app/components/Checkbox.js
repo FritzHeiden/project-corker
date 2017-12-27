@@ -22,7 +22,7 @@ class Checkbox extends React.Component {
     render() {
 
         let lowPass = {
-            width: '59%',
+            width: '40%',
         };
 
         return (
