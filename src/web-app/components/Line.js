@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Line extends React.Component {
+export default class Line extends React.Component {
    render() {
 
       let line =
@@ -13,5 +13,3 @@ class Line extends React.Component {
       );
    }
 }
-
-export default Line;

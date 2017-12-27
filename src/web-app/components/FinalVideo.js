@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Video extends React.Component {
+export default class Video extends React.Component {
 
   constructor(props){
     super(props);
@@ -14,9 +14,6 @@ class Video extends React.Component {
     );
   }
 }
-
-export default Video;
-
 
 {/*        <VideoPlayer style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"/>
 

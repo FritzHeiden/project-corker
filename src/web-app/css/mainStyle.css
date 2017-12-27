@@ -82,6 +82,10 @@ h1 {
     color: #e5004b;
 }
 
+h1.projectTitle {
+    text-align: center;
+}
+
 img {
     width: 20%;
     height: auto;
@@ -108,16 +112,8 @@ span {
     padding: 0.5rem;
 }
 
-.MenuButton line.One {
-    stroke-width: 13px;
-}
-
-.MenuButton circle.Two {
-    stroke-width: 9px;
-}
-
 .background {
-    display: flex; /* or inline-flex */
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     z-index: -1;
@@ -151,11 +147,12 @@ span {
     flex-direction: row;
     flex-flow: row wrap;
     justify-content: space-between;
-    width: 100%;
-    height: auto;
+    /* width: 100%; */
+    /* height: auto; */
     position: relative;
-    box-sizing: border-box;
-    /*background-color: red;*/
+    /* box-sizing: border-box; */
+    /* background-color: red; */
+    margin-top: 20rem;
 }
 
 .filterBox {
@@ -255,7 +252,7 @@ span {
     overflow-y: scroll;
 }
 
-.slider {
+.crossFader {
     -webkit-appearance: none;
     width: 25%;
     height: 7.5px;
@@ -265,7 +262,7 @@ span {
     margin-bottom: 8vh;
 }
 
-.slider::-webkit-slider-thumb {
+.crossFader::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
@@ -275,7 +272,7 @@ span {
     cursor: pointer;
 }
 
-.slider::-moz-range-thumb {
+.crossFader::-moz-range-thumb {
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -323,7 +320,7 @@ p {
     font-family: 'Helvetica', Georgia, serif;
 }
 
-h2.options {
+h2.loginTitle {
     font-size: 30px;
     position: relative;
     top: 1rem;
@@ -351,32 +348,6 @@ div.errorMessage p {
     top: 10%;
 }
 
-/*
-input[type="text"]{
-  background-color: #323232;
-  width: 75%;
-  height: 2rem;
-  margin: 2rem 0 0.5rem 12.5%;
-  font-size: 20px;
-  border: 2px solid #323232;
-  color: #95989A;
-}
-*/
-/*
-input[type="text"]{
-  background-color: #323232;
-  width: 75%;
-  height: 2rem;
-  margin: 4rem 0 0.5rem 0;
-  font-size: 20px;
-  border: 2px solid #323232;
-  color: #95989A;
-  text-align: center;
-}*/
-
-input[type="text"]:focus {
-    border: 2px solid #e5004b;
-}
 
 .pushButton {
     width: 75%;
@@ -400,24 +371,9 @@ input[type="text"].path {
     margin: 3rem 0 2rem 0;
 }
 
-
-input[type="text"].path::placeholder {
+input[type="text"]::placeholder {
     color: white;
 }
-
-/*
-.pushButton{
-  background-color: #00868B;
-  color: white;
-  width: 75%;
-  height: 3rem;
-  margin-bottom: 1rem;
-  font-size: 25px;
-  /*position: absolute;
-  bottom: 0;
-  left: 12.5%;
-  border: none;
-}*/
 
 .errorMessage {
     position: relative;
@@ -432,7 +388,6 @@ input[type="text"].path::placeholder {
 
 .errorMessage:after {
     content: '';
-    /*position: absolute;*/
     border-style: solid;
     border-width: 15px 20px 15px 0;
     border-color: transparent #FFFFFF;
@@ -613,7 +568,7 @@ input[type="text"].closeInput{
 /* Navigation bar*/
 
 /* The side navigation menu */
-.sidenav {
+.sideBar {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -627,31 +582,7 @@ input[type="text"].closeInput{
     text-align: center;
 }
 
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus {
-    color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    /*position: absolute;*/
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-.sidenav h3 {
+.sideBar h3 {
     font-size: 1.0rem;
     font-family: 'Helvetica', Georgia, serif;
     color: white;
@@ -661,7 +592,7 @@ input[type="text"].closeInput{
     margin-bottom: 0;
 }
 
-.sidenav input[type="text"] {
+.sideBar input[type="text"] {
     background-color: #494949;
     width: 95%;
     height: 2rem;
@@ -672,28 +603,7 @@ input[type="text"].closeInput{
     text-align: center;
 }
 
-.sidenav input[type="text"]::placeholder { /* Most modern browsers support this now. */
-    color: white;
-    font-size: 1rem;
-    font-family: 'Helvetica', Georgia, serif;
-}
-
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
 .wrongPath {
-    background-color: red;
-    width: 4%;
-    height: 2rem;
-    position: relative;
-    top: -2rem;
-    left: 0.5rem;
-}
-
-.wrongPathSignUp {
     background-color: red;
     width: 4%;
     height: 2.5rem;
@@ -706,8 +616,9 @@ input[type="text"].closeInput{
     display: none;
 }
 
-.signUp {
+.login {
     text-align: center;
+    margin-top: 20rem;
 }
 
 .errorMessage {

@@ -6,8 +6,8 @@ class BackgroundImage extends React.Component {
    let svg =
    {
       fill: "none",
-      stroke: "#494949",
-      strokeMiterlimit: "10",
+      stroke: "#e5004b",
+      strokeMiterlimit: "14",
     };
 
     return (

@@ -1,10 +1,12 @@
 import React from 'react'
 
-import FileService from '../services/file-service.js'
+// used Functions
 import { Config } from '../test/filepath.js'
-import Folder from '../svg/folder.js'
+//import Folder from '../svg/folder.js'
 
-class FileBrowser extends React.Component {
+import Folder from 'react-svg-loader!../svg/folder.svg';
+
+export default class FileBrowser extends React.Component {
   constructor (props) {
     super(props)
     this.state = {files: []}
@@ -88,5 +90,3 @@ class FileBrowser extends React.Component {
     )
   }
 }
-
-export default FileBrowser
