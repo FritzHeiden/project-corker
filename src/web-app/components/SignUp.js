@@ -12,8 +12,12 @@ class FormPage extends React.Component {
       correctPath: true,
     };
      this.checkPath = this.checkPath.bind(this);
-     this.handleKeyPress = this.handleKeyPress.bind(this);
+      this.handleKeyPress = this.handleKeyPress.bind(this);
   }
+
+    componentDidMount(){
+        this.filePath.focus();
+    }
 
 
   static showErrorMessage(){
@@ -64,10 +68,26 @@ class FormPage extends React.Component {
         <h2 className="options">{title}</h2>
         <Line/>
         {correctPath ? (
-          <input id="path" className="path" type="text" name="folder" placeholder={'Music file path'} onKeyPress={this.handleKeyPress.bind(this)}/>
+          <input
+              id="path"
+              className="path"
+              type="text"
+              name="filePath"
+              placeholder={'Music file path'}
+              onKeyPress={this.handleKeyPress.bind(this)}
+              ref={(input) => { this.filePath = input; }}
+          />
         ) : (
            <div>
-            <input id="path" className="path" type="text" name="folder" placeholder={'Music file path'} onKeyPress={this.handleKeyPress.bind(this)}/>
+            <input
+                id="path"
+                className="path"
+                type="text"
+                name="filePath"
+                placeholder={'Music file path'}
+                onKeyPress={this.handleKeyPress.bind(this)}
+                ref={(input) => { this.filePath = input; }}
+            />
             <div className="wrongPathSignUp"/>
             <div className="errorMessage" id="errorMessage">
               <p> Music file path not found! Please check your spelling.</p>

@@ -7,186 +7,260 @@ import AudioPlayerJS from '../audio/player.js'
 import AudioFile from '../data/audio-file'
 
 class AudioBox extends React.Component {
-  constructor (props) {
-    super(props)
-    this._fileService = props.fileService
-    this._audioContext = props.audioContext
-    this._audioPlayer = new AudioPlayerJS(this._audioContext)
+    constructor(props) {
+        super(props);
+        this._fileService = props.fileService;
+        this._audioContext = props.audioContext;
+        this._audioPlayer = new AudioPlayerJS(this._audioContext);
 
-    // for testing
-    this._loadAudioFile('04-EnjoyTheSilence.mp3').then(audioFile => {
-      this._audioFile = audioFile
-      this._audioPlayer.loadAudioFile(this._audioFile)
-    })
-  }
+        // for testing
+        this._loadAudioFile('04-EnjoyTheSilence.mp3').then(audioFile => {
+            this._audioFile = audioFile
+            this._audioPlayer.loadAudioFile(this._audioFile)
+        })
+    }
 
-  render () {
-    return (
-      <div className="audioBox">
-        <AudioPlayer/>
-        <Line/>
-        <Player audioPlayerJS={this._audioPlayer}/>
-        <Line/>
-        <Filter audioPlayerJS={this._audioPlayer}/>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div className="audioBox">
+                <AudioPlayer/>
+                <Line/>
+                <Player audioPlayerJS={this._audioPlayer}/>
+                <Line/>
+                <Filter audioPlayerJS={this._audioPlayer}/>
+            </div>
+        )
+    }
 
-  async _loadAudioFile (path) {
-    let file = await this._fileService.getFile(`audio/${path}`)
-    let audioBuffer = await this._audioContext.decodeAudioData(file.data)
-    return new AudioFile(file.path, file.filename, file.data, file.extension, file.isDirectory, audioBuffer)
-  }
+    async _loadAudioFile(path) {
+        let file = await this._fileService.getFile(`audio/${path}`);
+        let audioBuffer = await this._audioContext.decodeAudioData(file.data);
+        return new AudioFile(file.path, file.filename, file.data, file.extension, file.isDirectory, audioBuffer);
+    }
 }
 
 class AudioPlayer extends React.Component {
 
-  constructor (props) {
-    super(props)
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  allowDrop (e) {
-    //this.allowDrop(this);
-    e.preventDefault()
-    e.dataTransfer.setData('text', e.target.id)
-  }
+    allowDrop(e) {
+        //this.allowDrop(this);
+        e.preventDefault();
+        e.dataTransfer.setData('text', e.target.id);
+    }
 
-  drop (e) {
-    //drop.drop(this);
-    e.preventDefault()
-    var data = e.dataTransfer.getData('text')
-    // console.log(document.getElementById(data).innerText);
-  }
+    drop(e) {
+        //drop.drop(this);
+        e.preventDefault();
+        var data = e.dataTransfer.getData('text');
+        // console.log(document.getElementById(data).innerText);
+    }
 
-  updateSoundBar () {
-    const numbers = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+    updateSoundBar() {
+        const numbers = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
 
-    let listItems = numbers.map((number, index) =>
-      <div className='bar' style={{height: number}} key={index}></div>
-    )
-    return listItems
-  }
+        let listItems = numbers.map((number, index) =>
+            <div className='bar' style={{height: number}} key={index}></div>
+        );
+        return listItems
+    }
 
-  render () {
+    render() {
 
-    let audio =
-      {
-        height: '6rem',
-        backgroundColor: 'rgb(50, 50, 50)',
-        margin: '2%',
-      }
+        let audio =
+            {
+                height: '6rem',
+                backgroundColor: 'rgb(50, 50, 50)',
+                margin: '2%',
+            };
 
-    let overflowY =
-      {
-        overflowY: 'hidden',
-      }
+        let overflowY =
+            {
+                overflowY: 'hidden',
+            };
 
-    return (
-      <div id="testMusic" style={overflowY} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(this.event)}>
-        <div style={audio}>
-          {this.updateSoundBar()}
-        </div>
-      </div>
-    )
-  }
+        return (
+            <div id="testMusic" style={overflowY} onDrop={this.drop.bind(this)}
+                 onDragOver={this.allowDrop.bind(this.event)}>
+                <div style={audio}>
+                    {this.updateSoundBar()}
+                </div>
+            </div>
+        )
+    }
 }
 
 // <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
 
 class Player extends React.Component {
 
-  constructor (props) {
-    super(props)
+    constructor(props) {
+        super(props);
 
-    this.audioPlayerJS = this.props.audioPlayerJS
-  }
+        this.audioPlayerJS = this.props.audioPlayerJS;
+    }
 
-  render () {
-    return (
-      <div className="minimalButtons">
-        <StartStopButton audioPlayerJS={this.audioPlayerJS}/>
-        {/*
+    render() {
+        return (
+            <div className="minimalButtons">
+                <StartStopButton audioPlayerJS={this.audioPlayerJS}/>
+                {/*
           <PreviousButton/>
           <NextButton/>
           */}
 
-      </div>
-    )
-  }
+            </div>
+        )
+    }
 }
 
 class Filter extends React.Component {
 
-  constructor (props) {
-    super(props)
-    //this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0, rotate: 0};
+    constructor(props) {
+        super(props);
+        //this.state = { startX: 0, endX: 0, startY: 0, endY: 0, clicked: 0, rotate: 0};
 
-    this.changeVolume = this.changeVolume.bind(this)
-    this.setStart = this.setStart.bind(this)
-    this.audioPlayerJS = this.props.audioPlayerJS
+        this.changeVolume = this.changeVolume.bind(this);
+        this.setStart = this.setStart.bind(this);
+        this.displayVolumeBox = this.displayVolumeBox.bind(this);
+        this.vanishVolumeBox = this.vanishVolumeBox.bind(this);
 
-  }
-
-  setStart (e) {
-    if (this.state.clicked === 0) {
-      this.setState({startY: e.screenY})
-      this.setState({startX: e.screenX})
-      this.setState({clicked: 1})
-    }
-    else if (this.state.clicked === 1) {
-      this.setState({clicked: 0})
-    }
-  }
-
-  /* Doesn't work well */
-  changeVolume (event) {
-
-    if (this.state.clicked === 1) {
-      let elementSize = 50
-
-      var position = this.refs.filterButton.getBoundingClientRect()
-      let middleX = position.left + elementSize / 2
-      let middleY = position.top + elementSize / 2
-
-      let y = event.screenY
-      let x = event.screenX
-
-      this.setState({endY: event.screenY})
-      this.setState({endX: event.screenX})
-      // console.log("Ende der Line: " + this.state.endX + ", " + this.state.endY);
-      // console.log("Mittelpunkt Kreis: " + middleX +", " + middleY);
-
-      let dy = this.state.endY - middleY
-      let dx = this.state.endX - middleX
-      let theta = Math.atan(dy / dx)
-      theta *= 180 / Math.PI
-
-      //let object = this.refs.filterButton;
-      //let filter = document.getElementById(object);
-      //filter.style.transform = 'rotate('+theta+'deg)';
-
-      this.setState({rotate: 90})
+        this.audioPlayerJS = this.props.audioPlayerJS;
 
     }
-  }
 
-  render () {
-    return (
-      <div className="filterBox">
-        <Checkbox audioPlayerJS={this.audioPlayerJS}/>
-        <div className="sliderBox">
-          <input className="sliderFilter" type="range" min={0} max={100} defaultValue={100}
-                 onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
-          <input className="sliderFilter" type="range" min={0} max={1} step={0.01} defaultValue={1}
-                 onChange={event => this.audioPlayerJS.changeLowpassFilterFrequency(event.target.value)}/>
-          <input className="sliderFilter" type="range" min={0} max={1} step={0.01} defaultValue={0}
-                 onChange={event => this.audioPlayerJS.changeLowpassFilterQuality(event.target.value)}/>
-          <input className="sliderFilter" type="range" min={0} max={9500} step={1} defaultValue={9500}
-                 onChange={event => this.audioPlayerJS.changeHighshelfFilterFrequency(parseInt(event.target.value))}/>
+    setStart(e) {
+        if (this.state.clicked === 0) {
+            this.setState({startY: e.screenY});
+            this.setState({startX: e.screenX});
+            this.setState({clicked: 1});
+        }
+        else if (this.state.clicked === 1) {
+            this.setState({clicked: 0});
+        }
+    }
+
+    /* Doesn't work well */
+    changeVolume(event) {
+
+        if (this.state.clicked === 1) {
+            let elementSize = 50
+
+            var position = this.refs.filterButton.getBoundingClientRect();
+            let middleX = position.left + elementSize / 2;
+            let middleY = position.top + elementSize / 2;
+
+            let y = event.screenY;
+            let x = event.screenX;
+
+            this.setState({endY: event.screenY});
+            this.setState({endX: event.screenX});
+            // console.log("Ende der Line: " + this.state.endX + ", " + this.state.endY);
+            // console.log("Mittelpunkt Kreis: " + middleX +", " + middleY);
+
+            let dy = this.state.endY - middleY;
+            let dx = this.state.endX - middleX;
+            let theta = Math.atan(dy / dx);
+            theta *= 180 / Math.PI;
+
+            //let object = this.refs.filterButton;
+            //let filter = document.getElementById(object);
+            //filter.style.transform = 'rotate('+theta+'deg)';
+
+            this.setState({rotate: 90});
+
+        }
+    }
+
+    displayVolumeBox(e) {
+        let volumeBox = document.getElementById("volumeBox");
+        volumeBox.style.display = "block";
+        volumeBox.style.left = e.pageX + "px";
+        volumeBox.style.top = e.pageY + "px";
+    }
+
+    displayLowpassFrequencyBox(e){
+        let lowpassFrequency = document.getElementById("lowpassFrequency");
+        lowpassFrequency.style.display = "block";
+        lowpassFrequency.style.left = e.pageX + "px";
+        lowpassFrequency.style.top = e.pageY + "px";
+    }
+
+    displayLowpassQualityBox(e){
+        let lowpassQuality = document.getElementById("lowpassQuality");
+        lowpassQuality.style.display = "block";
+        lowpassQuality.style.left = e.pageX + "px";
+        lowpassQuality.style.top = e.pageY + "px";
+    }
+
+    displayHighshelfFrequencyBox(e){
+        let highshelfFrequency = document.getElementById("highshelfFrequency");
+        highshelfFrequency.style.display = "block";
+        highshelfFrequency.style.left = e.pageX + "px";
+        highshelfFrequency.style.top = e.pageY + "px";
+    }
+
+    vanishVolumeBox() {
+        document.getElementById("volumeBox").style.display = "none";
+    }
+
+    vanishLowpassFrequencyBox(){
+        document.getElementById("lowpassFrequency").style.display = "none";
+
+    }
+
+    vanishLowpassQualityBox(){
+        document.getElementById("lowpassQuality").style.display = "none";
+    }
+
+    vanishHighshelfFrequencyBox(){
+        document.getElementById("highshelfFrequency").style.display = "none";
+    }
+
+    render() {
+        return <div className="filterBox">
+            <Checkbox audioPlayerJS={this.audioPlayerJS}/>
+            <div className="sliderBox">
+                <input className="sliderFilter"
+                       type="range"
+                       min={0}
+                       max={100}
+                       defaultValue={100}
+                       onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}
+                       onMouseEnter={this.displayVolumeBox.bind(this)}
+                       onMouseLeave={this.vanishVolumeBox.bind(this)}/>
+                <div className="filterBubble" id="volumeBox">Volume</div>
+                <input className="sliderFilter"
+                       type="range"
+                       min={0}
+                       max={1}
+                       step={0.01}
+                       defaultValue={1}
+                       onChange={event => this.audioPlayerJS.changeLowpassFilterFrequency(event.target.value)}
+                       onMouseEnter={this.displayLowpassFrequencyBox.bind(this)}
+                       onMouseLeave={this.vanishLowpassFrequencyBox.bind(this)}/>
+                <div className="filterBubble" id="lowpassFrequency">Lowpass Frequency</div>
+                <input className="sliderFilter"
+                       type="range"
+                       min={0} max={1}
+                       step={0.01}
+                       defaultValue={0}
+                       onChange={event => this.audioPlayerJS.changeLowpassFilterQuality(event.target.value)}
+                       onMouseEnter={this.displayLowpassQualityBox.bind(this)}
+                       onMouseLeave={this.vanishLowpassQualityBox.bind(this)}/>
+                <div className="filterBubble" id="lowpassQuality">Lowpass Quality</div>
+                <input className="sliderFilter"
+                       type="range"
+                       min={0} max={9500} step={1}
+                       defaultValue={9500}
+                       onChange={event => this.audioPlayerJS.changeHighshelfFilterFrequency(parseInt(event.target.value))}
+                       onMouseEnter={this.displayHighshelfFrequencyBox.bind(this)}
+                       onMouseLeave={this.vanishHighshelfFrequencyBox.bind(this)}/>
+                <div className="filterBubble" id="highshelfFrequency">Highshelf Frequency</div>
+            </div>
         </div>
-      </div>
-    )
-  }
+    }
 }
-
 export default AudioBox

@@ -2,7 +2,7 @@ import React from "react";
 
 class Checkbox extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.clickLowPass = this.clickLowPass.bind(this);
@@ -11,29 +11,29 @@ class Checkbox extends React.Component {
         this.audioPlayerJS = this.props.audioPlayerJS;
     }
 
-    clickLowPass(event) {
+    clickLowPass() {
         this.audioPlayerJS.toggleLowpass();
     }
 
-    clickHighshelf(event) {
+    clickHighshelf() {
         this.audioPlayerJS.toggleHighshelf();
     }
 
-    render(){
+    render() {
 
-        let lowPass={
+        let lowPass = {
             width: '59%',
         };
 
         return (
             <div>
-                <p className="filterTitle" style={lowPass}>Low pass filter:</p>
+                <p className="filterTitle" style={lowPass}>Lowpass:</p>
                 <input
                     className="container"
                     type="checkbox"
                     onClick={this.clickLowPass}
                 />
-                <p className="filterTitle">High shelf filter:</p>
+                <p className="filterTitle">Highshelf:</p>
                 <input
                     className="container"
                     type="checkbox"
