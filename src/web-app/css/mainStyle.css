@@ -714,12 +714,14 @@ input[type=checkbox] {
 .filterBubble
 {
     position: absolute;
-    width: 280px;
-    height: 120px;
+    width: 13rem;
+    height: 40px;
     padding: 0;
-    background: #FFFFFF;
+    background: #1e1e1e;
     border-radius: 0;
     display: none;
+    border: #e5004b solid 3px;
+    left: 3.75%;
 }
 
 .filterBubble:after
@@ -728,14 +730,29 @@ input[type=checkbox] {
     position: absolute;
     border-style: solid;
     border-width: 10px 10px 0;
-    border-color: #FFFFFF transparent;
+    border-color: #e5004b transparent;
     display: block;
     width: 0;
     z-index: 1;
+    margin-left: -10px;
     bottom: -10px;
-    left: 130px;
+    left: 50%;
 }
 
+.filterBubble:before
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 12px 12px 0;
+    border-color: #e5004b transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+    margin-left: -12px;
+    bottom: -15px;
+    left: 50%;
+}
 
 .checkboxThree input[type=checkbox] {
     visibility: hidden;
@@ -788,4 +805,11 @@ input[type=checkbox] {
 .checkboxThree input[type=checkbox]:checked + label {
     left: 4.5rem;
     background: #6AAF2C;
+}
+
+.filterInfo{
+    width: 100%;
+    height: auto;
+    padding: 1rem 0 0 0;
+    background: #494949;
 }
