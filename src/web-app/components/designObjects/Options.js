@@ -1,5 +1,5 @@
 import React from 'react';
-import {Sidebar} from '../test/sidebar.js';
+import {Sidebar} from '../../services/sidebar-service.js'
 
 export default class OptionsButton extends React.Component {
     constructor(props) {

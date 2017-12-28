@@ -1,12 +1,8 @@
 import React from 'react'
 
-//used Functions
-import {Config} from '../test/filepath.js';
-
-//Components
-import Line from './Line.js';
+import Line from './designObjects/Line.js';
+import {Config} from '../services/file-path-service.js';
 import FileService from '../services/file-service.js';
-
 
 export default class FormPage extends React.Component {
 

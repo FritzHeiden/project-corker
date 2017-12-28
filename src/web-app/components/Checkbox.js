@@ -46,3 +46,13 @@ export default class Checkbox extends React.Component {
     }
 }
 
+
+{/*
+<div class="checkboxThree">
+					<input type="checkbox" value="1" id="checkboxThreeInputMob" name="slider" onclick="sliderState()" />
+					<label for="checkboxThreeInputMob"></label>
+				</div>
+*/
+}
+
+

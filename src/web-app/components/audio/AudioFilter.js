@@ -1,6 +1,5 @@
 import React from 'react'
-//Components
-import Checkbox from './Checkbox.js'
+import Checkbox from '../Checkbox.js'
 
 export default class AudioFilter extends React.Component {
 
@@ -28,7 +27,7 @@ export default class AudioFilter extends React.Component {
         }
     }
 
-    /* Doesn't work well */
+    /* Doesn't work */
     changeVolume(event) {
 
         if (this.state.clicked === 1) {
@@ -60,6 +59,7 @@ export default class AudioFilter extends React.Component {
         }
     }
 
+    /***********************Fritz fragen wo das hin soll am besten (vllt. audio verzeichnis?)**************************/
     displayVolumeBox(e) {
         let volumeBox = document.getElementById("volumeBox");
         volumeBox.style.display = "block";
@@ -104,6 +104,8 @@ export default class AudioFilter extends React.Component {
     vanishHighshelfFrequencyBox(){
         document.getElementById("highshelfFrequency").style.display = "none";
     }
+
+    /******************************************************************************************************************/
 
     render() {
         return <div className="filterBox">

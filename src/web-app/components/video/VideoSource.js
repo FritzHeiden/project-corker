@@ -60,7 +60,7 @@ export default class VideoSource extends React.Component {
         return (
             <div>
                 <video id="film" width="100" height="100">
-                    <source src="test.ogv" type="video/ogg"/>
+                    <source src="../test.ogv" type="video/ogg"/>
                     {/* TODO Findet Video nicht */}
                 </video>
                 <canvas id="zwischenablage" width="100" height="100" style={displayNone}></canvas>

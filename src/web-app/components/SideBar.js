@@ -1,11 +1,8 @@
 import React from 'react'
 
-//Components
-import {Config} from '../test/filepath.js'
-import {Sidebar} from '../test/sidebar.js'
-
-//used Functions
 import FileService from '../services/file-service.js'
+import {Config} from '../services/file-path-service.js'
+import {Sidebar} from '../services/sidebar-service.js'
 
 
 export default class SideBar extends React.Component {

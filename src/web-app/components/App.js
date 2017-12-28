@@ -1,19 +1,16 @@
 import React from 'react'
 
-//Components
 import SideBar from './SideBar.js'
-import FinalVideo from './FinalVideo.js'
-import AudioBox from './AudioBox.js'
-import VideoBox from './VideoBox.js'
+import FinalVideo from './video/FinalVideo.js'
+import AudioBox from './audio/AudioBox.js'
+import VideoBox from './video/VideoBox.js'
 import Login from './Login.js'
 import FileBrowser from './FileBrowser.js'
 
-//Used Funktions
 import FileService from '../services/file-service.js'
 
-/* Images */
-import BackgroundImage from '../svg/background.js'
-import Options from './Options.js'
+import Background from './designObjects/Background.js'
+import Options from './designObjects/Options.js'
 //import BackgroundImage from 'react-svg-loader!../svg/Background.svg'; // just works with folder.js
 
 export default class App extends React.Component {
@@ -30,7 +27,7 @@ export default class App extends React.Component {
 
         return (
             <div>
-                <BackgroundImage/>
+                <Background/>
                 <h1 className="projectTitle" style={{opacity: '0', display: 'none'}}>{title}</h1>
 
                 <div id="login" className="login">

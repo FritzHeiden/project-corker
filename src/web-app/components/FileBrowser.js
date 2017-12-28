@@ -1,92 +1,87 @@
 import React from 'react'
 
 // used Functions
-import { Config } from '../test/filepath.js'
-//import Folder from '../svg/folder.js'
+import {Config} from '../services/file-path-service.js'
+import Folder from './designObjects/Folder.js'
 
-import Folder from 'react-svg-loader!../svg/folder.svg';
+//import Folder from 'react-svg-loader!../svg/folder.svg';
 
 export default class FileBrowser extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {files: []}
+    constructor(props) {
+        super(props)
+        this.state = {files: []}
 
-    this.fileService = props.fileService
-    Config.onPathChange = this.updateFileList.bind(this)
-//    this.updateFileList();
-    FileBrowser.mouseDragged = FileBrowser.mouseDragged.bind(this)
+        this.fileService = props.fileService
+        Config.onPathChange = this.updateFileList.bind(this)
+        FileBrowser.mouseDragged = FileBrowser.mouseDragged.bind(this)
 
-    this.tableCounter = 0
-  }
-
-  static mouseDragged (event) {
-    event.dataTransfer.setData('text', event.target.id)
-  }
-
-  updateFileList (path) {
-    //let path = Config.path;
-    // console.log("From FileBrowser: " + path);
-
-    if (path !== '') {
-      this.fileService.getFiles(path).then(files => {
-        let state = this.state
-        // console.log(files);
-
-        state.files = files
-        this.setState(state)
-      }).catch(error => {
-        console.error(error)
-      })
+        this.tableCounter = 0
     }
 
-    /*
-      let path = Filepath.path;
-      this.fileService.getFiles(path).then(function(files){
-        let state = this.state;
-        state.files = state;
-        this.setState(state);
-      }).catch(function(){
+    static mouseDragged(event) {
+        event.dataTransfer.setData('text', event.target.id)
+    }
 
-    };*/
-  }
+    updateFileList(path) {
+        if (path !== '') {
+            this.fileService.getFiles(path).then(files => {
+                let state = this.state
 
-  updateTable () {
+                state.files = files
+                this.setState(state)
+            }).catch(error => {
+                console.error(error)
+            })
+        }
 
-    let table = this.state.files.filter(file => {
-      //return file.extension === "wav";
-      return file
-    }).map(file => {
-      this.tableCounter = this.tableCounter + 1
-      // console.log(this.tableCounter);
-      return (<tr>
-        <td id={this.tableCounter} key={this.tableCounter} draggable="true"
-            onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
-      </tr>)
-    })
-    // console.log(table);
-    return (table)
-  }
+        /*
+          let path = Filepath.path;
+          this.fileService.getFiles(path).then(function(files){
+            let state = this.state;
+            state.files = state;
+            this.setState(state);
+          }).catch(function(){
 
-  render () {
-    const {title} = this.props
+        };*/
+    }
 
-    return (
-      <div>
-        <h3>{title}</h3>
-        <div className="musicFolder">
-          <table>
-            <tbody>
-            <tr>
-              <td><Folder/></td>
-            </tr>
-            <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
-              <td></td>
-            </tr>
-            {this.updateTable()}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    )
-  }
+    updateTable() {
+        let table = this.state.files.filter(file => {
+            //return file.extension === "wav";
+            //if(file.extension === "wav" || file.extension === "mp3"){
+            // return file
+            //}
+            return file
+        }).map(file => {
+            this.tableCounter = this.tableCounter + 1
+            return (<tr>
+                <td id={file.path} key={this.tableCounter} draggable="true"
+                    onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
+            </tr>)
+        })
+        return (table)
+    }
+
+    render() {
+        const {title} = this.props
+
+        return (
+            <div>
+                <h3>{title}</h3>
+                <div className="musicFolder">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><Folder/></td>
+                        </tr>
+                        <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
+                            <td></td>
+                        </tr>
+                        {this.updateTable()}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        )
+    }
 }

@@ -1,25 +1,27 @@
 import React from 'react'
 
-export default class AudioBar extends React.Component {
+export class AudioBar extends React.Component {
 
     constructor(props) {
         super(props);
     }
 
-    allowDrop(e) {
-        //this.allowDrop(this);
+    static allowDrop(e) {
         e.preventDefault();
         e.dataTransfer.setData('text', e.target.id);
+        console.log(e.target.id);
+        alert("Hallo from AllowDrop");
     }
 
-    drop(e) {
-        //drop.drop(this);
+    static drop(e) {
         e.preventDefault();
         var data = e.dataTransfer.getData('text');
-        // console.log(document.getElementById(data).innerText);
+        console.log(e.target.id);
+        alert("Hallo from Drop");
+        console.log(document.getElementById(data));
     }
 
-    updateSoundBar() {
+    static updateSoundBar() {
         const numbers = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
 
         let listItems = numbers.map((number, index) =>
@@ -43,8 +45,8 @@ export default class AudioBar extends React.Component {
             };
 
         return (
-            <div id="testMusic" style={overflowY} onDrop={this.drop.bind(this)}
-                 onDragOver={this.allowDrop.bind(this.event)}>
+            <div id="testMusic" style={overflowY} onDrop={AudioBar.drop.bind(this)}
+                 onDragOver={AudioBar.allowDrop.bind(this.event)}>
                 <div style={audio}>
                     {this.updateSoundBar()}
                 </div>
