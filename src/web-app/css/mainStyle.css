@@ -654,13 +654,12 @@ input[type="text"].closeInput{
     animation-fill-mode: forwards;
     animation-duration: 10s;
     animation-delay: 1s;
-    height: 43px;
     width: 10px;
     background-color: #494949;
-    padding: 0 5px 0 5px;
     margin: 0 2.5px 0 2.5px;
     float: right;
     position: relative;
+    padding: 0 5px 0 5px;
 }
 
 @keyframes moveBar {

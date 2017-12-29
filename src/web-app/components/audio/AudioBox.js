@@ -1,16 +1,20 @@
 import React from 'react'
 
-//Components
 import Line from '../designObjects/Line.js'
 import StartStopButton from '../designObjects/StartStopButton.js'
 import AudioPlayerJS from '../../audio/player.js'
-import AudioFile from '../../data/audio-file'
 import AudioFilter from './AudioFilter.js'
+import AudioInfo from './AudioInformation.js'
 import AudioBar from './AudioBox.js'
+
+import AudioFile from '../../data/audio-file'
+
 
 class AudioBox extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {usedFilter: ''}
+
         this._fileService = props.fileService;
         this._audioContext = props.audioContext;
         this._audioPlayer = new AudioPlayerJS(this._audioContext);
@@ -20,16 +24,30 @@ class AudioBox extends React.Component {
             this._audioFile = audioFile
             this._audioPlayer.loadAudioFile(this._audioFile)
         })
+        this.filterChanged = '';
+    }
+
+    onFilterUsed(filter){
+        console.log("From AudioBox: " + filter)
+        this.setState({usedFilter: filter})
+        console.log("AudioBox State: " + this.state.usedFilter)
     }
 
     render() {
+
+        //console.log(this.state.usedFilter)
         return (
             <div className="audioBox">
                 <AudioPlayer/>
                 <Line/>
                 <StartStopButton _audioPlayer={this._audioPlayer}/>
                 <Line/>
-                <AudioFilter audioPlayerJS={this._audioPlayer}/>
+                <AudioFilter
+                    audioPlayerJS={this._audioPlayer}
+                    onFilterUsed={this.onFilterUsed.bind(this)}/>
+                <Line/>
+                <AudioInfo filterChanged={this.state.usedFilter}/>
+
             </div>
         )
     }
@@ -59,10 +77,10 @@ class AudioPlayer extends React.Component {
     }
 
     static updateSoundBar() {
-        const numbers = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
+        const numbers = [95, 95, 95, 95, 50, 50, 50, 50, 50, 75, 75, 75, 75, 75,]; //max height is 95
 
         let listItems = numbers.map((number, index) =>
-            <div className='bar' style={{height: number}} key={index}></div>
+            <div className='bar' style={{height: number,}} key={index}></div>
         );
         return listItems
     }
@@ -75,15 +93,15 @@ class AudioPlayer extends React.Component {
                 height: '6rem',
                 backgroundColor: '#1e1e1e',
                 margin: '2%',
-            };
-
-        let overflowY =
-            {
-                overflowY: 'hidden',
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'nowrap',
+                alignItems: 'flex-end',
+                overflow: 'hidden',
             };
 
         return (
-            <div id="testMusic" style={overflowY} onDrop={AudioPlayer.drop.bind(this)}
+            <div id="testMusic" onDrop={AudioPlayer.drop.bind(this)}
                  onDragOver={AudioPlayer.allowDrop.bind(this.event)}>
                 <div style={audio}>
                     {AudioPlayer.updateSoundBar()}
