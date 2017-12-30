@@ -35,22 +35,18 @@ export default class SideBar extends React.Component {
         })
     }
 
+    onTransparentMainClicked(){
+        Sidebar.closeSidebar()
+    }
+
     render() {
         const correctPath = this.state.correctPath
 
         return (
-            <div id="sideBar" className="sideBar">
-                <h3>Do you wanna change the file path?</h3>
-                {correctPath ? (
-                    <input className="path"
-                           id="sideBarInput"
-                           name="filePath"
-                           type="text"
-                           placeholder={'New file path'}
-                           onKeyPress={this.handleEnter.bind(this)}
-                    />
-                ) : (
-                    <div>
+            <div  id="fullTransparent" className="fullTransparent">
+                <div id="sideBar" className="sideBar">
+                    <h3>Do you wanna change the file path?</h3>
+                    {correctPath ? (
                         <input className="path"
                                id="sideBarInput"
                                name="filePath"
@@ -58,10 +54,21 @@ export default class SideBar extends React.Component {
                                placeholder={'New file path'}
                                onKeyPress={this.handleEnter.bind(this)}
                         />
-                        <div className="wrongPath"/>
-                        <p>Path not found! Please check the spelling.</p>
-                    </div>
-                )}
+                    ) : (
+                        <div>
+                            <input className="path"
+                                   id="sideBarInput"
+                                   name="filePath"
+                                   type="text"
+                                   placeholder={'New file path'}
+                                   onKeyPress={this.handleEnter.bind(this)}
+                            />
+                            <div className="wrongPath specialSideWrongPath"/>
+                            <p>Path not found! Please check the spelling.</p>
+                        </div>
+                    )}
+                </div>
+                <div className="transparentPart" id="transparentPart" onClick={this.onTransparentMainClicked}></div>
             </div>
         )
     }

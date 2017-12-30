@@ -329,7 +329,6 @@ div.errorMessage p {
     top: 10%;
 }
 
-
 .pushButton {
     width: 75%;
     background-color: #e5004b;
@@ -546,21 +545,18 @@ input[type="text"].closeInput{
 }
 
 
-/* Navigation bar*/
 
 /* The side navigation menu */
 .sideBar {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
     z-index: 101; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    background-color: #1e1e1e;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
     text-align: center;
+    float: left;
 }
 
 .sideBar h3 {
@@ -584,13 +580,46 @@ input[type="text"].closeInput{
     text-align: center;
 }
 
+.fullTransparent{
+    width: 0;
+    height: 100%;
+    display: flex;
+    z-index: 101; /* Stay on top */
+    flex-direction: row;
+    position: fixed; /* Stay in place */
+}
+
+.transparentPart {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    z-index: 101; /* Stay on top */
+    background-color: rgba(30,30,30,0.65); /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    float: left;
+    cursor: pointer;
+}
+
+.restScreen{
+    height: 100%;
+    width: auto;
+    color: rgba(215, 44, 44, 0.5);
+}
+
 .wrongPath {
     background-color: #e5004b;
     width: 4%;
     height: 2.5rem;
     position: relative;
-    top: -4.5rem;
-    left: 6.0rem;
+    top: -4.6rem;
+    left: 11%;
+}
+
+.specialSideWrongPath {
+    top: -2.4rem;
+    height: 2.4rem;
+    left: 2%;
 }
 
 .online {
@@ -608,6 +637,8 @@ input[type="text"].closeInput{
     width: 18rem;
     height: 120px;
     padding: 0;
+    top: 32%;
+    left: 104%;
     background: #494949;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -710,8 +741,7 @@ input[type=checkbox] {
     cursor: pointer;
 }
 
-.filterBubble
-{
+.filterBubble {
     position: absolute;
     width: 13rem;
     height: 40px;
@@ -723,8 +753,7 @@ input[type=checkbox] {
     left: 3.75%;
 }
 
-.filterBubble:after
-{
+.filterBubble:after {
     content: '';
     position: absolute;
     border-style: solid;
@@ -738,8 +767,7 @@ input[type=checkbox] {
     left: 50%;
 }
 
-.filterBubble:before
-{
+.filterBubble:before {
     content: '';
     position: absolute;
     border-style: solid;
@@ -806,7 +834,7 @@ input[type=checkbox] {
     background: #6AAF2C;
 }
 
-.filterInfo{
+.filterInfo {
     width: 100%;
     height: auto;
     padding: 1rem 0 0 0;

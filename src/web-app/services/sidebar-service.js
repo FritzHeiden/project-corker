@@ -1,25 +1,28 @@
-class Sidebar{
+class Sidebar {
 
-  constructor(){
-  }
+    constructor() {
+    }
 
-  showSidebar(){
-    document.getElementById("sideBar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "0px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.3)";
-    document.getElementById("sideBarInput").focus();
+    showSidebar() {
+        document.getElementById("fullTransparent").style.width = "100vw";
+        document.getElementById("transparentPart").style.width = "85%";
+        document.getElementById("sideBar").style.width = "15%";
+        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("sideBarInput").focus();
+    }
 
-  }
+    closeSidebar() {
+        document.getElementById("fullTransparent").style.width = "0";
+        document.getElementById("transparentPart").style.width = "0";
+        document.getElementById("sideBar").style.width = "0";
 
-  closeSidebar() {
-      document.getElementById("sideBar").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
-      document.body.style.backgroundColor = "#1e1e1e";
+        document.getElementById("main").style.marginLeft = "0";
+        document.body.style.backgroundColor = "#1e1e1e";
 
-      setTimeout(function(){
-        document.getElementById('sideBarInput').value = "";
-      },1000);
-  }
+        setTimeout(function () {
+            document.getElementById('sideBarInput').value = "";
+        }, 1000);
+    }
 
 }
 
