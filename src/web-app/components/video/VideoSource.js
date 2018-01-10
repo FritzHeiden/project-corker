@@ -150,12 +150,17 @@ style={displayNone}
         super(props);
 
         this.state = {
-            play: false,
+            interval: undefined,
+            ctx: undefined
         };
 
-        VideoSource.drop = VideoSource.drop.bind(this);
-        VideoSource.allowDrop = VideoSource.allowDrop.bind(this);
-        this.videoStartStop = this.videoStartStop.bind(this);
+        this.computeFrame = this.computeFrame.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            ctx: this.canvas.getContext("2d")
+    });
 
         /**
          onPause:Function - Callback to pause video
@@ -169,18 +174,45 @@ style={displayNone}
         if (this.state.play === false) {
             this.setState({play: true});
         }
-        else if (this.state.play === true) {
-            this.setState({play: false});
+    }
+
+    chromaKeyAlpha() {
+        let imageData = this.state.ctx.getImageData(0, 0, 400, 220);
+        let data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+            data[i + 3] = (data[i] + data[i + 1] + data[i + 2]) / 3; // blue
         }
+
+        this.state.ctx.putImageData(imageData, 0, 0);
     }
 
-    static allowDrop(e) {
-        e.preventDefault();
+    invertColor() {
+        let imageData = this.state.ctx.getImageData(0, 0, 400, 220);
+        let data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+            data[i] = 255 - data[i];         // red
+            data[i + 1] = 255 - data[i + 1]; // green
+            data[i + 2] = 255 - data[i + 2]; // blue
+        }
+
+        this.state.ctx.putImageData(imageData, 0, 0);
     }
 
-    static drop(e) {
-        e.preventDefault();
-        //var data = e.dataTransfer.getData("text");
-        // console.log("dropped");
-    }
+    grayScale() {
+        let imageData = this.state.ctx.getImageData(0, 0, 400, 220);
+        let data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+            let r = data[i];
+            let g = data[i + 1];
+            let b = data[i + 2];
+
+            let y = (0.2126 * r + 0.7152 * g + 0.0722 * b);
+
+            data[i] = y;
+            data[i + 1] = y;
+            data[i + 2] = y;
+        }
+
+        this.state.ctx.putImageData(imageData, 0, 0);
+    }V
     */

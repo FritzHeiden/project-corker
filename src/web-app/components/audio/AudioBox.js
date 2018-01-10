@@ -15,11 +15,13 @@ class AudioBox extends React.Component {
         super(props);
         this.state = ({
             usedFilterError: '',
+          volume: 100
         });
 
         this._fileService = props.fileService;
         this._audioContext = props.audioContext;
         this._audioPlayer = this.props.audioPlayer || new AudioPlayerJS(this._audioContext)
+      this._audioPlayer.listenOnVolumeChange(this.onVolumeChange.bind(this))
 
 
       // for testing
@@ -32,6 +34,11 @@ class AudioBox extends React.Component {
 
     onFilterUsed(filter){
         this.setState({usedFilterError: filter})
+    }
+
+    onVolumeChange (volume) {
+    this.state.volume = volume
+    this.setState(this.state)
     }
 
     render() {
@@ -47,9 +54,9 @@ class AudioBox extends React.Component {
                        type="range"
                        min={0}
                        max={100}
-                       defaultValue={100}
+                       value={this.state.volume * 100}
                        name="Volume"
-                       onChange={event => this._audioPlayer.changeVolume(parseInt(event.target.value))}/>
+                       onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
                 <Line/>
                 <AudioFilter
                     audioPlayerJS={this._audioPlayer}
