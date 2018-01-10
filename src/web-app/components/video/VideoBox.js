@@ -11,7 +11,7 @@ export default class VideoBox extends React.Component {
 
     render() {
         return (
-            <div className="audioBox">
+            <div className="mediaBox">
                 <VideoSource/>
                 <Line/>
                 <StartStopButton changeStartStop={this.videoStartStop}/>

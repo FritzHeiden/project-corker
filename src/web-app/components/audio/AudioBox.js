@@ -37,17 +37,25 @@ class AudioBox extends React.Component {
     render() {
         //console.log(this.state.usedFilter)
         return (
-            <div className="audioBox">
+            <div className="mediaBox">
                 <AudioPlayer/>
                 <Line/>
                 <StartStopButton _audioPlayer={this._audioPlayer}/>
+                <Line/>
+                <p>Volume</p>
+                <input className="sliderFilter"
+                       type="range"
+                       min={0}
+                       max={100}
+                       defaultValue={100}
+                       name="Volume"
+                       onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
                 <Line/>
                 <AudioFilter
                     audioPlayerJS={this._audioPlayer}
                     onFilterUsed={this.onFilterUsed.bind(this)}/>
                 <Line/>
                 <AudioInfo filterChanged={this.state.usedFilter}/>
-
             </div>
         )
     }

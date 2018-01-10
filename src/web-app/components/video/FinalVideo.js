@@ -9,13 +9,21 @@ export default class Video extends React.Component {
   render(){
     return(
       <div className="finalVideo">
-        <canvas/>
+          <video ref={video => (this.video = video)} muted>
+              <source
+                  src="https://www.w3schools.com/html/mov_bbb.mp4"
+                  type="video/mp4"
+              />
+          </video>
       </div>
     );
   }
 }
 
-{/*        <VideoPlayer style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"/>
+{/*
+    <canvas/>
+
+    <VideoPlayer style={video} src="http://www.html5rocks.com/en/tutorials/video/basics/devstories.mp4"/>
 
     let video =
     {

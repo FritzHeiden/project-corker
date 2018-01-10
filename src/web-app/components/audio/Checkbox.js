@@ -37,7 +37,7 @@ export default class Checkbox extends React.Component {
     render() {
 
         let lowPass = {
-            width: '40%',
+            width: '32%',
         };
 
         return (

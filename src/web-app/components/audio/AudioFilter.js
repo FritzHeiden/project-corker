@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-
-import Checkbox from '../Checkbox.js'
+import Checkbox from './Checkbox.js'
 
 export default class AudioFilter extends React.Component {
 
@@ -76,6 +75,7 @@ export default class AudioFilter extends React.Component {
                        onMouseEnter={this.displayInfo.bind(this)}
                        onMouseLeave={this.vanishInfo.bind(this)}/>
                 <div className="filterBubble" id="volumeBox"><p>Volume</p></div>
+                <p>Lowpass Frequency</p>
                 <input className="sliderFilter"
                        type="range"
                        min={0}
@@ -87,6 +87,7 @@ export default class AudioFilter extends React.Component {
                        onMouseEnter={this.displayInfo.bind(this)}
                        onMouseLeave={this.vanishInfo.bind(this)}/>
                 <div className="filterBubble" id="lowpassFrequency"><p>Lowpass Frequency</p></div>
+                <p>Lowpass Quality</p>
                 <input className="sliderFilter"
                        type="range"
                        min={0} max={1}
@@ -97,6 +98,7 @@ export default class AudioFilter extends React.Component {
                        onMouseEnter={this.displayInfo.bind(this)}
                        onMouseLeave={this.vanishInfo.bind(this)}/>
                 <div className="filterBubble" id="lowpassQuality"><p>Lowpass Quality</p></div>
+                <p>Highshelf Frequency</p>
                 <input className="sliderFilter"
                        type="range"
                        min={0} max={9500} step={1}
