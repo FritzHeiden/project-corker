@@ -21,12 +21,6 @@ export default class App extends React.Component {
 
         this._fileService = new FileService('localhost', 2345)
         this._audioContext = new (window.AudioContext || window.webkitAudioContext)()
-      this._midiController = new MidiController()
-      this._midiController.initialize()
-      this._midiController.listenOnCrossFaderChange(value => {console.log('cross fader action!', value)})
-      this._midiController.listenOnFxButtonChange((value, mode) => console.log('fx button', value, 'mode:', mode))
-      this._midiController.listenOnFxKnob4Column1Change((value, mode) => console.log('fx knob 4 row 1', value, 'mode:', mode))
-      this._midiController.listenOnBrowseKnobChange((value, mode) => console.log('browse knob!', value, 'mode:', mode))
     }
 
     render() {
