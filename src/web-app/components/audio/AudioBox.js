@@ -17,9 +17,10 @@ class AudioBox extends React.Component {
 
         this._fileService = props.fileService;
         this._audioContext = props.audioContext;
-        this._audioPlayer = new AudioPlayerJS(this._audioContext);
+        this._audioPlayer = this.props.audioPlayer || new AudioPlayerJS(this._audioContext)
 
-        // for testing
+
+      // for testing
         this._loadAudioFile('04-EnjoyTheSilence.mp3').then(audioFile => {
             this._audioFile = audioFile
             this._audioPlayer.loadAudioFile(this._audioFile)
@@ -34,7 +35,6 @@ class AudioBox extends React.Component {
     }
 
     render() {
-
         //console.log(this.state.usedFilter)
         return (
             <div className="audioBox">

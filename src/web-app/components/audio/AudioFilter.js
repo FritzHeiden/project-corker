@@ -7,11 +7,41 @@ export default class AudioFilter extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {usedFilter: ''}
+        this.state = {
+          usedFilter: '',
+          volume: 100,
+          lowpassFrequency: 1,
+          lowpassQuality: 0,
+          highshelfFrequency: 9500
+        }
 
         this.displayInfo = this.displayInfo.bind(this)
         this.vanishInfo = this.vanishInfo.bind(this)
         this.audioPlayerJS = this.props.audioPlayerJS;
+        this.audioPlayerJS.listenOnVolumeChange(this.onVolumeChange.bind(this))
+        this.audioPlayerJS.listenOnLowpassFrequencyChange(this.onLowpassFrequencyChange.bind(this))
+        this.audioPlayerJS.listenOnLowpassQualityChange(this.onLowpassQualityChange.bind(this))
+        this.audioPlayerJS.listenOnHighshelfFrequencyChange(this.onHighshelfFrequencyChange.bind(this))
+    }
+
+    onVolumeChange (volume) {
+      this.state.volume = volume
+      this.setState(this.state)
+    }
+
+    onLowpassQualityChange (quality) {
+      this.state.lowpassQuality = quality
+      this.setState(this.state)
+    }
+
+    onLowpassFrequencyChange (frequency) {
+      this.state.lowpassFrequency = frequency
+      this.setState(this.state)
+    }
+
+    onHighshelfFrequencyChange (frequency) {
+      this.state.highshelfFrequency = frequency
+      this.setState(this.state)
     }
 
     displayInfo(e){
@@ -40,7 +70,7 @@ export default class AudioFilter extends React.Component {
                        type="range"
                        min={0}
                        max={100}
-                       defaultValue={100}
+                       value={this.state.volume * 100}
                        name="Volume"
                        onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}
                        onMouseEnter={this.displayInfo.bind(this)}
@@ -51,7 +81,7 @@ export default class AudioFilter extends React.Component {
                        min={0}
                        max={1}
                        step={0.01}
-                       defaultValue={1}
+                       value={this.state.lowpassFrequency}
                        name="Lowpass Frequency"
                        onChange={event => this.audioPlayerJS.changeLowpassFilterFrequency(event.target.value)}
                        onMouseEnter={this.displayInfo.bind(this)}
@@ -61,7 +91,7 @@ export default class AudioFilter extends React.Component {
                        type="range"
                        min={0} max={1}
                        step={0.01}
-                       defaultValue={0}
+                       value={this.state.lowpassQuality}
                        name="Lowpass Quality"
                        onChange={event => this.audioPlayerJS.changeLowpassFilterQuality(event.target.value)}
                        onMouseEnter={this.displayInfo.bind(this)}
@@ -70,7 +100,7 @@ export default class AudioFilter extends React.Component {
                 <input className="sliderFilter"
                        type="range"
                        min={0} max={9500} step={1}
-                       defaultValue={9500}
+                       value={this.state.highshelfFrequency}
                        name="Highshelf Frequency"
                        onChange={event => this.audioPlayerJS.changeHighshelfFilterFrequency(parseInt(event.target.value))}
                        onMouseEnter={this.displayInfo.bind(this)}

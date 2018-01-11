@@ -12,6 +12,7 @@ import FileService from '../services/file-service.js'
 import Background from './designObjects/Background.js'
 import Options from './designObjects/Options.js'
 import MidiController from '../controller/midi-controller'
+import AudioPlayerJS from '../audio/player'
 //import BackgroundImage from 'react-svg-loader!../svg/Background.svg'; // just works with folder.js
 
 export default class App extends React.Component {
@@ -19,8 +20,75 @@ export default class App extends React.Component {
     constructor(props) {
         super(props)
 
+      this.state = {crossFader: 0.5}
+
         this._fileService = new FileService('localhost', 2345)
         this._audioContext = new (window.AudioContext || window.webkitAudioContext)()
+
+      this._midiController = new MidiController()
+      this._midiController.initialize()
+
+      this._leftAudioPlayer = new AudioPlayerJS(this._audioContext)
+      this._rightAudioPlayer = new AudioPlayerJS(this._audioContext)
+
+      this.mapControllerToPlayers()
+    }
+
+    mapControllerToPlayers () {
+      // left track
+      this._midiController.listenOnVolumeFader1Change(value => this._leftAudioPlayer.changeVolume(value, 127))
+      this._midiController.listenOnCueButtonColumn1Change(value => {
+        if (value === 0) {
+          this._leftAudioPlayer.pausePlay()
+        }
+      })
+      this._midiController.listenOnOneButtonColumn1Change(value => {
+        if (value === 0) {
+          this._leftAudioPlayer.toggleLowpass()
+        }
+      })
+      this._midiController.listenOnTwoButtonColumn1Change(value => {
+        if (value === 0) {
+          this._leftAudioPlayer.toggleHighshelf()
+        }
+      })
+      this._midiController.listenOnFxKnob1Column1Change(value => this._leftAudioPlayer.changeLowpassFilterFrequency(value / 127))
+      this._midiController.listenOnFxKnob2Column1Change(value => this._leftAudioPlayer.changeLowpassFilterQuality(value / 127))
+      this._midiController.listenOnFxKnob3Column1Change(value => this._leftAudioPlayer.changeHighshelfFilterFrequency(value / 127 * 9500))
+
+      // right track
+      this._midiController.listenOnVolumeFader4Change(value => this._rightAudioPlayer.changeVolume(value, 127))
+      this._midiController.listenOnCueButtonColumn4Change(value => {
+        if (value === 0) {
+          this._rightAudioPlayer.pausePlay()
+        }
+      })
+      this._midiController.listenOnOneButtonColumn4Change(value => {
+        if (value === 0) {
+          this._rightAudioPlayer.toggleLowpass()
+        }
+      })
+      this._midiController.listenOnTwoButtonColumn4Change(value => {
+        if (value === 0) {
+          this._rightAudioPlayer.toggleHighshelf()
+        }
+      })
+      this._midiController.listenOnFxKnob1Column4Change(value => this._rightAudioPlayer.changeLowpassFilterFrequency(value / 127))
+      this._midiController.listenOnFxKnob2Column4Change(value => this._rightAudioPlayer.changeLowpassFilterQuality(value / 127))
+      this._midiController.listenOnFxKnob3Column4Change(value => this._rightAudioPlayer.changeHighshelfFilterFrequency(value / 127 * 9500))
+
+      // cross fader
+      this._midiController.listenOnCrossFaderChange((value) => {
+        value /= 127
+        this.onCrossFaderChange(value)
+      })
+    }
+
+    onCrossFaderChange (value) {
+      this._leftAudioPlayer.changeMaxVolume(value > 0.5 ? 1 - value : 0.5, 0.5)
+      this._rightAudioPlayer.changeMaxVolume(value < 0.5 ? value : 0.5, 0.5)
+      this.state.crossFader = value
+      this.setState(this.state) 
     }
 
     render() {
@@ -39,13 +107,16 @@ export default class App extends React.Component {
                     <Options/>
                     <div id="main" className="main">
                         <div className="actionBox">
-                            <AudioBox fileService={this._fileService} audioContext={this._audioContext}/>
+                            <AudioBox fileService={this._fileService} audioContext={this._audioContext}
+                                      audioPlayer={this._leftAudioPlayer}/>
                             <VideoBox/>
                             <VideoBox/>
-                            <AudioBox fileService={this._fileService} audioContext={this._audioContext}/>
+                            <AudioBox fileService={this._fileService} audioContext={this._audioContext}
+                                      audioPlayer={this._rightAudioPlayer}/>
                         </div>
                         <div className="slideContainer">
-                            <input className="crossFader" type="range" min={1} max={100} defaultValue={50}/>
+                            <input className="crossFader" type="range" step={0.01} min={0} max={1} value={this.state.crossFader}
+                            onChange={event => this.onCrossFaderChange(event.target.value)}/>
                         </div>
                         <FileBrowser title="File Browser" fileService={this._fileService}/>
                         <FinalVideo/>

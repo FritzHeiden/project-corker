@@ -8,6 +8,9 @@ export default class StartStopControl extends React.Component {
         this.state = {click: true};
         this.clicked = this.clicked.bind(this);
         this._audioPlayer = this.props._audioPlayer;
+        if (this._audioPlayer) {
+          this._audioPlayer.listenOnTogglePlay(this.onTogglePlay.bind(this))
+        }
     }
 
     clicked() {
@@ -19,6 +22,11 @@ export default class StartStopControl extends React.Component {
             this.setState({click: false});
             this._audioPlayer.pausePlay();
         }
+    }
+
+    onTogglePlay (isPaused) {
+      this.state.click = isPaused
+      this.setState(this.state)
     }
 
     render() {

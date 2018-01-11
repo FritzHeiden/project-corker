@@ -5,10 +5,15 @@ export default class Checkbox extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {lowpass: false, highshelf: false}
+
         this.clickLowPass = this.clickLowPass.bind(this);
         this.clickHighshelf = this.clickHighshelf.bind(this);
 
         this.audioPlayerJS = this.props.audioPlayerJS;
+
+      this.audioPlayerJS.listenOnToggleLowpass(this.onToggleLowpass.bind(this))
+      this.audioPlayerJS.listenOnToggleHighshelf(this.onToggleHighshelf.bind(this))
     }
 
     clickLowPass() {
@@ -18,6 +23,16 @@ export default class Checkbox extends React.Component {
     clickHighshelf() {
         this.audioPlayerJS.toggleHighshelf();
     }
+
+  onToggleLowpass (active) {
+    this.state.lowpass = active
+    this.setState(this.state)
+  }
+
+  onToggleHighshelf (active) {
+    this.state.highshelf = active
+    this.setState(this.state)
+  }
 
     render() {
 
@@ -32,12 +47,14 @@ export default class Checkbox extends React.Component {
                     className="container"
                     type="checkbox"
                     onClick={this.clickLowPass}
+                    checked={this.state.lowpass}
                 />
                 <p className="filterTitle">Highshelf:</p>
                 <input
                     className="container"
                     type="checkbox"
                     onClick={this.clickHighshelf}
+                    checked={this.state.highshelf}
                 />
 
             </div>
