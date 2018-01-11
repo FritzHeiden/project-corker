@@ -5,3 +5,5 @@
 **/dist/audio/*
 *.log
 *.lock
+*.jpg
+*.jpeg
