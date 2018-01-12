@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Line from '../designObjects/Line.js'
-import StartStopButton from '../designObjects/StartStopButton.js'
+import AudioPlayButton from './AudioPlayButton.js'
 import AudioPlayerJS from '../../audio/player.js'
 import AudioFilter from './AudioFilter.js'
 import AudioInfo from './AudioInformation.js'
@@ -40,7 +40,7 @@ class AudioBox extends React.Component {
             <div className="mediaBox">
                 <AudioPlayer/>
                 <Line/>
-                <StartStopButton _audioPlayer={this._audioPlayer}/>
+                <AudioPlayButton _audioPlayer={this._audioPlayer}/>
                 <Line/>
                 <p>Volume</p>
                 <input className="sliderFilter"
@@ -49,7 +49,7 @@ class AudioBox extends React.Component {
                        max={100}
                        defaultValue={100}
                        name="Volume"
-                       onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}/>
+                       onChange={event => this._audioPlayer.changeVolume(parseInt(event.target.value))}/>
                 <Line/>
                 <AudioFilter
                     audioPlayerJS={this._audioPlayer}

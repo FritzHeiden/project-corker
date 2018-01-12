@@ -12,6 +12,24 @@ export default class VideoSource extends React.Component {
         this.computeFrame = this.computeFrame.bind(this);
     }
 
+    componentWillReceiveProps(){
+        this.play()
+        if(this.props.useInvertColor === true){
+            this.invertColor()
+        }
+        else if(this.props.useInvertColor === false){}
+
+        if(this.props.useChromaKeyAlpha === true){
+            this.chromaKeyAlpha()
+        }
+        else if(this.props.useChromaKeyAlpha === false){}
+
+        if(this.props.useGrayScale === true){
+            this.grayScale()
+        }
+        else if(this.props.useGrayScale === false){}
+    }
+
     componentDidMount() {
         this.setState({
             ctx: this.canvas.getContext("2d")
@@ -23,12 +41,10 @@ export default class VideoSource extends React.Component {
     computeFrame() {
         this.state.ctx.drawImage(this.video, 0, 0, 400, 220);
         this.invertColor();
-        //this.chromaKeyAlpha();
-        //this.grayScale();
     }
 
     play() {
-        if (this.video.paused) {
+        if(this.props.videoStart) {
             if (this.state.interval) {
                 clearInterval(this.state.interval);
             }
@@ -104,21 +120,19 @@ export default class VideoSource extends React.Component {
 
         return (
             <div>
-                <video ref={video => (this.video = video)} muted>
+                <video ref={video => (this.video = video)}
+                       muted>
                     <source
                         src="https://www.w3schools.com/html/mov_bbb.mp4"
                         type="video/mp4"
                     />
                 </video>
                 <canvas
+                    //style={displayNone}
                     ref={canvas => (this.canvas = canvas)}
-                    style={displayNone}
                     width="100%"
                     height="100%"
                 />
-                <button type="button" onClick={this.play.bind(this)}>
-                    Play
-                </button>
             </div>
         );
     }

@@ -1,7 +1,46 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 export default class VideoFilter extends React.Component {
 
+    constructor(props){
+        super(props);
+
+        this.state ={
+            invertColor: false,
+            chromaKeyAlpha: false,
+            grayScale: false,
+        };
+    }
+
+    changeInvertColor(){
+        if(this.state.invertColor === true){
+            this.setState({invertColor: false});
+        }
+        else if(this.state.invertColor === false){
+            this.setState({invertColor: true});
+        }
+        this.props.usedFilter("invertColor", this.state.invertColor)
+    }
+
+    changeChromaKeyAlpha(){
+        if(this.state.chromaKeyAlpha === true){
+            this.setState({chromaKeyAlpha: true});
+        }
+        else if(this.state.chromaKeyAlpha === false){
+            this.setState({chromaKeyAlpha: true});
+        }
+        this.props.usedFilter("chromaKeyAlpha", this.state.chromaKeyAlpha)
+    }
+    changeGrayScale(){
+        if(this.state.grayScale === true){
+            this.setState({grayScale: true});
+        }
+        else if(this.state.grayScale === false){
+            this.setState({grayScale: true});
+        }
+        this.props.usedFilter("grayScale", this.state.grayScale)
+    }
 
     render() {
 
@@ -24,22 +63,30 @@ export default class VideoFilter extends React.Component {
                     style={leftPositionCheckbox1}
                     className="container"
                     type="checkbox"
+                    onClick={this.changeInvertColor.bind(this)}
                 />
                 <p className="filterTitle">Chroma Key Alpha:</p>
                 <input
                     className="container"
                     type="checkbox"
+                    onClick={this.changeChromaKeyAlpha.bind(this)}
                 />
                 <p className="filterTitle" style={checkboxWidth}>Gray Scale:</p>
                 <input
                     style={leftPositionCheckbox2}
                     className="container"
                     type="checkbox"
+                    onClick={this.changeGrayScale.bind(this)}
                 />
             </div>
         );
     }
 }
+
+VideoFilter.propTypes = {
+    usedFilter: PropTypes.func,
+};
+
 
 {/*
 
