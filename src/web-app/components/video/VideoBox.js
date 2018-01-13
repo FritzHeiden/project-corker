@@ -24,7 +24,7 @@ export default class VideoBox extends React.Component {
         }
     }
 
-    useFilter(usedFilter, activateFilter){
+    useFilter(usedFilter){
         if(usedFilter === "invertColor"){
             if(this.state.invertColor === false){
                 this.setState({invertColor: true});

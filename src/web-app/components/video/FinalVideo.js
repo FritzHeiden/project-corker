@@ -2,22 +2,22 @@ import React from 'react';
 
 export default class Video extends React.Component {
 
-  constructor(props){
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render(){
-    return(
-      <div className="finalVideo">
-          <video ref={video => (this.video = video)} muted>
-              <source
-                  src="https://www.w3schools.com/html/mov_bbb.mp4"
-                  type="video/mp4"
-              />
-          </video>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="finalVideo">
+                <video ref={video => (this.video = video)} muted>
+                    <source
+                        src="https://www.w3schools.com/html/mov_bbb.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+        );
+    }
 }
 
 {/*
@@ -30,4 +30,14 @@ export default class Video extends React.Component {
       height: "2rem",
       width: "7.5%",
     }
-*/}
+
+
+
+                <canvas
+                    ref={canvas => (this.canvas = canvas)}
+                    width="100%"
+                    height="100%"
+                />
+
+*/
+}

@@ -692,12 +692,11 @@ input[type="text"].closeInput{
     margin: 2%;
 }
 
-.finalVideo video{
+.finalVideo video, .finalVideo canvas{
     width: 100%;
     position: relative;
     top: 0.2rem;
 }
-
 
 .mediaBox > p, .sliderBox > p {
     font-size: 0.6rem;

@@ -20,7 +20,7 @@ export default class VideoFilter extends React.Component {
         else if(this.state.invertColor === false){
             this.setState({invertColor: true});
         }
-        this.props.usedFilter("invertColor", this.state.invertColor)
+        this.props.usedFilter("invertColor")
     }
 
     changeChromaKeyAlpha(){
@@ -30,7 +30,7 @@ export default class VideoFilter extends React.Component {
         else if(this.state.chromaKeyAlpha === false){
             this.setState({chromaKeyAlpha: true});
         }
-        this.props.usedFilter("chromaKeyAlpha", this.state.chromaKeyAlpha)
+        this.props.usedFilter("chromaKeyAlpha")
     }
     changeGrayScale(){
         if(this.state.grayScale === true){
@@ -39,7 +39,7 @@ export default class VideoFilter extends React.Component {
         else if(this.state.grayScale === false){
             this.setState({grayScale: true});
         }
-        this.props.usedFilter("grayScale", this.state.grayScale)
+        this.props.usedFilter("grayScale")
     }
 
     render() {
@@ -64,12 +64,14 @@ export default class VideoFilter extends React.Component {
                     className="container"
                     type="checkbox"
                     onClick={this.changeInvertColor.bind(this)}
+                    checked={this.state.invertColor}
                 />
                 <p className="filterTitle">Chroma Key Alpha:</p>
                 <input
                     className="container"
                     type="checkbox"
                     onClick={this.changeChromaKeyAlpha.bind(this)}
+                    checked={this.state.chromaKeyAlpha}
                 />
                 <p className="filterTitle" style={checkboxWidth}>Gray Scale:</p>
                 <input
@@ -77,6 +79,7 @@ export default class VideoFilter extends React.Component {
                     className="container"
                     type="checkbox"
                     onClick={this.changeGrayScale.bind(this)}
+                    checked={this.state.grayScale}
                 />
             </div>
         );

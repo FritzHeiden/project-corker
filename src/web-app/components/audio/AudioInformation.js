@@ -9,16 +9,11 @@ export default class AudioInformation extends React.Component {
 
     render() {
         let informationText = null;
-        this.filter = this.props.filterChanged
-        console.log("From render AudioInformation: " + this.filter)
+        this.filter = this.props.filterError
 
-        if (this.filter === 'Volume') {
-            informationText = <p>{this.filter}</p>;
-        }
-        else if (this.filter === 'Lowpass Frequency' || this.filter === 'Lowpass Quality') {
+        if (this.filter === 'Lowpass Frequency' || this.filter === 'Lowpass Quality') {
             informationText = (
                 <div>
-                    <p>{this.filter}</p>
                     <p style={{marginTop: '1rem', color: '#e5004b'}}>Lowpass has to be active!</p>
                 </div>
             );
@@ -26,12 +21,11 @@ export default class AudioInformation extends React.Component {
         else if (this.filter === 'Highshelf Frequency') {
             informationText = (
                 <div>
-                    <p>{this.filter}</p>
                     <p style={{marginTop: '1rem', color: '#e5004b'}}>Highshelf has to be active!</p>
                 </div>
             );
         }
-
+        else{informationText =(<div></div>);}
 
         return <div className="filterInfo">
             {informationText}

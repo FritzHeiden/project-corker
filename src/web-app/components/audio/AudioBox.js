@@ -13,7 +13,9 @@ import AudioFile from '../../data/audio-file'
 class AudioBox extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {usedFilter: ''}
+        this.state = ({
+            usedFilterError: '',
+        });
 
         this._fileService = props.fileService;
         this._audioContext = props.audioContext;
@@ -29,9 +31,7 @@ class AudioBox extends React.Component {
     }
 
     onFilterUsed(filter){
-        console.log("From AudioBox: " + filter)
-        this.setState({usedFilter: filter})
-        console.log("AudioBox State: " + this.state.usedFilter)
+        this.setState({usedFilterError: filter})
     }
 
     render() {
@@ -53,9 +53,9 @@ class AudioBox extends React.Component {
                 <Line/>
                 <AudioFilter
                     audioPlayerJS={this._audioPlayer}
-                    onFilterUsed={this.onFilterUsed.bind(this)}/>
+                    onFilterUsedError={this.onFilterUsed.bind(this)}/>
                 <Line/>
-                <AudioInfo filterChanged={this.state.usedFilter}/>
+                <AudioInfo filterError={this.state.usedFilterError}/>
             </div>
         )
     }

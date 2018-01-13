@@ -1,11 +1,15 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 export default class Checkbox extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {lowpass: false, highshelf: false}
+        this.state = ({
+            lowpassActive: false,
+            highshelfActive: false,
+        });
 
         this.clickLowPass = this.clickLowPass.bind(this);
         this.clickHighshelf = this.clickHighshelf.bind(this);
@@ -18,19 +22,38 @@ export default class Checkbox extends React.Component {
 
     clickLowPass() {
         this.audioPlayerJS.toggleLowpass();
+
+        if(this.state.lowpassActive === true){
+            this.setState({lowpassActive: false});
+        }
+        else if(this.state.lowpassActive === false){
+            this.setState({lowpassActive: true});
+        }
+        this.callfather("lowPass");
     }
 
     clickHighshelf() {
         this.audioPlayerJS.toggleHighshelf();
+        if(this.state.highshelfActive === true){
+            this.setState({highshelfActive: false});
+        }
+        else if(this.state.highshelfActive === false){
+            this.setState({highshelfActive: true});
+        }
+        this.callfather("highShelf");
+    }
+
+    callfather(nameCheckbox){
+        this.props.clickCheckbox(nameCheckbox);
     }
 
   onToggleLowpass (active) {
-    this.state.lowpass = active
+    this.state.lowpassActive = active
     this.setState(this.state)
   }
 
   onToggleHighshelf (active) {
-    this.state.highshelf = active
+    this.state.highshelfActive = active
     this.setState(this.state)
   }
 
@@ -47,14 +70,14 @@ export default class Checkbox extends React.Component {
                     className="container"
                     type="checkbox"
                     onClick={this.clickLowPass}
-                    checked={this.state.lowpass}
+                    checked={this.state.lowpassActive}
                 />
                 <p className="filterTitle">Highshelf:</p>
                 <input
                     className="container"
                     type="checkbox"
                     onClick={this.clickHighshelf}
-                    checked={this.state.highshelf}
+                    checked={this.state.highshelfActive}
                 />
 
             </div>
@@ -62,6 +85,10 @@ export default class Checkbox extends React.Component {
         );
     }
 }
+
+Checkbox.propTypes = {
+    changeStartStop: PropTypes.func,
+};
 
 
 {/*

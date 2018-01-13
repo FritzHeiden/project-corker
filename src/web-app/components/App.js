@@ -119,10 +119,12 @@ export default class App extends React.Component {
                             onChange={event => this.onCrossFaderChange(event.target.value)}/>
                         </div>
                         <FileBrowser title="File Browser" fileService={this._fileService}/>
-                        <FinalVideo/>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+{/*                        <FinalVideo/>
+*/}

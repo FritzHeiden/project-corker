@@ -11,11 +11,12 @@ export default class AudioFilter extends React.Component {
           volume: 100,
           lowpassFrequency: 1,
           lowpassQuality: 0,
-          highshelfFrequency: 9500
+          highshelfFrequency: 9500,
+          useLowPass: false,
+          useHighshelf: false,
         }
 
         this.displayInfo = this.displayInfo.bind(this)
-        this.vanishInfo = this.vanishInfo.bind(this)
         this.audioPlayerJS = this.props.audioPlayerJS;
         this.audioPlayerJS.listenOnVolumeChange(this.onVolumeChange.bind(this))
         this.audioPlayerJS.listenOnLowpassFrequencyChange(this.onLowpassFrequencyChange.bind(this))
@@ -50,20 +51,44 @@ export default class AudioFilter extends React.Component {
         this.onChangeFilter()
     }
 
-    vanishInfo(){
-        let state = this.state
-        state.usedFilter = ''
-        this.setState(state)
+    onChangeFilter(){
+        console.log(this.state.usedFilter)
+        console.log(this.state.useLowPass)
+        console.log(this.state.useHighshelf)
+        if((this.state.usedFilter === 'Lowpass Frequency' || this.state.usedFilter === 'Lowpass Quality') && this.state.useLowPass === false){
+            this.props.onFilterUsedError(this.state.usedFilter);
+        }
+        else if(this.state.usedFilter === 'Highshelf Frequency' && this.state.useHighshelf === false){
+            this.props.onFilterUsedError(this.state.usedFilter);
+        }
+        else{
+            this.props.onFilterUsedError('no Failure');
+        }
     }
 
-    onChangeFilter(){
-        console.log("From AudioFilter: " + this.state.usedFilter)
-        this.props.onFilterUsed(this.state.usedFilter);
+    checkboxClicked(name){
+        if(name === "lowPass") {
+            if(this.state.useLowPass === false){
+                this.setState({useLowPass: true});
+            }
+            else if(this.state.useLowPass === true){
+                this.setState({useLowPass: false});
+            }
+        }
+        else if(name === "highShelf") {
+            if(this.state.useHighshelf === false){
+                this.setState({useHighshelf: true});
+            }
+            else if(this.state.useHighshelf === true){
+                this.setState({useHighshelf: false});
+            }
+        }
+        this.onChangeFilter()
     }
 
     render() {
         return <div className="filterBox">
-            <Checkbox audioPlayerJS={this.audioPlayerJS}/>
+            <Checkbox audioPlayerJS={this.audioPlayerJS} clickCheckbox={this.checkboxClicked.bind(this)}/>
             <div className="sliderBox">
                 <input className="sliderFilter"
                        type="range"
@@ -73,7 +98,8 @@ export default class AudioFilter extends React.Component {
                        name="Volume"
                        onChange={event => this.audioPlayerJS.changeVolume(parseInt(event.target.value))}
                        onMouseEnter={this.displayInfo.bind(this)}
-                       onMouseLeave={this.vanishInfo.bind(this)}/>
+                       // onMouseLeave={this.vanishInfo.bind(this)}
+                />
                 <div className="filterBubble" id="volumeBox"><p>Volume</p></div>
                 <p>Lowpass Frequency</p>
                 <input className="sliderFilter"
@@ -85,7 +111,8 @@ export default class AudioFilter extends React.Component {
                        name="Lowpass Frequency"
                        onChange={event => this.audioPlayerJS.changeLowpassFilterFrequency(event.target.value)}
                        onMouseEnter={this.displayInfo.bind(this)}
-                       onMouseLeave={this.vanishInfo.bind(this)}/>
+                       //onMouseLeave={this.vanishInfo.bind(this)}
+                />
                 <div className="filterBubble" id="lowpassFrequency"><p>Lowpass Frequency</p></div>
                 <p>Lowpass Quality</p>
                 <input className="sliderFilter"
@@ -96,7 +123,8 @@ export default class AudioFilter extends React.Component {
                        name="Lowpass Quality"
                        onChange={event => this.audioPlayerJS.changeLowpassFilterQuality(event.target.value)}
                        onMouseEnter={this.displayInfo.bind(this)}
-                       onMouseLeave={this.vanishInfo.bind(this)}/>
+                       //onMouseLeave={this.vanishInfo.bind(this)}
+                />
                 <div className="filterBubble" id="lowpassQuality"><p>Lowpass Quality</p></div>
                 <p>Highshelf Frequency</p>
                 <input className="sliderFilter"
@@ -106,7 +134,8 @@ export default class AudioFilter extends React.Component {
                        name="Highshelf Frequency"
                        onChange={event => this.audioPlayerJS.changeHighshelfFilterFrequency(parseInt(event.target.value))}
                        onMouseEnter={this.displayInfo.bind(this)}
-                       onMouseLeave={this.vanishInfo.bind(this)}/>
+                       //onMouseLeave={this.vanishInfo.bind(this)}
+                />
                 <div className="filterBubble" id="highshelfFrequency"><p>Highshelf Frequency</p></div>
             </div>
         </div>
@@ -114,5 +143,5 @@ export default class AudioFilter extends React.Component {
 }
 
 AudioFilter.propTypes = {
-    onFilterUsed: PropTypes.func,
+    onFilterUsedError: PropTypes.func,
 };

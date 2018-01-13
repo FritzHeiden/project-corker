@@ -12,29 +12,31 @@ export default class VideoSource extends React.Component {
         this.computeFrame = this.computeFrame.bind(this);
     }
 
-    componentWillReceiveProps(){
+    componentWillReceiveProps() {
         this.play()
-        if(this.props.useInvertColor === true){
+        if (this.props.useInvertColor === true) {
             this.invertColor()
         }
-        else if(this.props.useInvertColor === false){}
+        else if (this.props.useInvertColor === false) {
+        }
 
-        if(this.props.useChromaKeyAlpha === true){
+        if (this.props.useChromaKeyAlpha === true) {
             this.chromaKeyAlpha()
         }
-        else if(this.props.useChromaKeyAlpha === false){}
+        else if (this.props.useChromaKeyAlpha === false) {
+        }
 
-        if(this.props.useGrayScale === true){
+        if (this.props.useGrayScale === true) {
             this.grayScale()
         }
-        else if(this.props.useGrayScale === false){}
+        else if (this.props.useGrayScale === false) {
+        }
     }
 
     componentDidMount() {
         this.setState({
             ctx: this.canvas.getContext("2d")
-    });
-
+        });
         this.video.crossOrigin = "Anonymous";
     }
 
@@ -44,7 +46,7 @@ export default class VideoSource extends React.Component {
     }
 
     play() {
-        if(this.props.videoStart) {
+        if (this.props.videoStart) {
             if (this.state.interval) {
                 clearInterval(this.state.interval);
             }
@@ -102,17 +104,6 @@ export default class VideoSource extends React.Component {
     }
 
     render() {
-
-        /* let video =
-       {
-         height: "5rem",
-         width: "85%",
-         position: "relative",
-         backgroundColor: "#323232",
-         left: "0%",
-         margin: "2% 0 2% 0",
-       };*/
-
         let displayNone =
             {
                 display: "none",
@@ -128,7 +119,7 @@ export default class VideoSource extends React.Component {
                     />
                 </video>
                 <canvas
-                    //style={displayNone}
+                    style={displayNone}
                     ref={canvas => (this.canvas = canvas)}
                     width="100%"
                     height="100%"
@@ -137,29 +128,40 @@ export default class VideoSource extends React.Component {
         );
     }
 }
-    /*
-    style={displayNone}
-      <PreviousButton/>
-      <StartStopButton changeStartStop={this.videoStartStop}/>
-      <NextButton/>
 
-          /*
-        constructor(props) {
-            super(props);
 
-            this.state = {
-                play: false,
-            };
+/*
 
-            VideoSource.drop = VideoSource.drop.bind(this);
-            VideoSource.allowDrop = VideoSource.allowDrop.bind(this);
-            this.videoStartStop = this.videoStartStop.bind(this);
+<div className="finalVideo">
+    <canvas
+        ref={canvas => (this.canvas = canvas)}
+        width="100%"
+        height="100%"
+    />
+</div>
 
-            /**
-             onPause:Function - Callback to pause video
-             onPlay:Function - Callback to play video
-             onSeek:Function - Callback to seek video
-             */
+style={displayNone}
+  <PreviousButton/>
+  <StartStopButton changeStartStop={this.videoStartStop}/>
+  <NextButton/>
+
+      /*
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            play: false,
+        };
+
+        VideoSource.drop = VideoSource.drop.bind(this);
+        VideoSource.allowDrop = VideoSource.allowDrop.bind(this);
+        this.videoStartStop = this.videoStartStop.bind(this);
+
+        /**
+         onPause:Function - Callback to pause video
+         onPlay:Function - Callback to play video
+         onSeek:Function - Callback to seek video
+         */
 
 /*
     videoStartStop() {
