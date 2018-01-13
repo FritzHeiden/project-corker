@@ -214,5 +214,5 @@ style={displayNone}
         }
 
         this.state.ctx.putImageData(imageData, 0, 0);
-    }V
+    }
     */
