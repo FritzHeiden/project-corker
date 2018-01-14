@@ -76,7 +76,7 @@ export default class AudioPlayer {
     _play() {
         this.source = this.context.createBufferSource();
         this.source.buffer = this.buffer;
-        this.source.loop = true;
+        this.source.loop = false;
         this._connectNodes();
 
         this.paused = false;
@@ -88,6 +88,16 @@ export default class AudioPlayer {
         else {
             this.startedAt = Date.now();
             this.source.start(0);
+        }
+
+        // reset playback if track has reached its end
+        let self = this;
+        this.source.onended = function() {
+            if (!self.paused) {
+                self.paused = true;
+                self.startedAt = 0;
+                self.pausedAt = 0;
+            }
         }
     }
 
