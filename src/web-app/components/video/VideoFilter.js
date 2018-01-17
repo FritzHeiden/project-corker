@@ -45,8 +45,8 @@ export default class VideoFilter extends React.Component {
     render() {
 
 
-        let addMargineToChromeKeyAplha = {
-            margin: '0 0 0 23%',
+        let addMargineToChromaKeyAplha = {
+            margin: '0 0 0 20%',
         };
 
         return (
@@ -58,7 +58,7 @@ export default class VideoFilter extends React.Component {
                     onClick={this.changeInvertColor.bind(this)}
                     checked={this.state.invertColor}
                 />
-                <p className="filterTitle" style={addMargineToChromeKeyAplha}>Chroma Key Alpha:</p>
+                <p className="filterTitle" style={addMargineToChromaKeyAplha}>Chroma Key Alpha:</p>
                 <input
                     className="container"
                     type="checkbox"
