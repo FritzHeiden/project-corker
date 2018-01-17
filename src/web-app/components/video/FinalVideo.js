@@ -15,8 +15,10 @@ export default class Video extends React.Component {
   }
 
   drawContextToCanvas (context) {
+    context.scale(5, 5)
     let imageData = context.getImageData(0, 0, context.width, context.height)
-    this.canvas.getContext('2d').putImageData(imageData, 0, 0)
+    let finalContext = this.canvas.getContext('2d')
+    finalContext.putImageData(imageData, 0, 0)
   }
 
   render () {

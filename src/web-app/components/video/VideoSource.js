@@ -1,147 +1,152 @@
-import React from 'react';
+import React from 'react'
 
 export default class VideoSource extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor (props) {
+    super(props)
 
-        this.state = {
-            interval: undefined,
-            ctx: props.outputContext
-        };
-
-        this.computeFrame = this.computeFrame.bind(this);
+    this.state = {
+      interval: undefined,
+      ctx: props.outputContext,
+      src: props.src
     }
 
-    componentWillReceiveProps(props) {
-        if (props.videoStart) {
-          this.play()
-        } else {
-            this.pause()
-        }
-        // if (this.props.useInvertColor === true) {
-        //     this.invertColor()
-        // }
-        // else if (this.props.useInvertColor === false) {
-        // }
-        //
-        // if (this.props.useChromaKeyAlpha === true) {
-        //     this.chromaKeyAlpha()
-        // }
-        // else if (this.props.useChromaKeyAlpha === false) {
-        // }
-        //
-        // if (this.props.useGrayScale === true) {
-        //     this.grayScale()
-        // }
-        // else if (this.props.useGrayScale === false) {
-        // }
+    this.computeFrame = this.computeFrame.bind(this)
+  }
+
+  componentWillReceiveProps (props) {
+    if (props.videoStart) {
+      this.play()
+    } else {
+      this.pause()
+    }
+    // if (this.props.useInvertColor === true) {
+    //     this.invertColor()
+    // }
+    // else if (this.props.useInvertColor === false) {
+    // }
+    //
+    // if (this.props.useChromaKeyAlpha === true) {
+    //     this.chromaKeyAlpha()
+    // }
+    // else if (this.props.useChromaKeyAlpha === false) {
+    // }
+    //
+    // if (this.props.useGrayScale === true) {
+    //     this.grayScale()
+    // }
+    // else if (this.props.useGrayScale === false) {
+    // }
+  }
+
+  componentDidMount () {
+    this.video.crossOrigin = 'Anonymous'
+    this.setState(this.state)
+    this.video.currentTime = 200
+    console.log(this.state.src)
+    this.video.src = this.state.src
+  }
+
+  static allowDrop (e) {
+    e.preventDefault()
+    e.dataTransfer.setData('text', e.target.id)
+  }
+
+  static drop (e) {
+    e.preventDefault()
+    var data = e.dataTransfer.getData('text') //in data the id is stored
+    console.log(data)
+  }
+
+  computeFrame () {
+    let context = this.state.ctx
+    context.drawImage(this.video, 0, 0, context.width, context.height)
+    // this.chromaKeyAlpha()
+  }
+
+  play () {
+    if (this.state.interval) {
+      clearInterval(this.state.interval)
+    }
+    this.video.play()
+
+    this.setState({
+      interval: setInterval(this.computeFrame, 1000 / 30)
+    })
+  }
+
+  pause () {
+    clearInterval(this.state.interval)
+    this.setState({
+      interval: undefined
+    })
+    this.video.pause()
+  }
+
+  chromaKeyAlpha () {
+    let context = this.state.ctx
+    let imageData = context.getImageData(0, 0, context.width, context.height)
+    let data = imageData.data
+    for (let i = 0; i < data.length; i += 4) {
+      data[i + 3] = (data[i] + data[i + 1] + data[i + 2]) / 3 // blue
     }
 
-    componentDidMount() {
-      this.video.crossOrigin = "Anonymous"
-      this.setState(this.state);
-      this.video.currentTime = 200
-      this.video.src = "http://localhost:2345/api/file?path=../dist/video/test.mp4"
+    this.state.ctx.putImageData(imageData, 0, 0)
+  }
+
+  invertColor () {
+    let context = this.state.ctx
+    let imageData = context.getImageData(0, 0, context.width, context.height)
+    let data = imageData.data
+    for (let i = 0; i < data.length; i += 4) {
+      data[i] = 255 - data[i]         // red
+      data[i + 1] = 255 - data[i + 1] // green
+      data[i + 2] = 255 - data[i + 2] // blue
     }
 
-    static allowDrop(e) {
-        e.preventDefault();
-        e.dataTransfer.setData('text', e.target.id);
+    this.state.ctx.putImageData(imageData, 0, 0)
+  }
+
+  grayScale () {
+    let context = this.state.ctx
+    let imageData = context.getImageData(0, 0, context.width, context.height)
+    let data = imageData.data
+    for (let i = 0; i < data.length; i += 4) {
+      let r = data[i]
+      let g = data[i + 1]
+      let b = data[i + 2]
+
+      let y = (0.2126 * r + 0.7152 * g + 0.0722 * b)
+
+      data[i] = y
+      data[i + 1] = y
+      data[i + 2] = y
     }
 
-    static drop(e) {
-        e.preventDefault();
-        var data = e.dataTransfer.getData('text'); //in data the id is stored
-        console.log(data)
-    }
+    this.state.ctx.putImageData(imageData, 0, 0)
+  }
 
-    computeFrame() {
-          this.state.ctx.drawImage(this.video, 0, 0, 400, 220);
-        this.chromaKeyAlpha();
-    }
+  render () {
+    let displayNone =
+      {
+        display: 'none',
+      }
 
-    play() {
-        if (this.state.interval) {
-            clearInterval(this.state.interval);
-        }
-        this.video.play();
-
-        this.setState({
-            interval: setInterval(this.computeFrame, 1000 / this.props.fps)
-        });
-    }
-
-    pause () {
-      clearInterval(this.state.interval);
-      this.setState({
-        interval: undefined
-      });
-      this.video.pause();
-    }
-
-    chromaKeyAlpha() {
-        let imageData = this.state.ctx.getImageData(0, 0, 400, 220);
-        let data = imageData.data;
-        for (let i = 0; i < data.length; i += 4) {
-            data[i + 3] = (data[i] + data[i + 1] + data[i + 2]) / 3; // blue
-        }
-
-        this.state.ctx.putImageData(imageData, 0, 0);
-    }
-
-    invertColor() {
-        let imageData = this.state.ctx.getImageData(0, 0, 400, 220);
-        let data = imageData.data;
-        for (let i = 0; i < data.length; i += 4) {
-            data[i] = 255 - data[i];         // red
-            data[i + 1] = 255 - data[i + 1]; // green
-            data[i + 2] = 255 - data[i + 2]; // blue
-        }
-
-        this.state.ctx.putImageData(imageData, 0, 0);
-    }
-
-    grayScale() {
-        let imageData = this.state.ctx.getImageData(0, 0, 400, 220);
-        let data = imageData.data;
-        for (let i = 0; i < data.length; i += 4) {
-            let r = data[i];
-            let g = data[i + 1];
-            let b = data[i + 2];
-
-            let y = (0.2126 * r + 0.7152 * g + 0.0722 * b);
-
-            data[i] = y;
-            data[i + 1] = y;
-            data[i + 2] = y;
-        }
-
-        this.state.ctx.putImageData(imageData, 0, 0);
-    }
-
-    render() {
-        let displayNone =
-            {
-                display: "none",
-            };
-
-        return (
-            <div>
-                <video controls
-                  ref={video => (this.video = video)}
-                       onDrop={VideoSource.drop.bind(this)}
-                       onDragOver={VideoSource.allowDrop.bind(this.event)}
-                       muted
-                       style={{backgroundColor: "red"}}>
-                    <source
-                        type="video/mp4"
-                    />
-                </video>
-            </div>
-        );
-    }
+    return (
+      <div>
+        <video controls
+               ref={video => (this.video = video)}
+               onDrop={VideoSource.drop.bind(this)}
+               onDragOver={VideoSource.allowDrop.bind(this.event)}
+               muted
+               style={{backgroundColor: 'red'}}>
+          <source
+            type="video/mp4"
+          />
+        </video>
+      </div>
+    )
+  }
 }
-
 
 /*
 
