@@ -40,6 +40,17 @@ export default class VideoSource extends React.Component {
         this.video.crossOrigin = "Anonymous";
     }
 
+    static allowDrop(e) {
+        e.preventDefault();
+        e.dataTransfer.setData('text', e.target.id);
+    }
+
+    static drop(e) {
+        e.preventDefault();
+        var data = e.dataTransfer.getData('text'); //in data the id is stored
+        console.log(data)
+    }
+
     computeFrame() {
         this.state.ctx.drawImage(this.video, 0, 0, 400, 220);
         this.invertColor();
@@ -112,12 +123,15 @@ export default class VideoSource extends React.Component {
         return (
             <div>
                 <video ref={video => (this.video = video)}
+                       onDrop={VideoSource.drop.bind(this)}
+                       onDragOver={VideoSource.allowDrop.bind(this.event)}
                        muted>
                     <source
                         src="https://www.w3schools.com/html/mov_bbb.mp4"
                         type="video/mp4"
                     />
                 </video>
+
                 <canvas
                     style={displayNone}
                     ref={canvas => (this.canvas = canvas)}
