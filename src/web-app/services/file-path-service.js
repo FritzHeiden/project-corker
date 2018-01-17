@@ -1,4 +1,4 @@
-class Config{
+class Config {
   constructor(){
     this._path = "";
   }

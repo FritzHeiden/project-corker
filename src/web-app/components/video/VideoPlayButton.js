@@ -49,7 +49,7 @@ export default class VideoPlayButton extends React.Component {
         return (
             <div className="minimalButtons" onClick={this.clickedAudioPlayer}>
                 {clicked ? (
-                    <div onClick={this.props.videoStartStop}>
+                    <div onClick={() => this.props.videoStartStop(false)}>
                         <svg x="0px" y="0px" viewBox="0 0 500 500">
                             <g>
                                 <path style={svgLines}
@@ -63,7 +63,7 @@ export default class VideoPlayButton extends React.Component {
                         </svg>
                     </div>
                 ) : (
-                    <div onClick={this.props.videoStartStop}>
+                    <div onClick={() => this.props.videoStartStop(true)}>
                         <svg x="0px" y="0px" viewBox="0 0 500 500">
                             <g>
                                 <path style={svgLines}

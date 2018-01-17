@@ -15,13 +15,9 @@ export default class VideoBox extends React.Component {
         };
     }
 
-    videoStart(){
-        if(this.state.videoStart === false){
-            this.setState({videoStart: true});
-        }
-        else if(this.state.videoStart === true){
-            this.setState({videoStart: false});
-        }
+    videoStart(status){
+        this.state.videoStart = status
+        this.setState(this.state);
     }
 
     useFilter(usedFilter){

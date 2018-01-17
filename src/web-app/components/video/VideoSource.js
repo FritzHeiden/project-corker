@@ -12,32 +12,37 @@ export default class VideoSource extends React.Component {
         this.computeFrame = this.computeFrame.bind(this);
     }
 
-    componentWillReceiveProps() {
-        this.play()
-        if (this.props.useInvertColor === true) {
-            this.invertColor()
+    componentWillReceiveProps(props) {
+        if (props.videoStart) {
+          this.play()
+        } else {
+            this.pause()
         }
-        else if (this.props.useInvertColor === false) {
-        }
-
-        if (this.props.useChromaKeyAlpha === true) {
-            this.chromaKeyAlpha()
-        }
-        else if (this.props.useChromaKeyAlpha === false) {
-        }
-
-        if (this.props.useGrayScale === true) {
-            this.grayScale()
-        }
-        else if (this.props.useGrayScale === false) {
-        }
+        // if (this.props.useInvertColor === true) {
+        //     this.invertColor()
+        // }
+        // else if (this.props.useInvertColor === false) {
+        // }
+        //
+        // if (this.props.useChromaKeyAlpha === true) {
+        //     this.chromaKeyAlpha()
+        // }
+        // else if (this.props.useChromaKeyAlpha === false) {
+        // }
+        //
+        // if (this.props.useGrayScale === true) {
+        //     this.grayScale()
+        // }
+        // else if (this.props.useGrayScale === false) {
+        // }
     }
 
     componentDidMount() {
-        this.setState({
-            ctx: this.canvas.getContext("2d")
-        });
-        this.video.crossOrigin = "Anonymous";
+      this.state.ctx = this.canvas.getContext("2d")
+      this.video.crossOrigin = "Anonymous"
+      this.setState(this.state);
+      this.video.currentTime = 200
+      this.video.src = "http://localhost:2345/api/file?path=../dist/video/test.mp4"
     }
 
     static allowDrop(e) {
@@ -52,26 +57,27 @@ export default class VideoSource extends React.Component {
     }
 
     computeFrame() {
-        this.state.ctx.drawImage(this.video, 0, 0, 400, 220);
+          this.state.ctx.drawImage(this.video, 0, 0, 400, 220);
         this.invertColor();
     }
 
     play() {
-        if (this.props.videoStart) {
-            if (this.state.interval) {
-                clearInterval(this.state.interval);
-            }
-            this.video.play();
-            this.setState({
-                interval: setInterval(this.computeFrame, 1000 / this.props.fps)
-            });
-        } else {
+        if (this.state.interval) {
             clearInterval(this.state.interval);
-            this.setState({
-                interval: undefined
-            });
-            this.video.pause();
         }
+        this.video.play();
+
+        this.setState({
+            interval: setInterval(this.computeFrame, 1000 / this.props.fps)
+        });
+    }
+
+    pause () {
+      clearInterval(this.state.interval);
+      this.setState({
+        interval: undefined
+      });
+      this.video.pause();
     }
 
     chromaKeyAlpha() {
@@ -122,18 +128,19 @@ export default class VideoSource extends React.Component {
 
         return (
             <div>
-                <video ref={video => (this.video = video)}
+                <video controls
+                  ref={video => (this.video = video)}
                        onDrop={VideoSource.drop.bind(this)}
                        onDragOver={VideoSource.allowDrop.bind(this.event)}
-                       muted>
+                       muted
+                       style={{backgroundColor: "red"}}>
                     <source
-                        src="https://www.w3schools.com/html/mov_bbb.mp4"
                         type="video/mp4"
                     />
                 </video>
 
                 <canvas
-                    style={displayNone}
+                    // style={displayNone}
                     ref={canvas => (this.canvas = canvas)}
                     width="100%"
                     height="100%"

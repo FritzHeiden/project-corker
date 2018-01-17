@@ -20,6 +20,7 @@ export default class WebServer {
     handle(method, path, callback) {
         switch (method.toUpperCase()) {
             case "GET": this.app.get(path, callback);
+          case "ALL": this.app.all(path, callback)
         }
     }
 
