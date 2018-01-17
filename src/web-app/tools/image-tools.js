@@ -9,4 +9,11 @@ export default class ImageTools {
     context.height = height
     return context
   }
+
+  static createCanvas(width, height) {
+    let canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
+    return canvas
+  }
 }

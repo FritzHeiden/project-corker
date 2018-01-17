@@ -4,21 +4,15 @@ export default class Video extends React.Component {
 
   constructor (props) {
     super(props)
-    this._context = props.context
-    this._refreshRate = props.refreshRate
+    this._inputCanvas = props.videoSyncService.canvas
+    this._videoSyncService = props.videoSyncService
   }
 
   componentDidMount () {
-    setInterval(() => {
-      this.drawContextToCanvas(this._context)
-    }, 1000 / this._refreshRate)
-  }
-
-  drawContextToCanvas (context) {
-    context.scale(5, 5)
-    let imageData = context.getImageData(0, 0, context.width, context.height)
-    let finalContext = this.canvas.getContext('2d')
-    finalContext.putImageData(imageData, 0, 0)
+    this._videoSyncService.listenOnVideoDrawable(() => {
+      this.canvas.getContext('2d').clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.canvas.getContext('2d').drawImage(this._inputCanvas, 0, 0, this.canvas.width, this.canvas.height)
+    })
   }
 
   render () {

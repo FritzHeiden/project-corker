@@ -1,86 +1,82 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 export default class VideoFilter extends React.Component {
 
-    constructor(props){
-        super(props);
+  constructor (props) {
+    super(props)
 
-        this.state ={
-            invertColor: false,
-            chromaKeyAlpha: false,
-            grayScale: false,
-        };
+    this.state = {
+      invertColor: false,
+      chromaKeyAlpha: false,
+      grayScale: false,
+    }
+  }
+
+  changeInvertColor (status) {
+    this.setState({invertColor: status})
+    this.props.usedFilter('invertColor', status)
+  }
+
+  changeChromaKeyAlpha (status) {
+    this.setState({chromaKeyAlpha: status})
+    this.props.usedFilter('chromaKeyAlpha', status)
+  }
+
+  changeGrayScale (status) {
+    this.setState({grayScale: status})
+    this.props.usedFilter('grayScale', status)
+  }
+
+  render () {
+
+    let checkboxWidth = {
+      width: '50%',
     }
 
-    changeInvertColor(){
-        if(this.state.invertColor === true){
-            this.setState({invertColor: false});
-        }
-        else if(this.state.invertColor === false){
-            this.setState({invertColor: true});
-        }
-        this.props.usedFilter("invertColor")
+    let leftPositionCheckbox1 = {
+      left: '12%',
     }
 
-    changeChromaKeyAlpha(){
-        if(this.state.chromaKeyAlpha === true){
-            this.setState({chromaKeyAlpha: true});
-        }
-        else if(this.state.chromaKeyAlpha === false){
-            this.setState({chromaKeyAlpha: true});
-        }
-        this.props.usedFilter("chromaKeyAlpha")
-    }
-    changeGrayScale(){
-        if(this.state.grayScale === true){
-            this.setState({grayScale: true});
-        }
-        else if(this.state.grayScale === false){
-            this.setState({grayScale: true});
-        }
-        this.props.usedFilter("grayScale")
+    let leftPositionCheckbox2 = {
+      left: '12%',
     }
 
-    render() {
-
-
-        let addMargineToChromaKeyAplha = {
-            margin: '0 0 0 20%',
-        };
-
-        return (
-            <div className="filterBox">
-                <p className="filterTitle">Invert Color:</p>
-                <input
-                    className="container"
-                    type="checkbox"
-                    onClick={this.changeInvertColor.bind(this)}
-                    checked={this.state.invertColor}
-                />
-                <p className="filterTitle" style={addMargineToChromaKeyAplha}>Chroma Key Alpha:</p>
-                <input
-                    className="container"
-                    type="checkbox"
-                    onClick={this.changeChromaKeyAlpha.bind(this)}
-                    checked={this.state.chromaKeyAlpha}
-                />
-                <p className="filterTitle">Gray Scale:</p>
-                <input
-                    className="container"
-                    type="checkbox"
-                    onClick={this.changeGrayScale.bind(this)}
-                    checked={this.state.grayScale}
-                />
-            </div>
-        );
+    let addMargineToChromaKeyAplha = {
+      margin: '0 0 0 20%',
     }
+
+    return (
+      <div className="filterBox">
+        <p className="filterTitle">Invert Color:</p>
+        <input
+          className="container"
+          type="checkbox"
+          onClick={event => this.changeInvertColor(event.target.checked)}
+          checked={this.state.invertColor}
+        />
+        <p className="filterTitle" style={addMargineToChromaKeyAplha}>Chroma Key Alpha:</p>
+        <input
+          className="container"
+          type="checkbox"
+          onClick={event => this.changeChromaKeyAlpha(event.target.checked)}
+          checked={this.state.chromaKeyAlpha}
+        />
+        <p className="filterTitle">Gray Scale:</p>
+        <input
+          className="container"
+          type="checkbox"
+          onClick={event => this.changeGrayScale(event.target.checked)}
+          checked={this.state.grayScale}
+        />
+      </div>
+    )
+  }
 }
 
 VideoFilter.propTypes = {
-    usedFilter: PropTypes.func,
-};
-
+  usedFilter: PropTypes.func,
+}
 
 {/*
 
@@ -138,4 +134,5 @@ VideoFilter.propTypes = {
     <button className="filter" onDrag={this.mouseClicked}></button>
     <button className="filter" onDrag={this.mouseClicked}></button>
     <button className="filter" onDrag={this.mouseClicked}></button>
-    <button className="filter" onDrag={this.mouseClicked}></button>*/}
+    <button className="filter" onDrag={this.mouseClicked}></button>*/
+}

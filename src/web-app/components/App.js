@@ -14,6 +14,7 @@ import Options from './designObjects/Options.js'
 import MidiController from '../controller/midi-controller'
 import AudioPlayerJS from '../audio/player'
 import ImageTools from '../tools/image-tools'
+import VideoSyncService from '../services/video-sync-service'
 //import BackgroundImage from 'react-svg-loader!../svg/Background.svg'; // just works with folder.js
 
 export default class App extends React.Component {
@@ -25,7 +26,8 @@ export default class App extends React.Component {
 
     this._fileService = new FileService('localhost', 2345)
     this._audioContext = new (window.AudioContext || window.webkitAudioContext)()
-    this._finalVideoContext = ImageTools.createContext2d(400, 220)
+    this._finalVideoCanvas = ImageTools.createCanvas(400, 220)
+    this._videoSyncService = new VideoSyncService(this._finalVideoCanvas)
 
     this._midiController = new MidiController()
     this._midiController.initialize()
@@ -111,8 +113,10 @@ export default class App extends React.Component {
             <div className="actionBox">
               <AudioBox fileService={this._fileService} audioContext={this._audioContext}
                         audioPlayer={this._leftAudioPlayer}/>
-              <VideoBox outputContext={this._finalVideoContext} src={'http://localhost:2345/api/file?path=../dist/video/test.mp4'}/>
-              <VideoBox outputContext={this._finalVideoContext} src={'http://localhost:2345/api/file?path=../dist/video/croma.mp4'}/>
+              <VideoBox videoSyncService={this._videoSyncService}
+                        src={'http://localhost:2345/api/file?path=../dist/video/test.mp4'}/>
+              <VideoBox videoSyncService={this._videoSyncService}
+                        src={'http://localhost:2345/api/file?path=../dist/video/croma.mp4'}/>
               <AudioBox fileService={this._fileService} audioContext={this._audioContext}
                         audioPlayer={this._rightAudioPlayer}/>
             </div>
@@ -120,7 +124,7 @@ export default class App extends React.Component {
               <input className="crossFader" type="range" step={0.01} min={0} max={1} value={this.state.crossFader}
                      onChange={event => this.onCrossFaderChange(event.target.value)}/>
               <FileBrowser title="File Browser" fileService={this._fileService}/>
-              <FinalVideo context={this._finalVideoContext} refreshRate={30}/>
+              <FinalVideo videoSyncService={this._videoSyncService} refreshRate={30}/>
             </div>
           </div>
         </div>
