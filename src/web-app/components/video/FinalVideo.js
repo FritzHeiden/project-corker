@@ -1,23 +1,31 @@
-import React from 'react';
+import React from 'react'
 
 export default class Video extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
+  constructor (props) {
+    super(props)
+    this._context = props.context
+    this._refreshRate = props.refreshRate
+  }
 
-    render() {
-        return (
-            <div className="finalVideo">
-                <video ref={video => (this.video = video)} muted>
-                    <source
-                        src="https://www.w3schools.com/html/mov_bbb.mp4"
-                        type="video/mp4"
-                    />
-                </video>
-            </div>
-        );
-    }
+  componentDidMount () {
+    setInterval(() => {
+      this.drawContextToCanvas(this._context)
+    }, 1000 / this._refreshRate)
+  }
+
+  drawContextToCanvas (context) {
+    let imageData = context.getImageData(0, 0, context.width, context.height)
+    this.canvas.getContext('2d').putImageData(imageData, 0, 0)
+  }
+
+  render () {
+    return (
+      <div className="finalVideo">
+        <canvas ref={canvas => this.canvas = canvas}/>
+      </div>
+    )
+  }
 }
 
 {/*

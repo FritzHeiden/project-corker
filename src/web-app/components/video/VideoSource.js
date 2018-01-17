@@ -6,7 +6,7 @@ export default class VideoSource extends React.Component {
 
         this.state = {
             interval: undefined,
-            ctx: undefined
+            ctx: props.outputContext
         };
 
         this.computeFrame = this.computeFrame.bind(this);
@@ -38,7 +38,6 @@ export default class VideoSource extends React.Component {
     }
 
     componentDidMount() {
-      this.state.ctx = this.canvas.getContext("2d")
       this.video.crossOrigin = "Anonymous"
       this.setState(this.state);
       this.video.currentTime = 200
@@ -58,7 +57,7 @@ export default class VideoSource extends React.Component {
 
     computeFrame() {
           this.state.ctx.drawImage(this.video, 0, 0, 400, 220);
-        this.invertColor();
+        this.chromaKeyAlpha();
     }
 
     play() {
@@ -138,13 +137,6 @@ export default class VideoSource extends React.Component {
                         type="video/mp4"
                     />
                 </video>
-
-                <canvas
-                    // style={displayNone}
-                    ref={canvas => (this.canvas = canvas)}
-                    width="100%"
-                    height="100%"
-                />
             </div>
         );
     }

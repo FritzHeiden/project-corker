@@ -55,6 +55,7 @@ export default class VideoBox extends React.Component {
                     useInvertColor={this.state.invertColor}
                     useChromaKeyAlpha={this.state.chromaKeyAlpha}
                     useGrayScale={this.state.grayScale}
+                    outputContext={this.props.outputContext}
                 />
                 <Line/>
                 <VideoPlayButton videoStartStop={this.videoStart.bind(this)}/>
