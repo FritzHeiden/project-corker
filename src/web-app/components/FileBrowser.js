@@ -66,7 +66,7 @@ export default class FileBrowser extends React.Component {
         const {title} = this.props
 
         return (
-            <div>
+            <div className="fileBrowser">
                 <h3>{title}</h3>
                 <div className="musicFolder">
                     <table>

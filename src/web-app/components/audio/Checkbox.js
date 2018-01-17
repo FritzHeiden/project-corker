@@ -59,27 +59,20 @@ export default class Checkbox extends React.Component {
 
     render() {
 
-        let lowPass = {
-            width: '32%',
-        };
-
         return (
-            <div>
-                <p className="filterTitle" style={lowPass}>Lowpass:</p>
+            <div className="filterBox">
+                <p className="filterTitle">Lowpass:</p>
                 <input
-                    className="container"
                     type="checkbox"
                     onClick={this.clickLowPass}
                     checked={this.state.lowpassActive}
                 />
                 <p className="filterTitle">Highshelf:</p>
                 <input
-                    className="container"
                     type="checkbox"
                     onClick={this.clickHighshelf}
                     checked={this.state.highshelfActive}
                 />
-
             </div>
 
         );

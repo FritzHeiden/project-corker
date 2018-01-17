@@ -81,7 +81,7 @@ export default class AudioFilter extends React.Component {
     }
 
     render() {
-        return <div className="filterBox">
+        return <div>
             <Checkbox audioPlayerJS={this.audioPlayerJS} clickCheckbox={this.checkboxClicked.bind(this)}/>
             <div className="sliderBox">
                 <div className="filterBubble" id="volumeBox"><p>Volume</p></div>
@@ -95,7 +95,7 @@ export default class AudioFilter extends React.Component {
                        name="Lowpass Frequency"
                        onChange={event => this.audioPlayerJS.changeLowpassFilterFrequency(event.target.value)}
                        onMouseEnter={this.displayInfo.bind(this)}
-                       //onMouseLeave={this.vanishInfo.bind(this)}
+                    //onMouseLeave={this.vanishInfo.bind(this)}
                 />
                 <div className="filterBubble" id="lowpassFrequency"><p>Lowpass Frequency</p></div>
                 <p>Lowpass Quality</p>
@@ -107,7 +107,7 @@ export default class AudioFilter extends React.Component {
                        name="Lowpass Quality"
                        onChange={event => this.audioPlayerJS.changeLowpassFilterQuality(event.target.value)}
                        onMouseEnter={this.displayInfo.bind(this)}
-                       //onMouseLeave={this.vanishInfo.bind(this)}
+                    //onMouseLeave={this.vanishInfo.bind(this)}
                 />
                 <div className="filterBubble" id="lowpassQuality"><p>Lowpass Quality</p></div>
                 <p>Highshelf Frequency</p>
@@ -118,7 +118,7 @@ export default class AudioFilter extends React.Component {
                        name="Highshelf Frequency"
                        onChange={event => this.audioPlayerJS.changeHighshelfFilterFrequency(parseInt(event.target.value))}
                        onMouseEnter={this.displayInfo.bind(this)}
-                       //onMouseLeave={this.vanishInfo.bind(this)}
+                    //onMouseLeave={this.vanishInfo.bind(this)}
                 />
                 <div className="filterBubble" id="highshelfFrequency"><p>Highshelf Frequency</p></div>
             </div>
@@ -129,3 +129,7 @@ export default class AudioFilter extends React.Component {
 AudioFilter.propTypes = {
     onFilterUsedError: PropTypes.func,
 };
+
+/*
+
+ */

@@ -118,13 +118,12 @@ export default class App extends React.Component {
                             <input className="crossFader" type="range" step={0.01} min={0} max={1} value={this.state.crossFader}
                             onChange={event => this.onCrossFaderChange(event.target.value)}/>
                         </div>
-                        <FileBrowser title="File Browser" fileService={this._fileService}/>
+                        <div className="footer">
+                            <FileBrowser title="File Browser" fileService={this._fileService}/>
+                        </div>
                     </div>
                 </div>
             </div>
         )
     }
 }
-
-{/*                        <FinalVideo/>
-*/}

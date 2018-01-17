@@ -127,5 +127,8 @@ class AudioPlayer extends React.Component {
 }
 
 // <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
+/*
 
+
+ */
 export default AudioBox
