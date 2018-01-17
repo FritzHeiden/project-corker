@@ -44,38 +44,29 @@ export default class VideoFilter extends React.Component {
 
     render() {
 
-        let checkboxWidth = {
-            width: '50%',
-        };
 
-        let leftPositionCheckbox2 = {
-            left: '12%',
-        };
-
-        let leftPositionCheckbox1 = {
-            left: '12%',
+        let addMargineToChromeKeyAplha = {
+            margin: '0 0 0 23%',
         };
 
         return (
             <div className="filterBox">
-                <p className="filterTitle" style={checkboxWidth}>Invert Color:</p>
+                <p className="filterTitle">Invert Color:</p>
                 <input
-                    style={leftPositionCheckbox1}
                     className="container"
                     type="checkbox"
                     onClick={this.changeInvertColor.bind(this)}
                     checked={this.state.invertColor}
                 />
-                <p className="filterTitle">Chroma Key Alpha:</p>
+                <p className="filterTitle" style={addMargineToChromeKeyAplha}>Chroma Key Alpha:</p>
                 <input
                     className="container"
                     type="checkbox"
                     onClick={this.changeChromaKeyAlpha.bind(this)}
                     checked={this.state.chromaKeyAlpha}
                 />
-                <p className="filterTitle" style={checkboxWidth}>Gray Scale:</p>
+                <p className="filterTitle">Gray Scale:</p>
                 <input
-                    style={leftPositionCheckbox2}
                     className="container"
                     type="checkbox"
                     onClick={this.changeGrayScale.bind(this)}
