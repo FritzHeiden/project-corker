@@ -122,9 +122,9 @@ span {
     position: relative;
     grid-row-start: 1;
     grid-row-end: 1;
-    align-self: start;
+    align-self: end;
+    margin-top: 5%;
 }
-
 
 .slideContainer{
     width: 100%;
@@ -723,7 +723,7 @@ input[type=checkbox] {
 }
 
 .sliderFilter {
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 0.75rem 0;
     -webkit-appearance: none;
     width: 75%;
     height: 7.5px;
