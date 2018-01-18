@@ -21,6 +21,7 @@ export default class FolderButton extends React.Component {
             this.setState({correctPath: true});
             Sidebar.closeSidebar();
             Config.path = filePath;
+            console.log(filePath)
         }).catch(error => {
             this.setState({correctPath: false});
             console.error(error);

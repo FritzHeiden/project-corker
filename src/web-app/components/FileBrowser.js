@@ -2,7 +2,8 @@ import React from 'react'
 
 // used Functions
 import {Config} from '../services/file-path-service.js'
-import Folder from './designObjects/Folder.js'
+import FolderAbove from './designObjects/FolderAbove.js'
+import FolderToDir from './designObjects/FolderToDir.js'
 
 //import Folder from 'react-svg-loader!../svg/folder.svg';
 
@@ -54,6 +55,18 @@ export default class FileBrowser extends React.Component {
             return file
         }).map((file, index) => {
             console.log(file)
+            if(file.isDirectory === true){
+
+                let positionSpan =
+                    {
+                        top: '-0.5rem',
+                        left: '-5%',
+                    }
+                return (
+                    <tr key={index}>
+                        <td><FolderToDir path={file.path} id={file.path} key={this.tableCounter}/> <span style={positionSpan}>{file.filename}</span></td>
+                    </tr>)
+            }
             this.tableCounter = this.tableCounter + 1
             return (<tr key={index}>
                 <td id={file.path} key={this.tableCounter} draggable="true"
@@ -73,7 +86,7 @@ export default class FileBrowser extends React.Component {
                     <table>
                         <tbody>
                         <tr>
-                            <td><Folder/></td>
+                            <td><FolderAbove/></td>
                         </tr>
                         <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
                             <td></td>
