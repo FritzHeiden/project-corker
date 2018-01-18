@@ -62,7 +62,6 @@ class AudioBox extends React.Component {
                     audioPlayerJS={this._audioPlayer}
                     onFilterUsedError={this.onFilterUsed.bind(this)}/>
                 <Line/>
-                <AudioInfo filterError={this.state.usedFilterError}/>
             </div>
         )
     }
@@ -128,7 +127,6 @@ class AudioPlayer extends React.Component {
 
 // <canvas id="canvasPlayer" style={audio} onDrop={this.drop.bind(this)} onDragOver={this.allowDrop.bind(event)}></canvas>
 /*
-
-
+                <AudioInfo filterError={this.state.usedFilterError}/>
  */
 export default AudioBox

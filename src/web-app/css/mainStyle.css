@@ -2,6 +2,7 @@ html, body {
     background-color: #1e1e1e;
     margin: 0;
     padding: 0;
+
 }
 
 h3 {
@@ -115,6 +116,8 @@ span {
     /* grid-template-rows: 70% 10% 20%; */
     /* flex-direction: column; */
     justify-content: space-around;
+    flex-wrap: wrap;
+    overflow-y: overlay;
 }
 
 .actionBox {
@@ -126,7 +129,7 @@ span {
     /*grid-row-start: 1;
     grid-row-end: 1;*/
     align-self: end;
-    margin-top: 6%;
+    margin-top: 8%;
 }
 
 .slideContainer{
@@ -146,8 +149,7 @@ span {
     width: 100%;
     /* grid-template-rows: 10% 30%; */
     /* align-self: end; */
-    position: absolute;
-    bottom: 0;
+    align-self: flex-end;
 }
 
 .filterBox{
