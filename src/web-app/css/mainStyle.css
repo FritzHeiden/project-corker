@@ -154,8 +154,7 @@ span {
 
 .filterBox{
     display: grid;
-    grid-template-columns: 60% 40%;
-    justify-items: center;
+    grid-template-columns: 10% 60% 40%;
     align-items: center;
 }
 
@@ -234,6 +233,7 @@ span {
     color: white;
     max-height: 15vh;
     overflow-y: scroll;
+    text-align: left;
 }
 
 .crossFader {
@@ -723,8 +723,8 @@ input[type="text"].closeInput{
 input[type=checkbox] {
     width: 50%;
     height: 2rem;
-    grid-column-start: 2;
-    grid-column-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 3;
 }
 
 .fileBrowser{
@@ -736,8 +736,8 @@ input[type=checkbox] {
 .filterTitle {
     text-align: left;
     font-size: 1.0rem;
-    grid-column-start: 1;
-    grid-column-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
 }
 
 .sliderFilter {

@@ -48,11 +48,12 @@ export default class FileBrowser extends React.Component {
     updateTable() {
         let table = this.state.files.filter(file => {
             //return file.extension === "wav";
-            //if(file.extension === "wav" || file.extension === "mp3"){
-            // return file
+            //if(file.extension === "wav" || file.extension === "mp3" || file.extension === "aac" || file.extension === "mp4"){
+            //return file
             //}
             return file
         }).map((file, index) => {
+            console.log(file)
             this.tableCounter = this.tableCounter + 1
             return (<tr key={index}>
                 <td id={file.path} key={this.tableCounter} draggable="true"
