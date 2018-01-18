@@ -85,9 +85,9 @@ export default class VideoSource extends React.Component {
   }
 
   play () {
-    if (this.state.interval) {
-      clearInterval(this.state.interval)
-    }
+    // if (this.state.interval) {
+    //   clearInterval(this.state.interval)
+    // }
     this.video.play()
 
     this.state.interval = setInterval(this.computeFrame, 1000 / 30)

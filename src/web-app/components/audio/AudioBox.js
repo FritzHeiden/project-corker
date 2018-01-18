@@ -59,7 +59,7 @@ class AudioBox extends React.Component {
                        onChange={event => this._audioPlayer.changeVolume(parseInt(event.target.value))}/>
                 <Line/>
                 <AudioFilter
-                    audioPlayerJS={this._audioPlayer}
+                    audioPlayer={this._audioPlayer}
                     onFilterUsedError={this.onFilterUsed.bind(this)}/>
                 <Line/>
             </div>
