@@ -52,9 +52,9 @@ export default class FileBrowser extends React.Component {
             // return file
             //}
             return file
-        }).map(file => {
+        }).map((file, index) => {
             this.tableCounter = this.tableCounter + 1
-            return (<tr>
+            return (<tr key={index}>
                 <td id={file.path} key={this.tableCounter} draggable="true"
                     onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
             </tr>)

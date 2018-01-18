@@ -48,7 +48,7 @@ export default class Checkbox extends React.Component {
     }
 
   onToggleLowpass (active) {
-    this.state.lowpassActive = active
+    this.state.lowpassActive   = active
     this.setState(this.state)
   }
 

@@ -21,15 +21,26 @@ export default class VideoSource extends React.Component {
   }
 
   componentWillReceiveProps (props) {
-    if (props.videoStart) {
-      this.play()
-    } else {
-      this.pause()
+    if (this.video.paused !== !props.videoStart) {
+      if (props.videoStart) {
+        this.play()
+      } else {
+        this.pause()
+      }
     }
+
     this.state.invertColor = props.invertColor
     this.state.chromaKeyAlpha = props.chromaKeyAlpha
     this.state.grayScale = props.grayScale
     this.setState(this.state)
+
+    if (this.props.chromaKeyAlpha !== props.chromaKeyAlpha) {
+      if (this.state.chromaKeyAlpha) {
+        this._videoSyncService.increaseChromaKeyVideoCount()
+      } else {
+        this._videoSyncService.decreaseChromaKeyVideoCount()
+      }
+    }
   }
 
   componentDidMount () {
@@ -68,7 +79,7 @@ export default class VideoSource extends React.Component {
 
     this._videoSyncService.canvas.getContext('2d').drawImage(this._canvas, 0, 0, this.state.outputWidth, this.state.outputHeight)
 
-    if (this.state.chromaKeyAlpha) {
+    if (this.state.chromaKeyAlpha || this._videoSyncService.chromaKeyVideoCount === 0) {
       this._videoSyncService.drawVideo()
     }
   }
@@ -80,8 +91,11 @@ export default class VideoSource extends React.Component {
     this.video.play()
 
     this.state.interval = setInterval(this.computeFrame, 1000 / 30)
-    console.log("started compute frame")
     this.setState(this.state)
+
+    if (this.state.chromaKeyAlpha) {
+      this._videoSyncService.increaseChromaKeyVideoCount()
+    }
   }
 
   pause () {
@@ -90,6 +104,11 @@ export default class VideoSource extends React.Component {
       interval: undefined
     })
     this.video.pause()
+
+
+    if (this.state.chromaKeyAlpha) {
+      this._videoSyncService.decreaseChromaKeyVideoCount()
+    }
   }
 
   chromaKeyAlpha () {
@@ -97,7 +116,7 @@ export default class VideoSource extends React.Component {
     let imageData = context.getImageData(0, 0, this._canvas.width, this._canvas.height)
     let data = imageData.data
     for (let i = 0; i < data.length; i += 4) {
-      if (data[i] <= 100 && data[i + 2] <= 100) {
+      if (data[i] <= 100 && data[i + 1] >= 100 && data[i + 2] <= 100) {
         data[i + 3] = 255 - data[i + 1]
       }
     }
