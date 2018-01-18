@@ -52,9 +52,65 @@ export default class FileBrowser extends React.Component {
             //if(file.extension === "wav" || file.extension === "mp3" || file.extension === "aac" || file.extension === "mp4"){
             //return file
             //}
-            return file
+
+            if(file.filename.charAt(0) !== "."){
+                return file
+            }
+        }).sort((a,b) => {
+            return a.filename.localeCompare(b.filename);
+        }).sort((a,b) => {
+            return a.isDirectory - b.isDirectory
         }).map((file, index) => {
-            console.log(file)
+            if(file.isDirectory === true){
+                let positionSpan =
+                    {
+                        top: '-0.5rem',
+                        left: '-5%',
+                    }
+                return (
+                    <tr key={index}>
+                        <td><FolderToDir path={file.path} id={file.path} key={this.tableCounter}/> <span style={positionSpan}>{file.filename}</span></td>
+                    </tr>)
+            }else{
+                return (<tr key={index}>
+                    <td id={file.path} key={this.tableCounter} draggable="true"
+                        onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
+                    </tr>)
+            }
+            this.tableCounter = this.tableCounter + 1
+        })
+
+        return (table)
+    }
+
+    render() {
+        const {title} = this.props
+
+        return (
+            <div className="fileBrowser">
+                <h3>{title}</h3>
+                <div className="musicFolder">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colSpan={2}><FolderAbove/></th>
+                        </tr>
+                        <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
+                            <td></td>
+                        </tr>
+                            {this.updateTable()}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        )
+    }
+}
+
+{/*obj.sort((a,b) => a.timeM - b.timeM);
+
+.map((file, index) => {
+            console.log(table)
             if(file.isDirectory === true){
 
                 let positionSpan =
@@ -73,29 +129,4 @@ export default class FileBrowser extends React.Component {
                     onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
             </tr>)
         })
-        return (table)
-    }
-
-    render() {
-        const {title} = this.props
-
-        return (
-            <div className="fileBrowser">
-                <h3>{title}</h3>
-                <div className="musicFolder">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td><FolderAbove/></td>
-                        </tr>
-                        <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
-                            <td></td>
-                        </tr>
-                        {this.updateTable()}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        )
-    }
-}
+*/}
