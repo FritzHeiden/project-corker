@@ -114,11 +114,9 @@ export default class App extends React.Component {
                             <AudioBox fileService={this._fileService} audioContext={this._audioContext}
                                       audioPlayer={this._rightAudioPlayer}/>
                         </div>
-                        <div className="slideContainer">
-                            <input className="crossFader" type="range" step={0.01} min={0} max={1} value={this.state.crossFader}
-                            onChange={event => this.onCrossFaderChange(event.target.value)}/>
-                        </div>
                         <div className="footer">
+                            <input className="crossFader" type="range" step={0.01} min={0} max={1} value={this.state.crossFader}
+                                   onChange={event => this.onCrossFaderChange(event.target.value)}/>
                             <FileBrowser title="File Browser" fileService={this._fileService}/>
                         </div>
                     </div>
@@ -127,3 +125,8 @@ export default class App extends React.Component {
         )
     }
 }
+
+{/*
+
+
+                        */}

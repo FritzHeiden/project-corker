@@ -107,11 +107,14 @@ span {
 
 .main {
     text-align: center;
-    display: grid;
-    grid-template-rows: 70% 10% 20%;
+    display: flex;
     align-items: start;
     justify-items: center;
     height: 100vh;
+    width: 100vw;
+    /* grid-template-rows: 70% 10% 20%; */
+    /* flex-direction: column; */
+    justify-content: space-around;
 }
 
 .actionBox {
@@ -120,25 +123,31 @@ span {
     flex-flow: row wrap;
     justify-content: space-around;
     position: relative;
-    grid-row-start: 1;
-    grid-row-end: 1;
+    /*grid-row-start: 1;
+    grid-row-end: 1;*/
     align-self: end;
-    margin-top: 5%;
+    margin-top: 6%;
 }
 
 .slideContainer{
     width: 100%;
-    grid-row-start: 2;
-    grid-row-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
     align-self: end;
 }
 
 .footer{
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-row-start: 3;
-    grid-row-end: 3;
+    /* grid-row-start: 2; */
+    /* grid-row-end: 2; */
     width: 100%;
+    /* grid-template-rows: 10% 30%; */
+    /* align-self: end; */
+    position: absolute;
+    bottom: 0;
 }
 
 .filterBox{
@@ -211,7 +220,8 @@ span {
 .mediaBox {
     background-color: #494949;
     width: 20%;
-    height: auto;
+    height: 100%;
+    /*height: auto;*/
 }
 
 .musicFolder {
@@ -225,12 +235,18 @@ span {
 }
 
 .crossFader {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    align-self: end;
     -webkit-appearance: none;
-    width: 25%;
+    width: 50%;
     height: 7.5px;
     border-radius: 10px;
     background: #494949;
     -webkit-transition: .2s;
+    justify-self: center;
 }
 
 .crossFader::-webkit-slider-thumb {
