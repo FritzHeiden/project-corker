@@ -9,7 +9,7 @@ export default class FileBrowser extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {files: [], firstRowFiles: [], secondRowFiles: []}
+    this.state = {files: []}
 
     this.fileService = props.fileService
     Config.onPathChange = this.updateFileList.bind(this)
@@ -46,31 +46,6 @@ export default class FileBrowser extends React.Component {
     };*/
   }
 
-  _getFirstRowFile (index, positionSpan, directory) {
-    /*if (directory === true) {
-        return (
-            <td>
-                <FolderToDir path={this.file.path} id={this.firstRowFiles[index].path}
-                             key={this.tableCounter}/> <span
-                style={positionSpan}>{this.firstRowFiles[index].filename}</span>
-            </td>)
-    }*/
-  }
-
-  _getSecondRowFile (index, positionSpan, directory) {
-    console.log('Hallo from getSecondRowMethode: ' + this.secondRowFiles)
-    /*if (directory === true) {
-        console.log(this.secondRowFiles[index])
-        return (
-            <td>
-                <FolderToDir path={this.secondRowFiles[index].path} id={this.secondRowFiles[index].path}
-                             key={this.tableCounter}/> <span
-                style={positionSpan}>{this.secondRowFiles[index].filename}</span>
-            </td>)
-    }*/
-
-  }
-
   updateTable () {
     let positionOfElementsInTable = {
       width: '50%',
@@ -86,18 +61,18 @@ export default class FileBrowser extends React.Component {
       gridColumnEnd: '2',
     }
 
-    let files = this.state.files
-    let table = files.sort((a, b) => {
+    let counterFiles = 0
+    let table = this.state.files.sort((a, b) => {
       return a.filename.localeCompare(b.filename)
     }).sort((a, b) => {
       return b.isDirectory - a.isDirectory
     }).map((file, index) => {
       if (file.isDirectory) {
-        if (index === files.length - 1) {
+        if (index === counterFiles - 1) {
           return (
             <div key={index}>
               <div>
-                <Folder path={file.path} fileName={file.filename} id={file.path} key={this.tableCounter}/><span>{file.filename}</span>
+                <Folder fileName={file.filename} path={file.path} id={file.path} key={this.tableCounter}/><span>{file.filename}</span>
               </div>
             </div>
           )
@@ -105,7 +80,7 @@ export default class FileBrowser extends React.Component {
         return (
           <div style={positionOfElementsInTable} key={index}>
             <div style={positionElementsInColumn}>
-              <Folder style={positionElementsInColumn} path={file.path} id={file.path} fileName={file.filename}
+              <Folder style={positionElementsInColumn} fileName={file.filename} path={file.path} id={file.path}
                       key={this.tableCounter}/><span>{file.filename}</span>
             </div>
           </div>
@@ -120,40 +95,6 @@ export default class FileBrowser extends React.Component {
       }
       this.tableCounter = this.tableCounter + 1
     })
-
-    /*.map((index) => {
-
-    console.log(firstRowFiles)
-    console.log(secondRowFiles)
-    let positionSpan =
-        {
-            top: '0rem',
-            left: '-5%',
-        }
-    if (firstRowFiles[index].isDirectory === true || secondRowFiles[index].isDirectory === true ) {
-        return (
-            <tr key={index}>
-                <td><FolderToDir path={firstRowFiles[index].path} id={firstRowFiles[index].path} key={this.tableCounter}/> <span style={positionSpan}>{firstRowFiles[index].filename}</span></td>
-                <td><FolderToDir path={firstRowFiles[index].path} id={firstRowFiles[index].path} key={this.tableCounter}/> <span style={positionSpan}>{firstRowFiles[index].filename}</span></td>
-            </tr>)
-    }else{
-        return (
-            <tr key={index}>
-                <td id={file.path} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
-                <td id={file.path} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
-            </tr>
-        )
-    }
-
-})*/
-    //console.log(this.firstRowFiles)
-
-    //let state = this.state
-    //state.firstRowFiles = firstRowFiles
-    //state.secondRowFiles = secondRowFiles
-    //this.setState(state)
-    //console.log(this.state.firstRowFiles)
-    //console.log(this.state.secondRowFiles)
     return (table)
   }
 
