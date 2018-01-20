@@ -14,14 +14,17 @@ export default class FolderButton extends React.Component {
     }
 
     changeDirectory() {
-        let filePath = ".";
+        let filePath = this.props.path;
+        console.log(filePath)
+        let useablePath = filePath.replace('../', '')
+        console.log(useablePath)
+
         let testFilePath = new FileService('127.0.0.1', 2345);
 
         testFilePath.getFiles(filePath).then(files => {
             this.setState({correctPath: true});
             Sidebar.closeSidebar();
             Config.path = filePath;
-            console.log(filePath)
         }).catch(error => {
             this.setState({correctPath: false});
             console.error(error);
