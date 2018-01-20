@@ -88,10 +88,9 @@ img {
 
 span {
     position: relative;
-    top: -6px;
+    top: -1px;
     margin-left: 0.5rem;
 }
-
 .MenuButton {
     position: absolute;
     top: 2rem;

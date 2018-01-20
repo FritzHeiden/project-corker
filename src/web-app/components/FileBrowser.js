@@ -74,7 +74,7 @@ export default class FileBrowser extends React.Component {
     updateTable() {
         let firstRowFiles = []
         let secondRowFiles = []
-
+        let counterFiles = 0;
         let table = this.state.files.filter(file => {
             //return file.extension === "wav";
             //if(file.extension === "wav" || file.extension === "mp3" || file.extension === "aac" || file.extension === "mp4"){
@@ -82,6 +82,7 @@ export default class FileBrowser extends React.Component {
             //}
 
             if (file.filename.charAt(0) !== ".") {
+                counterFiles = counterFiles + 1;
                 return file
             }
         }).sort((a, b) => {
@@ -94,7 +95,7 @@ export default class FileBrowser extends React.Component {
                 width: "50%",
                 flexWrap: "wrap",
                 textAlign: "left",
-                borderBottom: "0.3rem solid #1e1e1e",
+                borderBottom: "2px solid #1e1e1e",
                 display: "grid",
                 gridTemplateColumns: "25% 75%",
             };
@@ -104,8 +105,16 @@ export default class FileBrowser extends React.Component {
                 gridColumnEnd: "2",
             }
 
-
             if (file.isDirectory === true) {
+                if(index === counterFiles - 1){
+                    return (
+                        <div key={index}>
+                            <div>
+                                <Folder path={file.path} id={file.path} key={this.tableCounter}/><span>{file.filename}</span>
+                            </div>
+                        </div>
+                    )
+                }
                 return (
                     <div style={positionOfElementsInTable} key={index}>
                         <div style={positionElementsInColumn}>

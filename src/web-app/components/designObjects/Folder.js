@@ -14,10 +14,21 @@ export default class FolderButton extends React.Component {
     }
 
     changeDirectory() {
-        let filePath = Config.path + "/..";
-        console.log(filePath)
-        let useablePath = filePath.replace('../', '')
-        console.log(useablePath)
+
+        let filePath;
+
+        //if user has clicked on '..'folder
+        if(this.props.path === '.'){
+            filePath = Config.path + "/..";
+        }
+        else{
+            filePath = this.props.path
+            console.log(filePath)
+            filePath = filePath.replace("../", "");
+            console.log(filePath)
+            filePath = filePath + "/.." ;
+            console.log(filePath)
+        }
 
         let testFilePath = new FileService('127.0.0.1', 2345);
 
@@ -34,7 +45,7 @@ export default class FolderButton extends React.Component {
     render() {
 
         let svgWidth = {
-            width: "8%",
+            width: "6%",
         };
 
         let svgBackground =
