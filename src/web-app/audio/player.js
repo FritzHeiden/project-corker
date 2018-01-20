@@ -122,6 +122,10 @@ export default class AudioPlayer {
     this.changeVolume(this._volume, 1)
   }
 
+  changePlaybackRate(rate) {
+      this.source.playbackRate.setValueAtTime(rate, this.context.currentTime);
+  }
+
   // Frequencies below the cutoff pass through, frequencies above it are attenuated
   _initLowpass () {
     this.lowpassFilter = this.context.createBiquadFilter()
