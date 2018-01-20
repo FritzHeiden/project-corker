@@ -57,6 +57,15 @@ class AudioBox extends React.Component {
                        value={this.state.volume * 100}
                        name="Volume"
                        onChange={event => this._audioPlayer.changeVolume(parseInt(event.target.value))}/>
+                <p>Playback Speed</p>
+                <input className="sliderFilter"
+                       type="range"
+                       min={0}
+                       max={100}
+                       value={this.state.volume * 100}
+                       name="Volume"
+                       onChange={event => this._audioPlayer.changeVolume(parseInt(event.target.value))}/>
+
                 <Line/>
                 <AudioFilter
                     audioPlayer={this._audioPlayer}

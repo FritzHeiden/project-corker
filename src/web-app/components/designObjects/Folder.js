@@ -17,11 +17,12 @@ export default class FolderButton extends React.Component {
 
         let filePath;
 
-        //if user has clicked on '..'folder
-        if(this.props.path === '.'){
+
+        if(this.props.path === '.'){  //if user has clicked on '..''folder
             filePath = Config.path + "/..";
         }
-        else{
+        else{                        //if user has clicked on folder which he/she want to enter
+            //doesn't work
             filePath = this.props.path
             console.log(filePath)
             filePath = filePath.replace("../", "");
