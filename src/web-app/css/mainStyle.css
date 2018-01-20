@@ -88,8 +88,8 @@ img {
 
 span {
     position: relative;
-    top: -2rem;
-    margin-left: 2rem;
+    top: -6px;
+    margin-left: 0.5rem;
 }
 
 .MenuButton {
@@ -143,7 +143,7 @@ span {
 
 .footer{
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 27.5% 45% 27.5%;
     /* grid-row-start: 2; */
     /* grid-row-end: 2; */
     width: 100%;
@@ -225,15 +225,23 @@ span {
     /*height: auto;*/
 }
 
-.musicFolder {
-    margin: 0 auto; /* or margin: 0 auto 0 auto */
+.mediaBrowser {
+    margin: 0 auto;
     background: #494949;
     width: 100%;
     height: auto;
     color: white;
     max-height: 15vh;
     overflow-y: scroll;
+    /*
     text-align: left;
+    height: auto;
+    width: 100%;
+    background-color: #494949;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;*/
+
 }
 
 .crossFader {
@@ -243,7 +251,7 @@ span {
     grid-column-end: 2;
     align-self: end;
     -webkit-appearance: none;
-    width: 50%;
+    width: 83%;
     height: 7.5px;
     border-radius: 10px;
     background: #494949;
@@ -273,6 +281,16 @@ span {
     /*float: left;*/
     height: 50px;
     width: 50px;
+}
+
+.table{
+    display: flex; /* or inline-flex */
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+
 }
 
 .form {

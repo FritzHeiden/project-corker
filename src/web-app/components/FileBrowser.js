@@ -2,6 +2,7 @@ import React from 'react'
 
 import {Config} from '../services/file-path-service.js'
 import Folder from './designObjects/Folder.js'
+import Line from './designObjects/Line.js'
 
 export default class FileBrowser extends React.Component {
 
@@ -88,61 +89,67 @@ export default class FileBrowser extends React.Component {
         }).sort((a, b) => {
             return a.isDirectory - b.isDirectory;
         }).map((file, index) => {
-            /*if (index % 2 === 0) {
-                firstRowFiles.push(file)
+
+            let positionOfElementsInTable = {
+                width: "50%",
+                flexWrap: "wrap",
+                textAlign: "left",
+                borderBottom: "0.3rem solid #1e1e1e",
+                display: "grid",
+                gridTemplateColumns: "25% 75%",
+            };
+
+            let positionElementsInColumn ={
+                gridColumnStart: "2",
+                gridColumnEnd: "2",
             }
 
-            else if (index % 2 === 1) {
-                secondRowFiles.push(file)
-            }*/
 
-            let positionSpan =
-                {
-                    top: '0rem',
-                    left: '-5%',
-                }
-
-            if (file.isDirectory === true ) {
+            if (file.isDirectory === true) {
                 return (
-                    <tr key={index}>
-                        <td><Folder path={file.path} id={file.path} key={this.tableCounter}/> <span style={positionSpan}>{file.filename}</span></td>
-                    </tr>)
-            }else{
+                    <div style={positionOfElementsInTable} key={index}>
+                        <div style={positionElementsInColumn}>
+                            <Folder style={positionElementsInColumn} path={file.path} id={file.path} key={this.tableCounter}/><span>{file.filename}</span>
+                        </div>
+                    </div>
+                )
+            } else {
                 return (
-                    <tr key={index}>
-                        <td id={file.path} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
-                    </tr>
+                    <div style={positionOfElementsInTable} key={index}>
+                        <div style={positionElementsInColumn} id={file.path} key={this.tableCounter} draggable="true"
+                            onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</div>
+                    </div>
                 )
             }
             this.tableCounter = this.tableCounter + 1
         });
 
 
-            /*.map((index) => {
+        /*.map((index) => {
 
-            console.log(firstRowFiles)
-            console.log(secondRowFiles)
-            let positionSpan =
-                {
-                    top: '0rem',
-                    left: '-5%',
-                }
-            if (firstRowFiles[index].isDirectory === true || secondRowFiles[index].isDirectory === true ) {
-                return (
-                    <tr key={index}>
-                        <td><FolderToDir path={firstRowFiles[index].path} id={firstRowFiles[index].path} key={this.tableCounter}/> <span style={positionSpan}>{firstRowFiles[index].filename}</span></td>
-                        <td><FolderToDir path={firstRowFiles[index].path} id={firstRowFiles[index].path} key={this.tableCounter}/> <span style={positionSpan}>{firstRowFiles[index].filename}</span></td>
-                    </tr>)
-            }else{
-                return (
-                    <tr key={index}>
-                        <td id={file.path} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
-                        <td id={file.path} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
-                    </tr>
-                )
+        console.log(firstRowFiles)
+        console.log(secondRowFiles)
+        let positionSpan =
+            {
+                top: '0rem',
+                left: '-5%',
             }
+        if (firstRowFiles[index].isDirectory === true || secondRowFiles[index].isDirectory === true ) {
+            return (
+                <tr key={index}>
+                    <td><FolderToDir path={firstRowFiles[index].path} id={firstRowFiles[index].path} key={this.tableCounter}/> <span style={positionSpan}>{firstRowFiles[index].filename}</span></td>
+                    <td><FolderToDir path={firstRowFiles[index].path} id={firstRowFiles[index].path} key={this.tableCounter}/> <span style={positionSpan}>{firstRowFiles[index].filename}</span></td>
+                </tr>)
+        }else{
+            return (
+                <tr key={index}>
+                    <td id={file.path} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
+                    <td id={file.path} key={this.tableCounter} draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>{file.filename}</td>
+                </tr>
+            )
+        }
 
-        })*/
+    })*/
         //console.log(this.firstRowFiles)
 
 
@@ -158,14 +165,36 @@ export default class FileBrowser extends React.Component {
     render() {
         const {title} = this.props
 
+        let widthElement = {
+            width: "100%",
+            borderBottom: "0.3rem solid #1e1e1e",
+        };
+
         return (
             <div className="fileBrowser">
                 <h3>{title}</h3>
-                <div className="musicFolder">
+                <div className="mediaBrowser">
+                    <div style={widthElement}>
+                        <Folder path={"."}/><span>..</span>
+                    </div>
+                    <div className="table">
+                        {this.updateTable()}
+                    </div>
+                    <Line/>
+                </div>
+            </div>
+        )
+    }
+}
+
+{/*
+<div className="fileBrowser">
+                <h3>{title}</h3>
+                <div className="mediaBrowser">
                     <table>
                         <tbody>
                         <tr>
-                            <th colSpan={2}><Folder path={"."}/></th>
+                            <th colSpan={2}>/></th>
                         </tr>
                         <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
                         </tr>
@@ -176,11 +205,35 @@ export default class FileBrowser extends React.Component {
                     </table>
                 </div>
             </div>
-        )
-    }
-}
 
-{/*obj.sort((a,b) => a.timeM - b.timeM);
+
+
+
+ <div style={widthElement}>
+                        {this.updateTable()}
+                    </div>
+
+  <div className="fileBrowser">
+                <h3>{title}</h3>
+                <div className="musicFolder">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th colSpan={2}>/></th>
+                        </tr>
+                        <tr draggable="true" onDragStart={FileBrowser.mouseDragged.bind(this)}>
+                        </tr>
+                        <tr>
+                            {this.updateTable()}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+obj.sort((a,b) => a.timeM - b.timeM);
 
 .map((file, index) => {
             console.log(table)

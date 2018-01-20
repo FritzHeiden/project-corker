@@ -14,7 +14,7 @@ export default class FolderButton extends React.Component {
     }
 
     changeDirectory() {
-        let filePath = this.props.path;
+        let filePath = Config.path + "/..";
         console.log(filePath)
         let useablePath = filePath.replace('../', '')
         console.log(useablePath)
@@ -34,7 +34,7 @@ export default class FolderButton extends React.Component {
     render() {
 
         let svgWidth = {
-            width: "5%",
+            width: "8%",
         };
 
         let svgBackground =
