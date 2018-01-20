@@ -11,6 +11,7 @@ export default class FileHandler {
     let requestPath = FileHandler._getPath(request)
     requestPath = requestPath.replace(/\//g, '/')
     response.set('Access-Control-Allow-Origin', '*')
+    console.log('Request Path: ', requestPath)
     this._listDir(requestPath)
       .then(files => response.send(files))
       .catch(err => {
@@ -36,7 +37,6 @@ export default class FileHandler {
       if (!stats.isDirectory()) {
         let range = request.range()
         if (range && range !== -1) {
-          console.log('Range: ', JSON.stringify(range))
           fs.open(requestPath, 'r', (err, fileDescriptor) => {
             if (err) {
               response.status(500).send()
@@ -47,18 +47,16 @@ export default class FileHandler {
             response.set('Accept-Ranges', 'bytes')
             response.set('Content-Range', `bytes ${range[0].start}-${range[0].end}/${stats.size}`)
             response.set('Content-Type', 'video/mp4')
-            console.log(`bytes ${range[0].start}-${range[0].end}/${stats.size}`)
+            // console.log(`bytes ${range[0].start}-${range[0].end}/${stats.size}`)
             fs.read(fileDescriptor, buffer, 0, buffer.length, range.start, (err, bytesRead, buffer) => {
               if (err) {
                 response.status(500).send()
                 return
               }
-              console.log('Sent partial!')
               response.status(206).send(buffer)
             })
           })
         } else {
-          console.log('Sent whole file!')
           response.sendFile(requestPath)
         }
       } else {
