@@ -14,8 +14,8 @@ export default class FolderButton extends React.Component {
     }
 
     changeDirectory() {
-
         let filePath = Config.path + '/' + this.props.fileName;
+
         //if user has clicked on '..'folder
         // if(this.props.path === '.'){
         //     filePath = Config.path + "/..";

@@ -45,10 +45,13 @@ export default class AudioFilter extends React.Component {
   }
 
   onChangeFilter () {
-    if ((this.state.usedFilter === 'Lowpass Frequency' || this.state.usedFilter === 'Lowpass Quality') && this.state.lowpass === false) {
+    // console.log(this.state.usedFilter)
+    // console.log(this.state.useLowPass)
+    // console.log(this.state.useHighshelf)
+    if ((this.state.usedFilter === 'Lowpass Frequency' || this.state.usedFilter === 'Lowpass Quality') && this.state.useLowPass === false) {
       this.props.onFilterUsedError(this.state.usedFilter)
     }
-    else if (this.state.usedFilter === 'Highshelf Frequency' && this.state.highshelf === false) {
+    else if (this.state.usedFilter === 'Highshelf Frequency' && this.state.useHighshelf === false) {
       this.props.onFilterUsedError(this.state.usedFilter)
     }
     else {

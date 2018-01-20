@@ -72,7 +72,8 @@ export default class FileBrowser extends React.Component {
           return (
             <div key={index}>
               <div>
-                <Folder fileName={file.filename} path={file.path} id={file.path} key={this.tableCounter}/><span>{file.filename}</span>
+                <Folder fileName={file.filename} path={file.path} id={file.path}
+                        key={this.tableCounter}/><span>{file.filename}</span>
               </div>
             </div>
           )

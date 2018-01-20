@@ -36,6 +36,7 @@ export default class FileHandler {
 
       if (!stats.isDirectory()) {
         let range = request.range()
+        console.log(JSON.stringify(stats))
         if (range && range !== -1) {
           fs.open(requestPath, 'r', (err, fileDescriptor) => {
             if (err) {
@@ -47,7 +48,7 @@ export default class FileHandler {
             response.set('Accept-Ranges', 'bytes')
             response.set('Content-Range', `bytes ${range[0].start}-${range[0].end}/${stats.size}`)
             response.set('Content-Type', 'video/mp4')
-            // console.log(`bytes ${range[0].start}-${range[0].end}/${stats.size}`)
+            console.log(`bytes ${range[0].start}-${range[0].end}/${stats.size}`)
             fs.read(fileDescriptor, buffer, 0, buffer.length, range.start, (err, bytesRead, buffer) => {
               if (err) {
                 response.status(500).send()
@@ -57,6 +58,7 @@ export default class FileHandler {
             })
           })
         } else {
+          response.set('Content-Length', stats.size)
           response.sendFile(requestPath)
         }
       } else {

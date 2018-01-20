@@ -12,6 +12,7 @@ export default class VideoBox extends React.Component {
       invertColor: false,
       chromaKeyAlpha: false,
       grayScale: false,
+      src: props.src
     }
   }
 
@@ -32,16 +33,29 @@ export default class VideoBox extends React.Component {
     }
   }
 
+  allowDrop (e) {
+    e.preventDefault()
+    e.dataTransfer.setData('text', e.target.id)
+  }
+
+  drop (e) {
+    e.preventDefault()
+    let data = e.dataTransfer.getData('text') //in data the id is stored
+    this.state.src = `http://localhost:2345/api/file?path=${data}`
+    this.setState(this.state)
+  }
+
   render () {
     return (
-      <div className="mediaBox">
+      <div className="mediaBox" onDrop={event => this.drop(event)}
+           onDragOver={event => this.allowDrop(event)}>
         <VideoSource
           videoStart={this.state.videoStart}
           invertColor={this.state.invertColor}
           chromaKeyAlpha={this.state.chromaKeyAlpha}
           grayScale={this.state.grayScale}
           videoSyncService={this.props.videoSyncService}
-          src={this.props.src}
+          src={this.state.src}
         />
         <Line/>
         <VideoPlayButton videoStartStop={this.videoStart.bind(this)}/>
@@ -51,6 +65,3 @@ export default class VideoBox extends React.Component {
     )
   }
 }
-
-
-

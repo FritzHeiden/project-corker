@@ -32,6 +32,10 @@ export default class VideoSource extends React.Component {
     this.state.invertColor = props.invertColor
     this.state.chromaKeyAlpha = props.chromaKeyAlpha
     this.state.grayScale = props.grayScale
+    if (this.state.src !== props.src) {
+      this.state.src = props.src
+      this.video.src = props.src
+    }
     this.setState(this.state)
 
     if (this.props.chromaKeyAlpha !== props.chromaKeyAlpha) {
@@ -46,20 +50,9 @@ export default class VideoSource extends React.Component {
   componentDidMount () {
     this.setState(this.state)
     this.video.crossOrigin = 'Anonymous'
-    this.video.currentTime = 200
+    // this.video.currentTime = 200
     this.video.src = this.state.src
     this._canvas = ImageTools.createCanvas(this.state.outputWidth, this.state.outputHeight)
-  }
-
-  static allowDrop (e) {
-    e.preventDefault()
-    e.dataTransfer.setData('text', e.target.id)
-  }
-
-  static drop (e) {
-    e.preventDefault()
-    var data = e.dataTransfer.getData('text') //in data the id is stored
-    console.log(data)
   }
 
   computeFrame () {
@@ -84,11 +77,15 @@ export default class VideoSource extends React.Component {
     }
   }
 
-  play () {
+  async play () {
     // if (this.state.interval) {
     //   clearInterval(this.state.interval)
     // }
-    this.video.play()
+    try {
+      await this.video.play()
+    } catch (err) {
+      console.error(err)
+    }
 
     this.state.interval = setInterval(this.computeFrame, 1000 / 30)
     this.setState(this.state)
@@ -98,13 +95,17 @@ export default class VideoSource extends React.Component {
     }
   }
 
-  pause () {
+  async pause () {
     clearInterval(this.state.interval)
     this.setState({
       interval: undefined
     })
-    this.video.pause()
 
+    try {
+      await this.video.pause()
+    } catch (err) {
+      console.error(err)
+    }
 
     if (this.state.chromaKeyAlpha) {
       this._videoSyncService.decreaseChromaKeyVideoCount()
@@ -164,10 +165,8 @@ export default class VideoSource extends React.Component {
 
     return (
       <div>
-        <video controls
+        <video 
                ref={video => (this.video = video)}
-               onDrop={VideoSource.drop.bind(this)}
-               onDragOver={VideoSource.allowDrop.bind(this.event)}
                muted
                style={{backgroundColor: 'red'}}>
           <source
