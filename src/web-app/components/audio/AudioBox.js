@@ -24,10 +24,10 @@ class AudioBox extends React.Component {
         this._audioPlayer.listenOnVolumeChange(this.onVolumeChange.bind(this))
 
         // for testing
-        this._loadAudioFile('audio/04-EnjoyTheSilence.mp3').then(audioFile => {
-            this._audioFile = audioFile
-            this._audioPlayer.loadAudioFile(this._audioFile)
-        })
+        // this._loadAudioFile('audio/04-EnjoyTheSilence.mp3').then(audioFile => {
+        //     this._audioFile = audioFile
+        //     this._audioPlayer.loadAudioFile(this._audioFile)
+        // })
         this.filterChanged = ''
     }
 

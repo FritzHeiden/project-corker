@@ -112,9 +112,9 @@ export default class App extends React.Component {
               <AudioBox fileService={this._fileService} audioContext={this._audioContext}
                         audioPlayer={this._leftAudioPlayer}/>
               <VideoBox videoSyncService={this._videoSyncService}
-                        src={'http://localhost:2345/api/file?path=../dist/video/test.mp4'}/>
+                        />
               <VideoBox videoSyncService={this._videoSyncService}
-                        src={'http://localhost:2345/api/file?path=../dist/video/croma.mp4'}/>
+                        />
               <AudioBox fileService={this._fileService} audioContext={this._audioContext}
                         audioPlayer={this._rightAudioPlayer}/>
             </div>

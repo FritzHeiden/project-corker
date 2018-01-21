@@ -11,7 +11,7 @@ export default class FileHandler {
     let requestPath = FileHandler._getPath(request)
     requestPath = requestPath.replace(/\//g, '/')
     response.set('Access-Control-Allow-Origin', '*')
-    console.log('Request Path: ', requestPath)
+    // console.log('Request Path: ', requestPath)
     this._listDir(requestPath)
       .then(files => response.send(files))
       .catch(err => {
@@ -21,8 +21,8 @@ export default class FileHandler {
   }
 
   _getFile (request, response) {
-    console.log(request.url)
-    console.log(request.range())
+    // console.log(request.url)
+    // console.log(request.range())
     let requestPath = FileHandler._getPath(request)
     requestPath = requestPath.replace(/\//g, '/')
     response.set('Access-Control-Allow-Origin', '*')
@@ -36,7 +36,7 @@ export default class FileHandler {
 
       if (!stats.isDirectory()) {
         let range = request.range()
-        console.log(JSON.stringify(stats))
+        // console.log(JSON.stringify(stats))
         if (range && range !== -1) {
           fs.open(requestPath, 'r', (err, fileDescriptor) => {
             if (err) {
@@ -48,7 +48,7 @@ export default class FileHandler {
             response.set('Accept-Ranges', 'bytes')
             response.set('Content-Range', `bytes ${range[0].start}-${range[0].end}/${stats.size}`)
             response.set('Content-Type', 'video/mp4')
-            console.log(`bytes ${range[0].start}-${range[0].end}/${stats.size}`)
+            // console.log(`bytes ${range[0].start}-${range[0].end}/${stats.size}`)
             fs.read(fileDescriptor, buffer, 0, buffer.length, range.start, (err, bytesRead, buffer) => {
               if (err) {
                 response.status(500).send()
