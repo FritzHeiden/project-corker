@@ -1,6 +1,5 @@
 import React from 'react';
 import FileService from '../../services/file-service.js'
-import {Sidebar} from '../../services/sidebar-service'
 import {Config} from '../../services/file-path-service.js'
 
 export default class FolderButton extends React.Component {
@@ -33,7 +32,6 @@ export default class FolderButton extends React.Component {
 
         testFilePath.getFiles(filePath).then(files => {
             this.setState({correctPath: true});
-            Sidebar.closeSidebar();
             Config.path = filePath;
         }).catch(error => {
             this.setState({correctPath: false});

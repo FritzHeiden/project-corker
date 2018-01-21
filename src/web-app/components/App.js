@@ -1,16 +1,15 @@
 import React from 'react'
 
-import SideBar from './SideBar.js'
+// import SideBar from './SideBar.js'
 import FinalVideo from './video/FinalVideo.js'
 import AudioBox from './audio/AudioBox.js'
 import VideoBox from './video/VideoBox.js'
-import Login from './Login.js'
 import FileBrowser from './FileBrowser.js'
 
 import FileService from '../services/file-service.js'
 
 import Background from './designObjects/Background.js'
-import Options from './designObjects/Options.js'
+// import Options from './designObjects/Options.js'
 import MidiController from '../controller/midi-controller'
 import AudioPlayerJS from '../audio/player'
 import ImageTools from '../tools/image-tools'
@@ -103,12 +102,11 @@ export default class App extends React.Component {
         <Background/>
         <h1 className="projectTitle" style={{opacity: '0', display: 'none'}}>{title}</h1>
 
-        <div id="login" className="login">
-          <Login title={login}/>
-        </div>
+        {/*<div id="login" className="login">*/}
+          {/*<Login title={login}/>*/}
+        {/*</div>*/}
         <div id="online" className="online">
-          <SideBar/>
-          <Options/>
+          {/*<SideBar/>*/}
           <div id="main" className="main">
             <div className="actionBox">
               <AudioBox fileService={this._fileService} audioContext={this._audioContext}

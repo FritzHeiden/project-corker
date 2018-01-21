@@ -103,6 +103,7 @@ span {
     fill: none;
     z-index: 102;
     padding: 0.5rem;
+    display: none;
 }
 
 .main {
@@ -631,10 +632,6 @@ input[type="text"].closeInput{
     top: -2.4rem;
     height: 2.4rem;
     left: 2%;
-}
-
-.online {
-    display: none;
 }
 
 .login {
