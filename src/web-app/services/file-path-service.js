@@ -10,6 +10,7 @@ class Config {
   set path(path){
     this._path  = path;
     this._onPathChange(this._path);
+    console.log(path)
   }
 
   get path(){
