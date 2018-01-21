@@ -24,6 +24,10 @@ export default class FileBrowser extends React.Component {
     event.dataTransfer.setData('text', event.target.id)
   }
 
+  componentDidMount () {
+    this.updateFileList(Config.path)
+  }
+
   updateFileList (path) {
     if (path !== '') {
       this.fileService.getFiles(path).then(files => {
